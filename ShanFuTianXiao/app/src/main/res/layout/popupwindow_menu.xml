@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/popupwindow_top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/grey_700">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/red_textview"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"
+            android:text="全部地区"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_menu"
+        android:layout_below="@id/popupwindow_top"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff"
+        android:scrollbarStyle="outsideOverlay"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+    <RelativeLayout
+        android:layout_below="@id/lv_menu"
+        android:layout_width="fill_parent"
+        android:id="@+id/rl_menu_shadow"
+        android:background="#70000000"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+</RelativeLayout>

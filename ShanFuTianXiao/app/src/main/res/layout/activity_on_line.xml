@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray"
+    >
+    <include
+        android:id="@+id/on_line_top"
+        layout="@layout/activity_toplayout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/recommend_total_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="@style/black_grey_textview"
+                android:textColor="@color/grey_600"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="wrap_content"
+            android:background="@color/gray" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/new_people_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="@style/black_grey_textview"
+                android:textColor="@color/grey_600"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/first_level_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="@style/black_grey_textview"
+                android:textColor="@color/grey_600"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="wrap_content"
+            android:background="@color/gray" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/second_level_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/black_grey_textview"
+                android:textColor="@color/grey_600"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@color/yellow_900">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/white_textview"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:text="会员姓名"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/white_textview"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:text="会员ID号"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+           >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/white_textview"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:text="注册时间"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <ListView
+            android:id="@+id/my_online_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"/>
+    </LinearLayout>
+
+
+</LinearLayout>

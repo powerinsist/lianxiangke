@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_300">
+    <include
+        android:id="@+id/setup_pwd_next_top"
+        layout="@layout/activity_toplayout"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:visibility="gone"
+        android:src="@drawable/jymm"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Gainsboro_textview"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="为了您的交易安全，请设置您的交易密码"/>
+    <com.shanfu.tianxia.view.MyPassword
+        android:id="@+id/set_pay_pwd_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:maxLength="6"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/black_textview"
+        android:text="6位数字密码"/>
+
+
+    <Button
+        android:id="@+id/set_pqy_pwd_next_two"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textColor="@color/white"
+        android:background="@mipmap/button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="下一步" />
+
+</LinearLayout>

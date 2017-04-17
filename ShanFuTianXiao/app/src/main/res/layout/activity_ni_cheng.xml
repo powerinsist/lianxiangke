@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/common_red"
+       >
+    <RelativeLayout
+        android:id="@+id/ni_cheng_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true">
+       <ImageView
+
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginRight="20dp"
+           android:layout_centerVertical="true"
+           android:src="@mipmap/content_head_icon_back"/>
+        </RelativeLayout>
+
+       <TextView
+
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+           style="@style/white_textview"
+           android:text="昵称修改"
+           />
+
+       <TextView
+           android:id="@+id/ni_cheng_commit"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="20dp"
+           android:layout_centerVertical="true"
+           style="@style/white_textview"
+           android:text="确定"
+           />
+   </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <EditText
+            android:id="@+id/input_ni_cheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:hint="请输入昵称"
+            android:textColorHint="@color/grey_700"
+            style="@style/Gainsboro_textview"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/Gainsboro_textview"
+        android:layout_marginLeft="20dp"
+        android:text="4-20个字符,可由中文,数字,"/>
+
+</LinearLayout>

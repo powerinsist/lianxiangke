@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/grey_300">
+    <include
+        android:id="@+id/setup_pwd_top"
+        layout="@layout/activity_toplayout"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:visibility="gone"
+        android:src="@drawable/jymm"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Gainsboro_textview"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="为了您的交易安全，请设置您的交易密码"/>
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/black_textview"
+            android:text="交易密码:"/>
+
+        <EditText
+            android:id="@+id/set_pay_pwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="80dp"
+            android:digits="0123456789xyzXYZ"
+            android:maxLength="12"
+            android:background="@null"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:textColor="@color/grey_500"
+            android:textColorHint="@color/grey_500"
+            android:hint="请输入6~12位数字.字母组合的密码"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/black_textview"
+            android:text="交易密码:"/>
+
+        <EditText
+            android:id="@+id/set_pay_pwd_agin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="80dp"
+            android:digits="0123456789xyzXYZ"
+            android:maxLength="12"
+            android:background="@null"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:textColor="@color/grey_500"
+            android:textColorHint="@color/grey_500"
+            android:hint="请再次输入密码"/>
+
+    </LinearLayout>
+-->
+
+   <com.shanfu.tianxia.view.MyPassword
+       android:id="@+id/set_pay_pwd"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:maxLength="6"
+       android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/black_textview"
+        android:text="6位数字密码"/>
+
+
+    <Button
+        android:id="@+id/set_pqy_pwd_next"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textColor="@color/white"
+        android:background="@mipmap/button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="下一步" />
+
+</LinearLayout>

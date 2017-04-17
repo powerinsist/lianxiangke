@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ratingbar="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:background="@color/gray">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_red"
+        android:padding="10dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/evaluation_merchant_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/content_head_icon_back"/>
+        </RelativeLayout>
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="评价商家"
+            style="@style/white_textview"
+            />
+
+        <TextView
+            android:id="@+id/release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="发布"
+            style="@style/white_textview"
+            android:textSize="14sp"
+            />
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="20dp">
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/business_img"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="2"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+           android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+            <TextView
+                android:id="@+id/business_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:layout_alignParentTop="true"
+
+                />
+
+            <com.shanfu.tianxia.view.AutoSplitTextView
+                android:id="@+id/business_adress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Gainsboro_textview"
+                android:layout_alignParentBottom="true"
+
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:layout_gravity="center_vertical"
+                android:text="评价"/>
+
+           <com.shanfu.tianxia.view.StarBar
+                android:id="@+id/evaluate_starBar"
+                android:layout_below="@+id/display"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                ratingbar:starEmpty="@drawable/star_empty"
+                ratingbar:starFill="@drawable/star_full"
+                ratingbar:starDistance="5dp"
+                ratingbar:starCount="5"
+                android:isIndicator="true"
+                ratingbar:starSize="15dp"/>
+          <!--  -->
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:layout_gravity="center_vertical"
+
+                android:text="价格"/>
+
+            <com.shanfu.tianxia.view.StarBar
+                android:id="@+id/price_starBar"
+                android:layout_below="@+id/display"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                ratingbar:starEmpty="@drawable/star_empty"
+                ratingbar:starFill="@drawable/star_full"
+                ratingbar:starDistance="5dp"
+                ratingbar:starCount="5"
+                android:isIndicator="true"
+                ratingbar:starSize="15dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:layout_gravity="center_vertical"
+
+                android:text="环境"/>
+
+            <com.shanfu.tianxia.view.StarBar
+                android:id="@+id/environmental_starBar"
+                android:layout_below="@+id/display"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ratingbar:starEmpty="@drawable/star_empty"
+                ratingbar:starFill="@drawable/star_full"
+                android:layout_gravity="center_vertical"
+
+                ratingbar:starDistance="5dp"
+                ratingbar:starCount="5"
+                android:isIndicator="true"
+                ratingbar:starSize="15dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:layout_gravity="center_vertical"
+
+                android:text="服务"/>
+
+            <com.shanfu.tianxia.view.StarBar
+                android:id="@+id/service_starBar"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ratingbar:starEmpty="@drawable/star_empty"
+                ratingbar:starFill="@drawable/star_full"
+                android:layout_gravity="center_vertical"
+
+                ratingbar:starDistance="5dp"
+                ratingbar:starCount="5"
+                android:isIndicator="true"
+                ratingbar:starSize="15dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/black_textview"
+            android:layout_gravity="center_vertical"
+
+            android:text="消费"/>
+        <EditText
+            android:id="@+id/price_money"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:layout_gravity="center_vertical"
+            android:maxLength="9"
+            android:background="@mipmap/shurukuang"
+            android:gravity="left|center_vertical"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Gainsboro_textview"
+            android:layout_gravity="center_vertical"
+
+            android:text="  (元)  以平均消费为准"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/black_textview"
+            android:text="评价"/>
+        <EditText
+            android:id="@+id/comment"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            style="@style/black_textview"
+                android:background="@mipmap/shurukuang"
+           />
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="20dp">
+                <com.lzy.widget.ExpandGridView
+                    android:id="@+id/gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="3dp"/>
+                <com.shanfu.tianxia.view.MyImagePickerGridView
+                    android:id="@+id/my_goods_GV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:numColumns="3" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

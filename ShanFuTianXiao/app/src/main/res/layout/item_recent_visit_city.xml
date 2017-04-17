@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded">
+
+    <TextView
+        style="@style/LetterIndexTextViewStyle"
+        android:text="@string/cp_gv_city"/>
+
+    <com.shanfu.tianxia.view.WrapHeightGridView
+        android:id="@+id/gridview_gv_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="@dimen/side_letter_bar_width"
+        android:numColumns="3"
+        android:horizontalSpacing="12dp"
+        android:verticalSpacing="12dp"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:scrollbars="none"/>
+</LinearLayout>
+<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_recent_visit_city"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:text="热门城市" >
+    </TextView>
+
+    <com.shanfu.tianxia.view.MyGridView
+        android:id="@+id/gv_recent_visit_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:horizontalSpacing="20dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:verticalSpacing="10dp" >
+    </com.shanfu.tianxia.view.MyGridView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:background="#E2E2E2" />
+
+</LinearLayout>-->

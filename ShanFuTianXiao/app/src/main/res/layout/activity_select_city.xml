@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    >
+
+    <LinearLayout
+        android:id="@+id/select_city_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:background="@color/common_red">
+
+        <ImageButton
+            android:id="@+id/select_city_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/content_head_icon_back"/>
+
+        <EditText
+            android:id="@+id/select_city_ed_search"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/search_transparent"
+            android:hint="输入商户名/关键词"
+            android:textColorHint="@color/white"
+            android:singleLine="true"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="15sp"
+            style="@style/black_textview"
+            android:textColor="@color/white"/>
+
+        <ImageButton
+            android:id="@+id/select_city_search"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_vertical"
+
+            android:background="#00000000"
+            android:contentDescription="@string/search"
+            android:scaleType="centerInside"
+            android:src="@drawable/top_search_icon" />
+
+    </LinearLayout>
+    <com.shanfu.tianxia.view.DropDownMenu
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:id="@+id/dropDownMenu"
+        android:layout_below="@+id/select_city_top"
+        android:background="@color/ripple_material_dark"
+        android:layout_height="60dp"/>
+
+  <!-- <ListView
+        android:layout_width="fill_parent"
+        android:layout_below="@id/dropDownMenu"
+        android:id="@+id/lv_list"
+        android:background="#ffffff"
+        android:layout_height="wrap_content"/>-->
+    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+        android:layout_below="@id/dropDownMenu"
+        android:id="@+id/lv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

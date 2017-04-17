@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_300">
+    <include
+        android:id="@+id/add_bank_card_top"
+        layout="@layout/activity_toplayout"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        style="@style/black_grey_textview"
+        android:text="请绑定持卡人本人的银行卡"
+        android:textColor="#666666"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        >
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:text="持卡人"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+
+        <EditText
+            android:id="@+id/bankcard_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@null"
+            android:gravity="left"
+            android:hint="请输入持卡人姓名"
+            android:maxLines="1"
+            android:maxLength="8"
+            style="@style/black_textview"
+            android:textColorHint="@color/grey_700"
+            android:textSize="16sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        >
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:text="卡号"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+
+        <EditText
+            android:id="@+id/user_bankcard_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@null"
+            android:gravity="left"
+            android:hint="银行卡号"
+            android:maxLines="1"
+            android:inputType="number"
+            style="@style/black_textview"
+            android:textColorHint="@color/grey_700"
+            android:textSize="16sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        style="@style/black_grey_textview"
+        android:text="支付宝智能加密，保障你的用卡安全"
+        android:textColor="#666666"/>
+
+    <Button
+        android:id="@+id/confirm_add"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textColor="@color/white"
+        android:background="@mipmap/button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="确认添加" />
+
+</LinearLayout>

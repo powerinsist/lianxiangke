@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">联享客</string>
+    <string name="splash_version_info">京东商城客户端\n\nVersion 1.0.0</string>
+    <string name="home">首页</string>
+    <string name="mine">扫码</string>
+    <string name="three">我的</string>
+    <string name="find_et_hint">输入商户名搜索词</string>
+    <string name="search">搜索</string>
+    <string name="tea">美容养生</string>
+    <string name="food">美食餐饮</string>
+    <string name="hotel">酒店住宿</string>
+    <string name="ktv">家具建材</string>
+    <string name="shop">商场购物</string>
+    <string name="relax">休闲娱乐</string>
+    <string name="life">生活服务</string>
+    <string name="beauty">其它</string>
+    <string name="hot_shop">热门商家</string>
+    <string name="my_con_income">我的收入明细</string>
+    <string name="my_con_wop">联享客积分</string>
+    <string name="con_my_con_goback">我的返还</string>
+    <string name="con_my_con_balance">账户余额</string>
+    <string name="recharge">充值</string>
+    <string name="withdrawals">提现</string>
+    <string name="con_my_con_name_normal">实名认证</string>
+    <string name="con_my_con_safe_normal">安全设置</string>
+    <string name="my_bank_card">提现卡绑定</string>
+    <string name="Revenue_inquiry">市场收入</string>
+    <string name="on_line">我的会员</string>
+    <string name="consumption">消费明细</string>
+    <string name="account">账户流水</string>
+    <string name="my_merchant">我的商户</string>
+    <string name="receiving_address">设置</string>
+    <string name="money">金额</string>
+    <string name="input_money">请输入充值金额</string>
+    <string name="pay_treasure">支付宝充值</string>
+    <string name="pay_wechat">微信充值</string>
+    <string name="withdrawals_card">提现账号</string>
+    <string name="withdrawals_money">提现金额</string>
+    <string name="password">提现密码</string>
+    <string name="phone_verification_code">手机验证码</string>
+    <string name="phone_num">手机号</string>
+    <string name="regest_num">注册手机</string>
+    <string name="reset">重置</string>
+    <string name="input_phone_num">请输入11位手机号</string>
+    <string name="yanzhengma">验证码</string>
+    <string name="input_yanzhengma">请输入验证码</string>
+    <string name="login_pwd">登录密码</string>
+    <string name="input_login_pwd">请输入8-20位密码</string>
+    <string name="queren_pwd">确认密码</string>
+    <string name="input_queren_pwd">请确认密码</string>
+    <string name="tui_jian_ren">推荐人</string>
+    <string name="input_tui_jian_ren">请填写推荐人的ID(必填)</string>
+    <string name="change_pwd_toast">为保障您的账户安全，请注意保密，登录密码与提现密码不能相同</string>
+
+    <string name="old_pay_pwd">原提现密码</string>
+    <string name="input_old_pay_pwd">请输入当前密码</string>
+    <string name="new_pay_pwd">新密码</string>
+    <string name="input_new_pay_pwd">请输入新密码</string>
+    <string name="queren_new_pay_pwd">确认新密码</string>
+    <string name="input_queren_new_pay_pwd">请确认新密码</string>
+    <string name="queren">确认</string>
+
+    <string name="old_login_pwd">原登录密码</string>
+    <string name="input_ogin_pay_pwd">请输入登录密码</string>
+    <string name="setting_login_pwd">修改登录密码</string>
+    <string name="setting_pay_pwd">修改提现密码</string>
+
+    <string name="safe_exit">安全退出</string>
+    <string name="forget_password">忘记密码?</string>
+
+    <string name="cp_select_city">城市列表</string>
+    <string name="cp_gv_city">最近访问城市</string>
+    <string name="cp_hot_city">热门城市</string>
+    <string name="cp_located_city">定位城市</string>
+    <string name="cp_hint_search_box">请输入城市名或拼音</string>
+    <string name="cp_nothing_found">没有搜索结果~</string>
+    <string name="cp_locating">正在定位…</string>
+    <string name="cp_located_failed">定位失败</string>
+    <string name="clear_map">Clear</string>
+    <string name="reset_map">Reset</string><string name="no_result">对不起，没有搜索到相关数据！</string>
+    <string name="photograph">拍照</string>
+    <string name="choice">相册中选择</string>
+    <string name="photo_cancel">取消</string>
+    <string name="you_have_a_select_limit">最多选择%1$s张图片</string>
+    <string name="select_complete">完成(%1$s/%2$s)</string>
+    <string name="complete">完成</string>
+    <string name="piece">张</string>
+    <string name="all_images">全部图片</string>
+
+    <string name="general_max_per_image">图片过大，超过200k上限。</string>
+
+    <string name="msg_default_status">将二维码放入框内，即可自动扫描</string>
+
+</resources>

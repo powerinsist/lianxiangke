@@ -1,0 +1,91 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--Homefragment页面的点击图片样式-->
+    <style name="ImageButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="white_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="black_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/Black</item>
+    </style>
+    <style name="red_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/common_red</item>
+    </style>
+    <style name="yellow_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+    <!-- 灰色 -->
+    <style name="Gainsboro_textview">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/Gainsboro</item>
+    </style>
+    <!-- 黑灰色 12sp -->
+    <style name="black_grey_textview">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="LetterIndexTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">@dimen/side_letter_bar_width</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/cp_gray</item>
+    </style>
+
+    <!-- dialog的样式　 -->
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">#00ffffff</item>
+        <!-- 设置自定义布局的背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- //设置背景 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- //去掉边框 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- //设置是否背景模糊 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- //设置半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- //设置无标题 -->
+        <item name="android:windowFullscreen">false</item>
+        <!-- //设置全屏 -->
+        <item name="android:windowIsFloating">true</item>
+    </style>
+    <!-- For GifView Declaration -->
+    <style name="Widget.GifView" parent="@android:style/Widget" />
+
+
+    <!-- 这个是加入的代码 -->
+    <style name="popupwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/show_from_bottom</item>
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowExitAnimation">@anim/hide2bottom</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
+
+
+</resources>

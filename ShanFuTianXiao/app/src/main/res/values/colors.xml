@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="gainsboro">#dcdcdc</color>
+   <!-- <color name="common_red">#fd5656</color>-->
+    <color name="common_red">#f95f00</color>
+    <color name="white">#ffffff</color>
+    <color name="Black">#333333</color>
+    <color name="gray">#DCDCDC</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="Gainsboro">#999999</color>
+
+    <color name="capture_text_cover_bg">#99535353</color>
+
+    <!-- 以下为城市选择器部分-->
+    <color name="cp_colorAccent">#F3F3F3</color>
+    <color name="cp_colorPrimary">@color/cp_colorAccent</color>
+    <color name="cp_colorPrimaryDark">@color/cp_colorAccent</color>
+
+    <color name="cp_divider">#E5E5E5</color>
+    <color name="cp_shadow">#AAEBEBEB</color>
+    <color name="cp_common_bg">#FAFAFA</color>
+    <color name="cp_content_bg">@color/cp_colorAccent</color>
+    <color name="cp_gray">#8c8c8c</color>
+    <color name="cp_gray_deep">#5c5c5c</color>
+    <color name="cp_alpha_gray">#CC646464</color>
+    <color name="cp_theme_gray">#646464</color>
+    <color name="grey_500">#ffc000</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_700">#999999</color>
+ <!-- 这个是淡点的黑色-->
+ <color name="grey_600">#666666</color>
+
+    <!-- 黄色-->
+    <color name="yellow_900">#F57F17</color>
+
+    <color name="default_menu_back">#f1f1f1</color>
+    <color name="default_menu_press_back">#fafafa</color>
+    <color name="default_menu_press_text">#000000</color>
+    <color name="default_menu_text">#00cf9b</color>
+    <color name="divider">#f1f1f1</color>
+
+    <color name="act_background">#efefef</color>
+    <color name="gary">#898989</color>
+    <color name="blue">#4c90f9</color>
+    <color name="phone_bg">#f6f6f6</color>
+    <color name="taobao_black">#333333</color>
+    <color name="black"> #000000</color>
+
+    <!-- 选择图片上传 -->
+    <color name="theme_body_dark">#cc20272a</color>
+    <color name="theme_body">#cc22292c</color>
+    <color name="green_500">#4CAF50</color>
+
+    <color name="title_tv_color">#ffffffff</color>
+    <color name="backgroud">#ffffffff</color>
+
+</resources>
