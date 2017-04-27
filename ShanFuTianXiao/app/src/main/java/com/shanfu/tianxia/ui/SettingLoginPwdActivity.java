@@ -23,6 +23,7 @@ import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
 
 import butterknife.Bind;
@@ -49,9 +50,12 @@ public class SettingLoginPwdActivity extends BaseFragmentActivity implements Vie
     Button change_button;
     @Bind(R.id.chang_longin_yanzhengma)
     EditText chang_longin_yanzhengma;
+//    @Bind(R.id.chang_longin_send)
+//    ImageButton chang_longin_send;
+    @Bind(R.id.chang_longin_send_rl)
+    RelativeLayout chang_longin_send_rl;
     @Bind(R.id.chang_longin_send)
-    ImageButton chang_longin_send;
-
+    TextView chang_longin_send;
 
 
     @Override
@@ -69,7 +73,7 @@ public class SettingLoginPwdActivity extends BaseFragmentActivity implements Vie
         content_head_title.setText("修改登录密码");
         content_head_back.setOnClickListener(this);
         change_button.setOnClickListener(this);
-        chang_longin_send.setOnClickListener(this);
+        chang_longin_send_rl.setOnClickListener(this);
     }
 
 
@@ -120,9 +124,11 @@ public class SettingLoginPwdActivity extends BaseFragmentActivity implements Vie
 
                 requestData(MD5Utils.MD5(old_pwd),MD5Utils.MD5(new_pwd),MD5Utils.MD5(queren_new_pwd),yanzhengma);
                 break;
-            case R.id.chang_longin_send:
+            case R.id.chang_longin_send_rl:
                 //// TODO: 2017/4/4  发送验证码
                 requestCode();
+                TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,chang_longin_send,chang_longin_send_rl);
+                timeCountUtil.start();
                 break;
             
         }

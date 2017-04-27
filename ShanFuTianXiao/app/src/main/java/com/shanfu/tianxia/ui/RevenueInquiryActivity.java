@@ -2,6 +2,7 @@ package com.shanfu.tianxia.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -42,6 +43,10 @@ public class RevenueInquiryActivity extends BaseFragmentActivity implements View
 
     @Bind(R.id.my_revenue_listview)
     ListView my_revenue_listview;
+    @Bind(R.id.balance_top)
+    TextView balance_top;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,13 +101,13 @@ public class RevenueInquiryActivity extends BaseFragmentActivity implements View
                         @Override
                         public void onSuccess(RevenueInquiryBean revenueInquiryBean, Call call, Response response) {
                             decodeResult(revenueInquiryBean);
+
                         }
                         @Override
                         public void onError(Call call, Response response, Exception e) {
                             TUtils.showShort(RevenueInquiryActivity.this, "数据获取失败，请检查网络后重试");
                         }
                     });
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,6 +120,8 @@ public class RevenueInquiryActivity extends BaseFragmentActivity implements View
         if("200".equals(code)){
             SPUtils.getInstance().putString("ptoken", revenueInquiryBean.getData().getPtoken());
             lists = revenueInquiryBean.getData().getList();
+            String balance = revenueInquiryBean.getData().getBalance();
+            balance_top.setText("账户余额 ： " + balance + " 元");
             if(adapter ==null){
                 adapter = new RevenueInquiryAdapter(RevenueInquiryActivity.this,lists);
                 my_revenue_listview.setAdapter(adapter);

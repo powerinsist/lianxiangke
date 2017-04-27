@@ -10,6 +10,16 @@ public class XiaoFeiFanHuanBean implements Serializable {
     private String err_code;
     private String err_msg;
     private XiaoFeiData data;
+    private CiaoFeiBean data_ciaofei;
+
+
+    public CiaoFeiBean getData_ciaofei() {
+        return data_ciaofei;
+    }
+
+    public void setData_ciaofei(CiaoFeiBean data_ciaofei) {
+        this.data_ciaofei = data_ciaofei;
+    }
 
     public String getErr_code() {
         return err_code;
@@ -38,6 +48,8 @@ public class XiaoFeiFanHuanBean implements Serializable {
     public class XiaoFeiData{
 
         private List<CiaoFeiBean> list;
+        private String ptoken;
+        private String uid;
 
         public List<CiaoFeiBean> getList() {
             return list;
@@ -63,12 +75,41 @@ public class XiaoFeiFanHuanBean implements Serializable {
             this.uid = uid;
         }
 
-        private String ptoken;
-        private String uid;
 
+
+        @Override
+        public String toString() {
+            return "XiaoFeiData{" +
+                    "list=" + list +
+                    ", ptoken='" + ptoken + '\'' +
+                    ", uid='" + uid + '\'' +
+                    '}';
+        }
     }
 
     public class CiaoFeiBean{
+
+        private String remission_time;
+        private String remission_money;
+        private String id;
+        private String status;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
         public String getRemission_money() {
             return remission_money;
         }
@@ -85,9 +126,24 @@ public class XiaoFeiFanHuanBean implements Serializable {
             this.remission_time = remission_time;
         }
 
-        private String remission_money;
-        private String remission_time;
+        @Override
+        public String toString() {
+            return "CiaoFeiBean{" +
+                    "remission_time='" + remission_time + '\'' +
+                    ", remission_money='" + remission_money + '\'' +
+                    ", id='" + id + '\'' +
+                    ", status='" + status + '\'' +
+                    '}';
+        }
     }
 
-
+    @Override
+    public String toString() {
+        return "XiaoFeiFanHuanBean{" +
+                "err_code='" + err_code + '\'' +
+                ", err_msg='" + err_msg + '\'' +
+                ", data=" + data +
+                ", data_ciaofei=" + data_ciaofei +
+                '}';
+    }
 }

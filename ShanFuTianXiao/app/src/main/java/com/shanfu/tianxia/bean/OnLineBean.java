@@ -9,6 +9,7 @@ import java.util.List;
 public class OnLineBean implements Serializable {
     private String err_code;
     private String err_msg;
+    private OnLineData data;
 
     public String getErr_code() {
         return err_code;
@@ -34,8 +35,6 @@ public class OnLineBean implements Serializable {
         this.data = data;
     }
 
-    private OnLineData data;
-
 
     public class OnLineData{
 
@@ -43,6 +42,9 @@ public class OnLineBean implements Serializable {
         private String ptoken;
         private String uid;
         private String recommend_total;
+        private String new_people_num;
+        private String first_level_num;
+        private String second_level_num;
 
         public String getRecommend_total() {
             return recommend_total;
@@ -76,11 +78,6 @@ public class OnLineBean implements Serializable {
             this.second_level_num = second_level_num;
         }
 
-        private String new_people_num;
-        private String first_level_num;
-        private String second_level_num;
-
-
         public List<OnLineListBean> getList() {
             return list;
         }
@@ -109,6 +106,8 @@ public class OnLineBean implements Serializable {
     public class OnLineListBean{
 
         private String member_name;
+        private String member_id;
+        private String reg_time;
 
         public String getMember_name() {
             return member_name;
@@ -133,10 +132,6 @@ public class OnLineBean implements Serializable {
         public void setReg_time(String reg_time) {
             this.reg_time = reg_time;
         }
-
-        private String member_id;
-        private String reg_time;
-
     }
 }
 

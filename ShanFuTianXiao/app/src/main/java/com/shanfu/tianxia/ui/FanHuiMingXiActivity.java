@@ -2,6 +2,7 @@ package com.shanfu.tianxia.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.Bind;
@@ -50,7 +52,7 @@ public class FanHuiMingXiActivity extends BaseFragmentActivity implements View.O
         xiaofei_fanhuan_top = (RelativeLayout) findViewById(R.id.xiaofei_fanhuan_top);
         content_head_back = (RelativeLayout) xiaofei_fanhuan_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) xiaofei_fanhuan_top.findViewById(R.id.content_head_title);
-        content_head_title.setText("我的返还");
+        content_head_title.setText("我的积分");
         content_head_back.setOnClickListener(this);
     }
     @Override
@@ -66,7 +68,7 @@ public class FanHuiMingXiActivity extends BaseFragmentActivity implements View.O
             String version = AppUtils.getVerName(FanHuiMingXiActivity.this);
             String ptoken = SPUtils.getInstance().getString("ptoken", "");
             String uid = SPUtils.getInstance().getString("uid", "");
-            HttpParams params = new HttpParams();
+            final HttpParams params = new HttpParams();
             params.put("time", time);
             params.put("token", token);
             params.put("uid", uid);
@@ -78,6 +80,7 @@ public class FanHuiMingXiActivity extends BaseFragmentActivity implements View.O
                     .execute(new DialogCallback<XiaoFeiFanHuanBean>(this) {
                         @Override
                         public void onSuccess(XiaoFeiFanHuanBean xiaoFeiFanHuanBean, Call call, Response response) {
+                            Log.e("LOG",xiaoFeiFanHuanBean.toString());
                             decodeResult(xiaoFeiFanHuanBean);
                         }
                         @Override

@@ -13,6 +13,7 @@ import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.umeng.socialize.PlatformConfig;
 
 
 public class SplashActivity extends BaseFragmentActivity {
@@ -35,6 +36,10 @@ public class SplashActivity extends BaseFragmentActivity {
 		Constants.SCREEN_WIDTH = metrics.widthPixels;
 
 		mHandler = new Handler(getMainLooper());
+
+//		//微信平台的配置
+//		PlatformConfig.setWeixin("wx3fca228ffb8ecee1","bd51b52b4ccfbed57f317e92fbd58818");
+
 		initView();
 		initData();
 	}

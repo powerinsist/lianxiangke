@@ -55,5 +55,27 @@
             android:src="@mipmap/arrow_rig"/>
 
     </RelativeLayout>
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/forget_pay_pwd"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="10dp"-->
+        <!--android:background="@color/white"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--style="@style/black_textview"-->
+            <!--android:text="忘记提现密码找回"/>-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@mipmap/arrow_rig"/>-->
+
+    <!--</RelativeLayout>-->
 
 </LinearLayout>

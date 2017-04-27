@@ -53,9 +53,10 @@ public class MiddleAdvertisementBean {
         }
 
         public String aid;
-
         public String description;
         public String url;
+        public String version;
+        public String img;
 
         public String getDescription() {
             return description;
@@ -81,8 +82,7 @@ public class MiddleAdvertisementBean {
             this.version = version;
         }
 
-        public String version;
-        public String img;
+
     }
 
 }

@@ -39,13 +39,6 @@ public class BannerImageUrlBean implements Serializable {
     private String err_code;
     private String err_msg;
 
-
-
-
-
-
-
-
     public class Data{
         public String getId() {
             return id;

@@ -23,7 +23,8 @@ public class QueryIncomeAdapter extends BaseAdapter {
 
     private List<QueryIncomeBean.QueryBean> lists;
     private LayoutInflater inflater;
-    private String accumulated_income, income_source, income_money, income_time;
+//    private String accumulated_income, income_source, income_money, income_time;
+    private String  income_source, income_money, income_time;
 
     public QueryIncomeAdapter(Context mContext, List<QueryIncomeBean.QueryBean> lists) {
         inflater = LayoutInflater.from(mContext);
@@ -52,11 +53,11 @@ public class QueryIncomeAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        accumulated_income = lists.get(position).getAccumulated_income();
+//        accumulated_income = lists.get(position).getAccumulated_income();
         income_money = lists.get(position).getIncome_money();
         income_source = lists.get(position).getIncome_source();
         income_time = lists.get(position).getIncome_time();
-        holder.accumulated_income_tv.setText(accumulated_income);
+//        holder.accumulated_income_tv.setText(accumulated_income);
         if ("手续费".equals(income_money) || "消费".equals(income_money) || "提现".equals(income_money)) {
             holder.income_money_tv.setTextColor(Color.RED);
             holder.income_money_tv.setText("-" + income_money);
@@ -80,8 +81,8 @@ public class QueryIncomeAdapter extends BaseAdapter {
         TextView income_money_tv;
         @Bind(R.id.income_source_tv)
         TextView income_source_tv;
-        @Bind(R.id.accumulated_income_tv)
-        TextView accumulated_income_tv;
+//        @Bind(R.id.accumulated_income_tv)
+//        TextView accumulated_income_tv;
 
 
         public ViewHolder(View convertView) {

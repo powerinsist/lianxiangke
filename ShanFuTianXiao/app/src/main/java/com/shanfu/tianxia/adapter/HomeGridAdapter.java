@@ -26,7 +26,7 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 
 	private int screenWidth;
 	private DisplayMetrics dm;
-	private MyRatingBar star;
+//	private MyRatingBar star;
 	private NetworkImageView iv;
 
 	public HomeGridAdapter(Context context, List<ProductData> datas,
@@ -50,25 +50,25 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 		layout.setLayoutParams(layoutParams);
 		iv = (NetworkImageView) holder
 				.getView(R.id.item_home_iv);
-		star = holder.getView(R.id.star);
-		star.setClickable(false);
+//		star = holder.getView(R.id.star);
+//		star.setClickable(false);
 		//star.setRating(Float.valueOf(data.getGrade()));
 		//star.setNumStars(Float.valueOf(data.getGrade()));
-		if(!TextUtils.isEmpty(data.getGrade())){
-			star.setStar(Float.valueOf(data.getGrade()));
-		}else{
-			star.setStar(0);
-		}
+//		if(!TextUtils.isEmpty(data.getGrade())){
+//			star.setStar(Float.valueOf(data.getGrade()));
+//		}else{
+//			star.setStar(0);
+//		}
 
 		//star.setNumStars(DateTransformation.getint(data.getGrade()));
 		//NetworkManager.getInstance().setImageUrl(iv, data.getImgUrl());
 		NetworkManager.getInstance().setImageUrl(iv, data.getImg());
 		//Glide.with(context).load(data.getImg()).into(iv);
 		holder.setTextViewText(R.id.store_name, data.getShopname());
-		holder.setTextViewText(R.id.score, data.getDiscount() + "%");
-		holder.setTextViewText(R.id.fraction, data.getGrade() + "分");
+//		holder.setTextViewText(R.id.score, data.getDiscount() + "%");
+//		holder.setTextViewText(R.id.fraction, data.getGrade() + "分");
 		holder.setTextViewText(R.id.foot_odga,data.getLabel());
-
+		holder.setTextViewText(R.id.adress_shop,data.getAddress());
 		holder.setTextViewText(R.id.distance,data.getJuli()+"km");
 		//holder.setTextViewText(R.id.item_home_tv_info, data.getInfo());
 		//holder.setTextViewText(R.id.item_home_tv_price, "￥" + data.getPrice());

@@ -20,6 +20,7 @@ import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
 
 import butterknife.Bind;
@@ -41,9 +42,11 @@ public class FrogetPassWordActivity extends BaseFragmentActivity implements View
     @Bind(R.id.froget_yanzhengma)
     EditText froget_yanzhengma;
     @Bind(R.id.forget_send)
-    ImageButton forget_send;
+    RelativeLayout forget_send;
     @Bind(R.id.froget_pwd_next)
     Button froget_pwd_next;
+    @Bind(R.id.forget_send_tv)
+    TextView forget_send_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,8 @@ public class FrogetPassWordActivity extends BaseFragmentActivity implements View
                     return;
                 }
                 registerCode(num);
+                TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,forget_send_tv,forget_send);
+                timeCountUtil.start();
                 break;
             case R.id.froget_pwd_next:
                 String phone_num = forget_phone_num.getText().toString().trim();

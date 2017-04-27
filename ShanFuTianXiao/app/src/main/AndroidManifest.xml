@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shanfu.tianxia" >
+    package="com.shanfu.tianxia">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -24,6 +23,8 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    //友盟权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -32,23 +33,41 @@
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="io.futurestud.tutorials.glide.glidemodule.SimpleGlideModule"
             android:value="GlideModule" />
         <meta-data
             android:name="io.futurestud.tutorials.glide.glidemodule.CustomImageSizeGlideModule"
             android:value="GlideModule" />
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="58e8efa59f06fd29cc00171d" />
+        <!-- <meta-data -->
+        <!-- android:name="UMENG_APPKEY" -->
+        <!-- android:value="58e8efa59f06fd29cc00171d" /> -->
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="LIANXIANGKE" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58fa017f5312dd519400125a">
+
+        </meta-data>
+        //友盟配置
+        <!-- <activity -->
+        <!-- android:name=".wxapi.WXEntryActivity" -->
+        <!-- android:configChanges="keyboardHidden|orientation|screenSize" -->
+        <!-- android:exported="true" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" /> -->
 
         <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
             android:name=".ui.SplashActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,20 +83,24 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.CommodityDetailsActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.RechargeActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.WithdrawalsActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.LocationCityActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan">
+
         </activity>
 
         <!-- 05e3bc7a01c74b7e07a0f304771ade24 -->
@@ -88,130 +111,181 @@
 
         <activity
             android:name=".ui.CaptureActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.RegeditActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.SecurityActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.ChangePwdActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.SettingLoginPwdActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.AuthenticationActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.SetUpPwdActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.BindingBankCardActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.MyBankCardActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.AddBankCardActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.RevenueInquiryActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.OnLineActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.ConsumptionActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.MyMerchantActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.SelectCityActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan">
+
         </activity>
         <activity
             android:name=".ui.RouteActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.InfoWindowActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.BusRouteDetailActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.DriveRouteDetailActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.WalkRouteDetailActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
 
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
-        <service android:name="com.amap.api.location.APSService" >
+        <service android:name="com.amap.api.location.APSService">
+
         </service>
 
         <activity
             android:name=".ui.SettingActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.FrogetPassWordActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.ForgetPwdNextActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.EvaluationMerchantActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="stateHidden|stateUnchanged|adjustPan">
+
         </activity>
         <activity
             android:name=".ui.SetUpPwdNextActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+
         </activity>
-        <activity android:name=".ui.PayWebViewActivity" >
+        <activity android:name=".ui.PayWebViewActivity">
+
         </activity>
         <activity android:name=".ui.ClipImageActivity" />
-        <activity android:name=".ui.TestActivity" >
+        <activity android:name=".ui.TestActivity">
+
         </activity>
         <activity android:name="com.zzti.fengyongge.imagepicker.PhotoSelectorActivity" />
-//选择图片
+        //选择图片
         <activity android:name="com.zzti.fengyongge.imagepicker.PhotoPreviewActivity" />
-//预览图片
-        <activity android:name=".ui.QueryIncomeActivity" >
+        //预览图片
+        <activity android:name=".ui.QueryIncomeActivity">
+
         </activity>
-        <activity android:name=".ui.NiChengActivity" >
+        <activity android:name=".ui.NiChengActivity">
+
         </activity>
-        <activity android:name=".ui.FanHuiMingXiActivity" >
+        <activity android:name=".ui.FanHuiMingXiActivity">
+
         </activity>
-        <activity android:name=".ui.PaymentActivity" >
+        <activity android:name=".ui.PaymentActivity">
+
         </activity>
-        <activity android:name=".ui.CaptureTwoActivity" >
+        <activity android:name=".ui.CaptureTwoActivity">
+
         </activity>
+        <activity android:name=".ui.ForgetPayPwdActivity">
+
+        </activity>
+        <activity android:name=".ui.ForgetPayPwdNextActivity">
+
+        </activity>
+        <activity android:name=".ui.MyQrCodeActivity">
+
+        </activity>
+        <activity android:name=".ui.MyInComeActivity">
+
+        </activity>
+
+        <!--<activity android:name=".ui.CallCenterActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait">-->
+
+        <!--</activity>-->
     </application>
 
 </manifest>

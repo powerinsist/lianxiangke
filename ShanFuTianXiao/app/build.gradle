@@ -2,12 +2,27 @@ apply plugin: 'com.android.application'
 //apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
     signingConfigs {
         config {
             keyAlias 'shanfutianxia'
             keyPassword 'shanfutianxia'
             storeFile file('D:/shanfutianxia/shanfu.jks')
             storePassword 'shanfu123456'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
     }
     compileSdkVersion 25
@@ -21,8 +36,8 @@ android {
         applicationId "com.shanfu.tianxia"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.2.2"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_7
             targetCompatibility JavaVersion.VERSION_1_7
@@ -33,7 +48,8 @@ android {
         debug {
             // 显示Log
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            versionNameSuffix "-debug"
+            //是否显示-debug版本
+            versionNameSuffix
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
@@ -64,13 +80,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.2.0'
     //compile 'com.android.support:support-v4:25.0.1'
     compile 'com.lzy.net:okgo:+'
-
     //版本号使用 + 可以自动引用最新版
     compile 'com.lzy.net:okrx:+'
-
     //版本号使用 + 可以自动引用最新版
     compile 'com.lzy.net:okserver:+'
-
     //版本号使用 + 可以自动引用最新版
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.code.gson:gson:2.6.1'
@@ -82,7 +95,6 @@ dependencies {
     compile files('libs/volley.jar')
     compile files('libs/jackson-core-asl-1.9.7.jar')
     //compile files('libs/jackson-mapper-asl-1.9.7.jar')
-
     //compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
     compile 'com.fasterxml.jackson.core:jackson-core:2.7.2'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
@@ -92,7 +104,6 @@ dependencies {
         exclude group: 'org.codehaus.jackson'
     }
     //compile files('libs/locSDK_3.1.jar')
-
     compile 'com.zaaach:citypicker:1.1'
     compile 'com.github.open-android:Zxing:v1.0.3'
     compile 'de.hdodenhof:circleimageview:2.1.0'
@@ -104,49 +115,48 @@ dependencies {
     compile 'com.lzy.widget:view-core:0.2.1'
     //权限
     compile 'com.lovedise:permissiongen:0.0.6'
-   // compile 'com.yanzhenjie:permission:1.0.5'
+    // compile 'com.yanzhenjie:permission:1.0.5'
     // compile 'com.github.k0shk0sh:PermissionHelper:1.1.0'
     //compile 'gun0912.ted:tedpermission:1.0.3'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     //打包出现问题时
+    /* compile ('com.google.apis:google-api-services-urlshortener:v1-rev47-1.22.0'){
+                                exclude module: 'httpclient'
+                                exclude group: 'org.apache.httpcomponents'
+                                exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+                            }
 
-
-   /* compile ('com.google.apis:google-api-services-urlshortener:v1-rev47-1.22.0'){
-        exclude module: 'httpclient'
-        exclude group: 'org.apache.httpcomponents'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
-
-    compile ('com.google.api-client:google-api-client-android:1.21.0') {
-        exclude module: 'httpclient'
-        exclude group: 'org.apache.httpcomponents'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }*/
-
+                            compile ('com.google.api-client:google-api-client-android:1.21.0') {
+                                exclude module: 'httpclient'
+                                exclude group: 'org.apache.httpcomponents'
+                                exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+                            }*/
     //张鸿洋申请权限
-   // apt 'com.zhy:mpermission-compiler:1.0.0'
-
+    // apt 'com.zhy:mpermission-compiler:1.0.0'
     //更改图片选择器
-   // compile 'com.lqr.imagepicker:library:1.0.0'
-   // compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    // compile 'com.lqr.imagepicker:library:1.0.0'
+    // compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //compile 'com.github.martin90s:ImagePicker:v1.3.2'
-
     compile 'com.zzti.fengyongge:imagepicker:1.0'
     //下拉刷新
     compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
     compile 'com.google.code.gson:gson:2.6.2'
-
-
     //权限
-
     //apt 'com.zhy:mpermission-compiler:1.0.0'
-   // compile 'com.zhy:mpermission-api:1.0.0'
+    // compile 'com.zhy:mpermission-api:1.0.0'
     //compile 'com.yanzhenjie:permission:1.0.5'
-
     //友盟
-   // compile 'com.umeng.analytics:analytics:latest.integration'
-
+    // compile 'com.umeng.analytics:analytics:latest.integration'
     //扫码
-   // compile 'com.github.open-android:Zxing:v1.0.3'
+    // compile 'com.github.open-android:Zxing:v1.0.3'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile files('libs/SocialSDK_WeChat_Simplify.jar')
+    compile files('libs/umeng_shareboard_widget.jar')
+    compile files('libs/umeng_social_api.jar')
+    compile files('libs/umeng_social_net.jar')
+    compile files('libs/umeng_social_shareboard.jar')
+    compile files('libs/umeng_social_tool.jar')
+    compile files('libs/SocialSDK_sms.jar')
+    compile files('libs/lib_jx_im_alone-2.3.7.jar')
 }
 

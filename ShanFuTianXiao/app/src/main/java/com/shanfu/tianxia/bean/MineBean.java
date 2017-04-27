@@ -43,6 +43,17 @@ public class MineBean implements Serializable {
         private String ptoken;
         private String bankcard;
         private String level;
+        private String uid;
+        private String yreturnmoney;
+        private String accumulated_income;
+
+        public String getAccumulated_income() {
+            return accumulated_income;
+        }
+
+        public void setAccumulated_income(String accumulated_income) {
+            this.accumulated_income = accumulated_income;
+        }
 
         public String getLevel() {
             return level;
@@ -124,7 +135,6 @@ public class MineBean implements Serializable {
             this.yreturnmoney = yreturnmoney;
         }
 
-        private String uid;
-        private String yreturnmoney;
+
     }
 }

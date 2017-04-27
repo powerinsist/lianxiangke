@@ -36,7 +36,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
     ImageButton btn_login;
     TextView tv_login_forget_password;
     TextView tv_login_quick_regedit;
-    ImageView dl_baomi;
+//    ImageView dl_baomi;
     ImageView login_close;
     private String phoneNum;
     private String sp_phoneNum;
@@ -112,7 +112,8 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
 
                 break;
 
-            case R.id.tv_login_quick_regedit:intent = new Intent(this,RegeditActivity.class);
+            case R.id.tv_login_quick_regedit:
+                intent = new Intent(this,RegeditActivity.class);
                // intent.putExtra("comefrom", comefrom);
                 startActivity(intent);
                 break;

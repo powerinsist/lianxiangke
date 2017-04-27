@@ -53,6 +53,17 @@ public class XiaoFeiFanHuanAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.remission_money_tv.setText(lists.get(position).getRemission_money());
         holder.remission_time_tv.setText(lists.get(position).getRemission_time());
+        holder.id.setText(lists.get(position).getId());
+        String status = lists.get(position).getStatus();
+        if ("0".equals(status)){
+            holder.status.setText("计算中");
+        }
+        else if ("1".equals(status))
+        {
+            holder.status.setText("已返还");
+        }else {
+            holder.status.setText("返还倒计时");
+        }
 
         return convertView;
 
@@ -64,7 +75,10 @@ public class XiaoFeiFanHuanAdapter extends BaseAdapter {
         TextView remission_money_tv;
         @Bind(R.id.remission_time_tv)
         TextView remission_time_tv;
-
+        @Bind(R.id.id)
+        TextView id;
+        @Bind(R.id.status)
+        TextView status;
 
 
         public ViewHolder(View convertView) {

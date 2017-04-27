@@ -68,6 +68,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
 
             @Override
             public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+                //如果输入金额里包含小数点
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
                         s = s.toString().subSequence(0,

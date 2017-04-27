@@ -1,5 +1,7 @@
 package com.shanfu.tianxia.listener;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.request.BaseRequest;
@@ -46,12 +48,13 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
              ParameterizedType parameterizedType = (ParameterizedType) type;  
              Type beanType = parameterizedType.getActualTypeArguments()[0];  
              if (beanType == String.class) {  
-                 //如果是String类型，直接返回字符串  
-                 return (T) response.body().string();  
-             } else {  
-                 //如果是 Bean List Map ，则解析完后返回  
-                 return new Gson().fromJson(response.body().string(), beanType);  
-             }  
+                 //如果是String类型，直接返回字符串
+                 return (T) response.body().string();
+             } else {
+//                 Log.e("LOGINFO",response.body().string());
+                 //如果是 Bean List Map ，则解析完后返回
+                 return new Gson().fromJson(response.body().string(), beanType);
+             }
          } else {  
              //如果没有写泛型，直接返回Response对象  
              return (T) response;  

@@ -3,10 +3,14 @@ package com.shanfu.tianxia.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
@@ -23,6 +27,9 @@ import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,9 +50,15 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
     EditText binding_bank_card_phone_number;
     @Bind(R.id.binding_card)
     Button binding_card;
+//    @Bind(R.id.select_band_card)
+//    Spinner select_band_card;
 
     private String cardNum,phoneNum;
     private String t_status,p_status,b_status;
+    private List<String> list;
+    private Spinner mSpinner;
+    private String bank;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,26 +67,72 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
         t_status = SPUtils.getInstance().getString("t_status","");
         p_status = SPUtils.getInstance().getString("p_status","");
         b_status = SPUtils.getInstance().getString("b_status","");
+
+
         initView();
+
     }
 
     private void initView() {
         bind_card_top = (RelativeLayout) findViewById(R.id.bind_card_top);
         content_head_back = (RelativeLayout) bind_card_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) bind_card_top.findViewById(R.id.content_head_title);
+
+        mSpinner = (Spinner) findViewById(R.id.select_band_card);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,getDatabanks());
+        mSpinner.setAdapter(adapter);
+        mSpinner.setOnItemSelectedListener(new OnItemSelectedListenerSpinner());
+
         content_head_title.setText("添加银行卡");
         content_head_back.setOnClickListener(this);
         binding_card.setOnClickListener(this);
     }
+    private class OnItemSelectedListenerSpinner implements AdapterView.OnItemSelectedListener {
 
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            bank = parent.getItemAtPosition(position).toString();
+            bank = mSpinner.getSelectedItem().toString();
+            Log.e("LOG",bank);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+
+    }
+
+    public List<String> getDatabanks(){
+        list = new ArrayList<>();
+        list.add("请选择开户银行");
+        list.add("中国工商银行");
+        list.add("中国农业银行");
+        list.add("中国建设银行");
+        list.add("中国银行");
+        list.add("交通银行");
+        list.add("招商银行");
+        list.add("中信银行");
+        list.add("其它银行");
+        return list;
+    }
     @Override
     public void onClick(View v) {
+//        mSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                bank = parent.getItemAtPosition(position).toString();
+//            }
+//        });
+//        Log.e("LOG",bank);
         switch (v.getId()){
             case R.id.content_head_back:
                 finish();
                 break;
             case R.id.binding_card:
                 cardNum = binding_bank_card_number.getText().toString().trim();
+//                String bankNum = cardNum.substring(0,5);
                 phoneNum = binding_bank_card_phone_number.getText().toString().trim();
                 if(TextUtils.isEmpty(cardNum)){
                     TUtils.showShort(BindingBankCardActivity.this,"银行卡号不能为空");
@@ -89,8 +148,6 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
                 }
                 requestData(cardNum,phoneNum);
                 break;
-
-
         }
     }
     private void requestData(String card,String num){
@@ -100,6 +157,7 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
             String version = AppUtils.getVerName(BindingBankCardActivity.this);
             String ptoken = SPUtils.getInstance().getString("ptoken", "");
             String uid = SPUtils.getInstance().getString("uid", "");
+
             HttpParams params = new HttpParams();
             params.put("time", time);
             params.put("token", token);
@@ -108,6 +166,8 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
             params.put("version", version);
             params.put("ptoken", ptoken);
             params.put("uid", uid);
+            //选择银行
+            params.put("bank",bank);
 
             OkGo.post(Urls.bindBankCard)
                     .tag(this)

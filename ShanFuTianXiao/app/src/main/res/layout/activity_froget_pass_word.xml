@@ -103,16 +103,32 @@
                 android:hint="@string/input_yanzhengma"/>
 
 
-           <ImageButton
+           <!--<ImageButton-->
+                <!--android:id="@+id/forget_send"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+               <!--android:layout_centerVertical="true"-->
+                <!--style="@style/black_textview"-->
+                <!--android:background="@null"-->
+                <!--android:src="@drawable/registered_send"-->
+                 <!--/>-->
+
+            <RelativeLayout
                 android:id="@+id/forget_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-               android:layout_centerVertical="true"
-                style="@style/black_textview"
-                android:background="@null"
-                android:src="@drawable/registered_send"
-                 />
+                android:background="@mipmap/withdrawal">
+                <TextView
+                    android:id="@+id/forget_send_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    style="@style/Gainsboro_textview"
+                    android:textSize="14sp"
+                    android:text="获取验证码"/>
+            </RelativeLayout>
 
         </LinearLayout>
 

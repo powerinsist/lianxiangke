@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -199,6 +200,7 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                 SPUtils.getInstance().putString("bankcard","");
                 //SPUtils.getInstance().putString("phoneNum","");
                 SPUtils.getInstance().putBoolean("request",false);
+//                Log.e("LOG","11111111");
                 intent = new Intent(SettingActivity.this, MainActivity.class);
                 intent.putExtra("comefrom","home");
                 startActivity(intent);

@@ -101,14 +101,29 @@
                 android:hint="@string/input_yanzhengma"
                 android:textSize="14sp"/>
 
-            <ImageButton
-                android:id="@+id/chang_longin_send"
+            <!--<ImageButton-->
+                <!--android:id="@+id/chang_longin_send"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--style="@style/black_textview"-->
+                <!--android:background="@drawable/registered_send"-->
+                <!--/>-->
+            <RelativeLayout
+                android:id="@+id/chang_longin_send_rl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                style="@style/black_textview"
-                android:background="@drawable/registered_send"
-                />
+                android:background="@mipmap/withdrawal">
+                <TextView
+                    android:id="@+id/chang_longin_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    style="@style/Gainsboro_textview"
+                    android:textSize="14sp"
+                    android:text="获取验证码"/>
+            </RelativeLayout>
 
         </LinearLayout>
     </LinearLayout>

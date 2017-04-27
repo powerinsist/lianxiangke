@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         style="@style/white_textview"
-
         />
 
 </RelativeLayout>

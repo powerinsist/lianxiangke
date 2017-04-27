@@ -25,7 +25,7 @@
                 style="@style/white_textview"
                 android:textSize="14sp"
                 android:layout_centerInParent="true"
-                android:text="返还金额"/>
+                android:text="进入时间"/>
         </RelativeLayout>
         <View
             android:layout_width="1dp"
@@ -42,7 +42,41 @@
                 style="@style/white_textview"
                 android:textSize="14sp"
                 android:layout_centerInParent="true"
-                android:text="返还时间"/>
+                android:text="序列号"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/white_textview"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:text="积分数量"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/white_textview"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:text="状态"/>
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout

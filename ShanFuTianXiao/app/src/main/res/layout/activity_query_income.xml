@@ -9,9 +9,30 @@
         layout="@layout/activity_toplayout"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="25dp"
         android:orientation="horizontal"
+        android:background="@color/yellow_900"
+        android:layout_marginTop="2dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/query_income_leiji"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="累计收入 ："
+                style="@style/white_textview"
+                android:textSize="12sp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="30dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp"
         android:background="@color/yellow_900">
 
         <RelativeLayout
@@ -66,31 +87,33 @@
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:background="@color/white"/>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <!--<RelativeLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
 
-                style="@style/white_textview"
-                android:textSize="14sp"
-                android:layout_centerInParent="true"
-                android:text="累计收入"/>
-        </RelativeLayout>
+                <!--style="@style/white_textview"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text="累计收入"/>-->
+        <!--</RelativeLayout>-->
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/query_income_listview_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
-    <ListView
-        android:id="@+id/query_icome_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"></ListView>
-        </LinearLayout>
+        <ListView
+            android:id="@+id/query_icome_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null">
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

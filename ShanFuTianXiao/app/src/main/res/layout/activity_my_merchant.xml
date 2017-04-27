@@ -64,7 +64,7 @@
                 style="@style/white_textview"
                 android:textSize="14sp"
                 android:layout_centerInParent="true"
-                android:text="合作折扣"/>
+                android:text="签约类型"/>
         </RelativeLayout>
        <!-- <RelativeLayout
             android:layout_width="0dp"

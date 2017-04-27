@@ -9,7 +9,16 @@ public class Urls {
     //static final String api_url = "https://api.xiaokang100.com/Api/";
     static final String api_url = "https://api.lianxiangke.cn/Api/";
 
-
+    //忘记密码的phone值
+    public  static final String forget_phone = api_url+"Login/Withdrawalsuidyu";
+    //我的提现（验证码判断）
+    public  static final String tixian_yanzheng = api_url+"Login/Withdrawalscodeyu";
+    //我的提现
+    public static final String my_income = api_url+"My/details";
+    //修改提现密码（发送验证码）
+    public static final String tixian_code = api_url+"Login/modifyithdrawals";
+    //修改提现密码（确认）
+    public static final String tixian_requst = api_url+"Login/repass";
     //热门城市列表
     public static final String home_hotcity = api_url+"Home/hotcity";
     //所有城市列表
@@ -67,8 +76,12 @@ public class Urls {
     public static final String index = api_url+"My/index";
     //测试
     public static final String test = api_url+"index/test";
+//    //我的收入
+//    public static final String queryIncome = api_url+"My/queryIncome";
+//    //我的收入
+//    public static final String queryIncome = api_url+"Myincome/queryIncome";
     //我的收入
-    public static final String queryIncome = api_url+"My/queryIncome";
+    public static final String queryIncome = api_url+"My/queryIncome2";
     //我的推广
     public static final String mySpread = api_url+"My/mySpread";
     //我的推广
@@ -91,7 +104,7 @@ public class Urls {
     public static final String modifyLoginPasswordSmsCode = api_url+"login/modifyLoginPasswordSmsCode";
 
 
-
+//    https://api.lianxiangke.cn/Api/My/remissionDetail
 
 
 

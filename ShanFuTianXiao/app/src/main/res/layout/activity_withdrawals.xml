@@ -256,6 +256,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/withdrawal">
             <TextView
+                android:id="@+id/send_withdrawal_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

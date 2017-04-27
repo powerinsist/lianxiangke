@@ -6,6 +6,8 @@ package com.shanfu.tianxia.bean;
  */
 public class RegeditBean {
     private RegeData data;
+    private String err_code;
+    private String err_msg;
 
     public RegeData getData() {
         return data;
@@ -31,12 +33,22 @@ public class RegeditBean {
         this.err_msg = err_msg;
     }
 
-    private String err_code;
-    private String err_msg;
-
 
     public class RegeData{
         private String ptoken;
+        private String uid;
+        private String phone;
+        private String p_status;
+        private String t_status;
+        private String b_status;
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
 
         public String getPtoken() {
             return ptoken;
@@ -45,11 +57,6 @@ public class RegeditBean {
         public void setPtoken(String ptoken) {
             this.ptoken = ptoken;
         }
-
-        private String uid;
-
-
-        private String b_status;
 
         public String getB_status() {
             return b_status;
@@ -70,13 +77,9 @@ public class RegeditBean {
         public String getT_status() {
             return t_status;
         }
-
         public void setT_status(String t_status) {
             this.t_status = t_status;
         }
-
-        private String p_status;
-        private String t_status;
 
         public String getUid() {
             return uid;

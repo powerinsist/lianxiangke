@@ -2,9 +2,12 @@ package com.shanfu.tianxia.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +30,7 @@ import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
 
 import butterknife.Bind;
@@ -57,6 +61,9 @@ public class WithdrawalsActivity extends BaseFragmentActivity implements View.On
     Button withdrawal_button;
     private String bankcard;
     private WithdrawalsBean withdrawalsBean;
+
+    @Bind(R.id.send_withdrawal_tv)
+    TextView send_withdrawal_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +163,9 @@ public class WithdrawalsActivity extends BaseFragmentActivity implements View.On
                 requestData(money, MD5Utils.MD5(pwd), verification_cod);
                 break;
             case R.id.send_withdrawal_code:
+
                 phoneNum =  SPUtils.getInstance().getString("phoneNum","");
+//                Log.e("LOG",phoneNum);
                 if(TextUtils.isEmpty(phoneNum)){
                     TUtils.showShort(this,"请重新登录");
                     Intent intent = new Intent(this,LoginActivity.class);
@@ -164,8 +173,9 @@ public class WithdrawalsActivity extends BaseFragmentActivity implements View.On
                 }else{
                     //// TODO: 2017/3/31
                     requestCode(phoneNum);
+                    TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,send_withdrawal_tv,send_withdrawal_code);
+                    timeCountUtil.start();
                 }
-                
                 break;
         }
     }

@@ -7,6 +7,7 @@ import java.util.List;
  * Created by qing on 2017/3/29.
  */
 public class RevenueInquiryBean implements Serializable {
+
     private String err_code;
     private String err_msg;
 
@@ -42,6 +43,15 @@ public class RevenueInquiryBean implements Serializable {
         private List<RevenueBean> list;
         private String ptoken;
         private String uid;
+        private String balance;
+
+        public String getBalance() {
+            return balance;
+        }
+
+        public void setBalance(String balance) {
+            this.balance = balance;
+        }
 
         public List<RevenueBean> getList() {
             return list;
@@ -69,9 +79,10 @@ public class RevenueInquiryBean implements Serializable {
     }
 
     public class RevenueBean{
-        private String balance;
         private String cases;
         private String changed_money;
+        private String income_time;
+
 
         public String getIncome_time() {
             return income_time;
@@ -79,14 +90,6 @@ public class RevenueInquiryBean implements Serializable {
 
         public void setIncome_time(String income_time) {
             this.income_time = income_time;
-        }
-
-        public String getBalance() {
-            return balance;
-        }
-
-        public void setBalance(String balance) {
-            this.balance = balance;
         }
 
         public String getCases() {
@@ -105,6 +108,6 @@ public class RevenueInquiryBean implements Serializable {
             this.changed_money = changed_money;
         }
 
-        private String income_time;
     }
+
 }

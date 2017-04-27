@@ -2,7 +2,9 @@ package com.shanfu.tianxia.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.RegeditBean;
+import com.shanfu.tianxia.bean.RusltPhoneBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -45,11 +48,21 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
     EditText input_queren_new_pay_pwd;
     @Bind(R.id.set_longin_pwd_button)
     Button set_longin_pwd_button;
+    @Bind(R.id.forget_pay_password)
+    TextView forget_pay_password;
+    private Intent intent;
+    private String old_pwd;
+    private String new_pwd;
+    private String queren_new_pwd;
+    private String phone;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pwd);
         ButterKnife.bind(this);
+        requestphone(phone);
         initView();
 
 
@@ -64,6 +77,7 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
         content_head_title.setText("修改提现密码");
         content_head_back.setOnClickListener(this);
         set_longin_pwd_button.setOnClickListener(this);
+        forget_pay_password.setOnClickListener(this);
 
     }
 
@@ -75,21 +89,27 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
                 finish();
                 break;
 
-            case R.id.set_longin_pwd_button:
-                String old_pwd = input_old_pay_pwd.getText().toString().trim();
-                String new_pwd = input_new_pay_pwd.getText().toString().trim();
-                String queren_new_pwd = input_queren_new_pay_pwd.getText().toString().trim();
+            case R.id.forget_pay_password:
+                intent = new Intent(ChangePwdActivity.this,ForgetPayPwdActivity.class);
+                intent.putExtra("phone",phone);
+                startActivity(intent);
+                break;
 
-                if(TextUtils.isEmpty(old_pwd)||old_pwd.length()!=6){
+            case R.id.set_longin_pwd_button:
+                old_pwd = input_old_pay_pwd.getText().toString().trim();
+                new_pwd = input_new_pay_pwd.getText().toString().trim();
+                queren_new_pwd = input_queren_new_pay_pwd.getText().toString().trim();
+
+                if(TextUtils.isEmpty(old_pwd)|| old_pwd.length()!=6){
                     TUtils.showShort(ChangePwdActivity.this,"请输入6位数的原交易密码");
                     return ;
                 }
 
-                if(TextUtils.isEmpty(new_pwd)||new_pwd.length()!=6){
+                if(TextUtils.isEmpty(new_pwd)|| new_pwd.length()!=6){
                     TUtils.showShort(ChangePwdActivity.this,"请输入6位数的新交易密码");
                     return ;
                 }
-                if(TextUtils.isEmpty(queren_new_pwd)||queren_new_pwd.length()!=6){
+                if(TextUtils.isEmpty(queren_new_pwd)|| queren_new_pwd.length()!=6){
                     TUtils.showShort(ChangePwdActivity.this,"请输入6位数的新确认交易密码");
                     return ;
                 }
@@ -100,10 +120,11 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
 
                 requestData(MD5Utils.MD5(old_pwd),MD5Utils.MD5(new_pwd),MD5Utils.MD5(queren_new_pwd));
                 break;
+
         }
     }
 
-    private void requestData(String newPwd,String oldPwd,String queren){
+    private void requestData(String oldPwd,String newPwd,String queren){
         try {
             String time = DateUtils.getLinuxTime();
             String token = MD5Utils.MD5(Constants.appKey + time);
@@ -150,10 +171,48 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
             Intent intent = new Intent(ChangePwdActivity.this,LoginActivity.class);
             startActivity(intent);
         }
+        else if ("100".equals(err_code)){
+            TUtils.showShort(ChangePwdActivity.this,msg);
+        }
         else{
             TUtils.showShort(ChangePwdActivity.this, msg);
         }
+    }
 
+    private void requestphone(String phone){
+        try {
+            String time = DateUtils.getLinuxTime();
+            String token = MD5Utils.MD5(Constants.appKey + time);
+            String ptoken = SPUtils.getInstance().getString("ptoken", "");
+            String uid = SPUtils.getInstance().getString("uid","");
+            HttpParams params = new HttpParams();
+            params.put("time", time);
+            params.put("token", token);
+            params.put("ptoken", ptoken);
+            params.put("uid", uid);
+
+            OkGo.post(Urls.forget_phone)
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<RusltPhoneBean>(this) {
+                        @Override
+                        public void onSuccess(RusltPhoneBean rusltPhoneBean, Call call, Response response) {
+//                            phoneResult(rusltPhoneBean);
+                            phoneResult(rusltPhoneBean);
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            TUtils.showShort(ChangePwdActivity.this, "数据获取失败，请检查网络后重试");
+                        }
+                    });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void phoneResult(RusltPhoneBean rusltPhoneBean){
+        phone = rusltPhoneBean.getData().getPhone();
 
     }
 }

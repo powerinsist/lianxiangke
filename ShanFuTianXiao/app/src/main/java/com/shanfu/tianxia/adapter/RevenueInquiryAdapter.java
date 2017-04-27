@@ -23,7 +23,8 @@ public class RevenueInquiryAdapter extends BaseAdapter {
 
     private List<RevenueInquiryBean.RevenueBean> lists;
     private LayoutInflater inflater;
-    private String changed_money,cases,time,balance;
+//    private String changed_money,cases,time,balance;
+    private String changed_money,cases,time;
     public RevenueInquiryAdapter(Context mContext,List<RevenueInquiryBean.RevenueBean> lists){
         inflater =  LayoutInflater.from(mContext);
         this.lists = lists;
@@ -50,7 +51,7 @@ public class RevenueInquiryAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        balance = lists.get(position).getBalance();
+//        balance = lists.get(position).getBalance();
         changed_money = lists.get(position).getChanged_money();
         cases = lists.get(position).getCases();
         time = lists.get(position).getIncome_time();
@@ -62,7 +63,7 @@ public class RevenueInquiryAdapter extends BaseAdapter {
             holder.changed_money_tv.setTextColor(Color.GREEN);
             holder.changed_money_tv.setText("+"+changed_money);
         }
-        holder.balance_tv.setText(balance);
+//        holder.balance_tv.setText(balance);
 
         holder.case_tv.setText(cases);
         holder.time_tv.setText(time);
@@ -71,8 +72,8 @@ public class RevenueInquiryAdapter extends BaseAdapter {
     }
     class ViewHolder{
 
-        @Bind(R.id.balance_tv)
-        TextView balance_tv;
+//        @Bind(R.id.balance_tv)
+//        TextView balance_tv;
         @Bind(R.id.changed_money_tv)
         TextView changed_money_tv;
         @Bind(R.id.case_tv)

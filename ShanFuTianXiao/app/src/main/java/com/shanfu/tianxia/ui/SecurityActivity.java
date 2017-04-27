@@ -22,6 +22,7 @@ public class SecurityActivity extends BaseFragmentActivity implements View.OnCli
     private RelativeLayout content_head_back;
     private TextView content_head_title;
     private String p_status;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +63,8 @@ public class SecurityActivity extends BaseFragmentActivity implements View.OnCli
                     intent = new Intent(this,SetUpPwdActivity.class);
                     startActivity(intent);
                 }
-
                 break;
+
         }
     }
 }

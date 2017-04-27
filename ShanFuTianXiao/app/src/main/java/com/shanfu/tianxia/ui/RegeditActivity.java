@@ -1,7 +1,9 @@
 package com.shanfu.tianxia.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,17 +13,20 @@ import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
+import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.bean.RsultBean;
+import com.shanfu.tianxia.fragment.MineFragment;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
 
 import butterknife.Bind;
@@ -44,7 +49,7 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
     @Bind(R.id.input_yanzhengma)
     EditText input_yanzhengma;
     @Bind(R.id.re_send)
-    ImageButton re_send;
+    TextView re_send;
     @Bind(R.id.input_login_pwd)
     EditText input_login_pwd;
     @Bind(R.id.input_queren_pwd)
@@ -53,6 +58,8 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
     EditText input_tui_jian_ren;
     @Bind(R.id.regist_button)
     Button regist_button;
+    @Bind(R.id.re_send_rl)
+    RelativeLayout re_send_rl;
 
     private String phoneNum;
 
@@ -132,9 +139,6 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                     TUtils.showShort(RegeditActivity.this,"两次输入的密码不相同，请重新输入");
                     return;
                 }
-
-
-
                 /*if(!TextUtils.isEmpty(tui_jian_ren)){
                     if(tui_jian_ren.length()!=11){
                         TUtils.showShort(RegeditActivity.this, "请输入正确的推荐人手机号码");
@@ -147,10 +151,9 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                         return;
 
                 }
-
                 register(phoneNum,yanzhengma, MD5Utils.MD5(login_pwd),tui_jian_ren);
-
-
+                Intent intent = new Intent(RegeditActivity.this,MainActivity.class);
+                startActivity(intent);
                 break;
             //发送验证码
             case R.id.re_send:
@@ -159,12 +162,14 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                     TUtils.showShort(RegeditActivity.this,"手机号码不能为空");
                     return;
                 }
-                if(num.length()!=11){
+                else if(num.length()!=11){
                     TUtils.showShort(RegeditActivity.this, "请输入正确的手机号码");
                     return;
+                }else {
+                    registerCode(num);
+                    TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,re_send,re_send_rl);
+                    timeCountUtil.start();
                 }
-
-                registerCode(num);
                 break;
         }
     }
@@ -212,10 +217,10 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
             SPUtils.getInstance().putString("uid", regeditBean.getData().getUid());
             SPUtils.getInstance().putString("ptoken", regeditBean.getData().getPtoken());
             this.finish();
-        }else{
+        }
+        else{
             TUtils.showShort(RegeditActivity.this,msg);
         }
-
 
     }
 

@@ -35,6 +35,7 @@ public class QueryIncomeBean implements Serializable {
     }
 
 
+
     private QueryIncomeData data;
 
 
@@ -43,6 +44,16 @@ public class QueryIncomeBean implements Serializable {
         private List<QueryBean> list;
         private String ptoken;
         private String uid;
+
+        private String accumulated_income;
+
+        public String getAccumulated_income() {
+            return accumulated_income;
+        }
+
+        public void setAccumulated_income(String accumulated_income) {
+            this.accumulated_income = accumulated_income;
+        }
 
         public List<QueryBean> getList() {
             return list;
@@ -73,6 +84,7 @@ public class QueryIncomeBean implements Serializable {
        private String income_money;
         private String income_source;
         private String income_time;
+//        private String accumulated_income;
 
         public String getIncome_money() {
             return income_money;
@@ -98,14 +110,14 @@ public class QueryIncomeBean implements Serializable {
             this.income_time = income_time;
         }
 
-        public String getAccumulated_income() {
-            return accumulated_income;
-        }
+//        public String getAccumulated_income() {
+//            return accumulated_income;
+//        }
+//
+//        public void setAccumulated_income(String accumulated_income) {
+//            this.accumulated_income = accumulated_income;
+//        }
 
-        public void setAccumulated_income(String accumulated_income) {
-            this.accumulated_income = accumulated_income;
-        }
 
-        private String accumulated_income;
     }
 }

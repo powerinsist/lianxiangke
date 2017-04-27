@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,6 +32,8 @@ import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.model.City;
 import com.shanfu.tianxia.model.LocateState;
 import com.shanfu.tianxia.utils.DateUtils;
+import com.shanfu.tianxia.utils.LogType;
+import com.shanfu.tianxia.utils.LogUtil;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
@@ -82,10 +85,7 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
                 .addRequestCode(100)
                 .permissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
                 .request();
-
-
-
-
+        initLocation();
     }
     @PermissionSuccess(requestCode = 100)
     public void doSomething(){
@@ -108,7 +108,7 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
 
 
     private void initLocation() {
-        mLocationClient = new AMapLocationClient(this);
+        mLocationClient = new AMapLocationClient(this.getApplicationContext());
         AMapLocationClientOption option = new AMapLocationClientOption();
         option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         option.setOnceLocation(true);
@@ -119,14 +119,14 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
                 if (aMapLocation != null) {
                     if (aMapLocation.getErrorCode() == 0) {
                         String city = aMapLocation.getCity();
+//                        Log.e("LOG",city);
                        // String district = aMapLocation.getDistrict();
                        // String location = StringUtils.extractLocation(city, district);
                        // double latitude = aMapLocation.getLatitude();
-                        //double longitude = aMapLocation.getLongitude();
+                        //  double longitude = aMapLocation.getLongitude();
                        // LogUtil.log(LogType.ERROR,getClass(),latitude+"");
                        // LogUtil.log(LogType.ERROR,getClass(),longitude+"");
-                       // LogUtil.log(LogType.ERROR,getClass(),city+"----");
-                       // LogUtil.log(LogType.ERROR, getClass(), city + "----");
+                       // LogUtil.log(LogType.ERROR,getClass(),city+"----");//LogUtil.log(LogType.ERROR, getClass(), city + "----");
                         mCityAdapter.updateLocateState(LocateState.SUCCESS, city);
                     } else {
                         //定位失败

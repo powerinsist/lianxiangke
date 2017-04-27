@@ -3,7 +3,7 @@
     <string name="splash_version_info">京东商城客户端\n\nVersion 1.0.0</string>
     <string name="home">首页</string>
     <string name="mine">扫码</string>
-    <string name="three">我的</string>
+    <string name="three">个人中心</string>
     <string name="find_et_hint">输入商户名搜索词</string>
     <string name="search">搜索</string>
     <string name="tea">美容养生</string>
@@ -16,15 +16,15 @@
     <string name="beauty">其它</string>
     <string name="hot_shop">热门商家</string>
     <string name="my_con_income">我的收入明细</string>
-    <string name="my_con_wop">联享客积分</string>
-    <string name="con_my_con_goback">我的返还</string>
+    <string name="my_con_wop">剩余积分</string>
+    <string name="con_my_con_goback">累计返还</string>
     <string name="con_my_con_balance">账户余额</string>
     <string name="recharge">充值</string>
     <string name="withdrawals">提现</string>
     <string name="con_my_con_name_normal">实名认证</string>
     <string name="con_my_con_safe_normal">安全设置</string>
     <string name="my_bank_card">提现卡绑定</string>
-    <string name="Revenue_inquiry">市场收入</string>
+    <string name="Revenue_inquiry">市场总收入</string>
     <string name="on_line">我的会员</string>
     <string name="consumption">消费明细</string>
     <string name="account">账户流水</string>
@@ -77,7 +77,8 @@
     <string name="cp_locating">正在定位…</string>
     <string name="cp_located_failed">定位失败</string>
     <string name="clear_map">Clear</string>
-    <string name="reset_map">Reset</string><string name="no_result">对不起，没有搜索到相关数据！</string>
+    <string name="reset_map">Reset</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
     <string name="photograph">拍照</string>
     <string name="choice">相册中选择</string>
     <string name="photo_cancel">取消</string>

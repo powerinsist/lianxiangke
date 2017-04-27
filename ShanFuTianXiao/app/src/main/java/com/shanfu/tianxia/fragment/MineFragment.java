@@ -1,9 +1,11 @@
 package com.shanfu.tianxia.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lzy.ninegrid.NineGridView;
 import com.lzy.okgo.OkGo;
@@ -27,7 +30,9 @@ import com.shanfu.tianxia.ui.ConsumptionActivity;
 import com.shanfu.tianxia.ui.FanHuiMingXiActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.MyBankCardActivity;
+import com.shanfu.tianxia.ui.MyInComeActivity;
 import com.shanfu.tianxia.ui.MyMerchantActivity;
+import com.shanfu.tianxia.ui.MyQrCodeActivity;
 import com.shanfu.tianxia.ui.OnLineActivity;
 import com.shanfu.tianxia.ui.QueryIncomeActivity;
 import com.shanfu.tianxia.ui.RechargeActivity;
@@ -110,8 +115,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
      */
     @Bind(R.id.con_my_con_name_normal)
     TextView con_my_con_name_normal;
-
-
+    //二维码
+    @Bind(R.id.my_qrcode)
+    RelativeLayout my_qrcode;
+    //我的提现
+    @Bind(R.id.my_income)
+    RelativeLayout my_income;
+    @Bind(R.id.lian_xi_ke_fu_rl)
+    RelativeLayout lian_xi_ke_fu_rl;
 
 
 
@@ -142,6 +153,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         receiving_address.setOnClickListener(this);
         fanhui_mingxi.setOnClickListener(this);
         profile_image.setOnClickListener(this);
+        my_qrcode.setOnClickListener(this);
+        my_income.setOnClickListener(this);
+        lian_xi_ke_fu_rl.setOnClickListener(this);
        // requestData();
 
     }
@@ -154,6 +168,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         t_status = SPUtils.getInstance().getString("t_status","");
         p_status = SPUtils.getInstance().getString("p_status","");
         b_status = SPUtils.getInstance().getString("b_status","");
+        String nickName = SPUtils.getInstance().getString("nickName","");
+        if(!TextUtils.isEmpty(nickName)){
+            con_my_con_name_normal.setText("已认证");
+        }else {
+            con_my_con_name_normal.setText("请先实名认证");
+        }
 
         if("1".equals(t_status)&&"1".equals(p_status)&&"1".equals(b_status)){
             con_my_con_name_normal_img.setImageResource(R.mipmap.con_my_con_name_selected);
@@ -171,8 +191,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if(request){
             requestData();
         }
-
-
     }
 
     @Override
@@ -227,6 +245,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             SPUtils.getInstance().putString("nickname", mineBean.getData().getNickname());
             SPUtils.getInstance().putString("uid", mineBean.getData().getUid());
             SPUtils.getInstance().putString("bankcard", mineBean.getData().getBankcard());
+            if(!TextUtils.isEmpty(mineBean.getData().getNickname())){
+                con_my_con_name_normal.setText("已认证");
+            }else {
+                con_my_con_name_normal.setText("请先实名认证");
+            }
             level =  mineBean.getData().getLevel();
             if("1".equals(level)){
                 dengji.setImageResource(R.mipmap.dengji1);
@@ -236,7 +259,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 dengji.setImageResource(R.mipmap.dengji3);
             }
 
-            my_con.setText(mineBean.getData().getIncome());
+            my_con.setText(mineBean.getData().getAccumulated_income());
             my_con_wop.setText(mineBean.getData().getKintegral());
             con_my_con_balance.setText(mineBean.getData().getAvailable_money());
             con_my_con_goback.setText(mineBean.getData().getYreturnmoney());
@@ -280,12 +303,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     intent = new Intent(getActivity(), WithdrawalsActivity.class);
                     startActivity(intent);
                 }*/
+                    //实名认证
                 if(!"1".equals(t_status)){
                     intent = new Intent(getActivity(), AuthenticationActivity.class);
                     startActivity(intent);
+                    //设置交易密码
                 }else if(!"1".equals(p_status)){
                     intent = new Intent(getActivity(), SetUpPwdActivity.class);
                     startActivity(intent);
+                    //绑定银行卡
                 }else if(!"1".equals(b_status)){
                     intent = new Intent(getActivity(), BindingBankCardActivity.class);
                     startActivity(intent);
@@ -353,6 +379,20 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.my_merchant:
                 intent = new Intent(getActivity(), MyMerchantActivity.class);
                 startActivity(intent);
+                break;
+            //我的二维码
+            case R.id.my_qrcode:
+                intent = new Intent(getActivity(), MyQrCodeActivity.class);
+                startActivity(intent);
+                break;
+            //我的提现
+            case R.id.my_income:
+                intent = new Intent(getActivity(), MyInComeActivity.class);
+                startActivity(intent);
+                break;
+            //联系客服
+            case R.id.lian_xi_ke_fu_rl:
+                TUtils.showShort(getActivity(),"即将开放，敬请期待");
                 break;
             //设置
              case R.id.receiving_address:

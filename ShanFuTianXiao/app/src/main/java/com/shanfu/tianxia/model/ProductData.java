@@ -7,6 +7,26 @@ import java.io.Serializable;
  */
 public class ProductData implements Serializable{
 
+	private String discount;//多少分
+	private String fencheng;
+	private String grade;
+	private String img;
+	private String juli;
+	private String label;
+	private String shopname;
+	private String shops_id;
+	private String logo;
+	private String name;
+	private String shoptype;
+	private String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public String getDiscount() {
 		return discount;
@@ -96,15 +116,4 @@ public class ProductData implements Serializable{
 		this.shoptype = shoptype;
 	}
 
-	private String discount;
-	private String fencheng;
-	private String grade;
-	private String img;
-	private String juli;
-	private String label;
-	private String shopname;
-	private String shops_id;
-	private String logo;
-	private String name;
-	private String shoptype;
 }

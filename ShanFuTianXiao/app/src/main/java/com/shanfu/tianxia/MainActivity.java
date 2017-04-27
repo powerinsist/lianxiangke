@@ -31,6 +31,7 @@ import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.PaymentActivity;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.umeng.socialize.PlatformConfig;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -86,6 +87,9 @@ public class MainActivity extends BaseFragmentActivity {
             }
         });
         initTabs();
+
+        //微信平台的配置
+        PlatformConfig.setWeixin("wx3fca228ffb8ecee1","bd51b52b4ccfbed57f317e92fbd58818");
 
     }
 
@@ -167,7 +171,7 @@ public class MainActivity extends BaseFragmentActivity {
                 if ("扫码".equals(tabId)) {
                     checkCamare();
                 }
-                if("我的".equals(tabId)){
+                if("个人中心".equals(tabId)){
                     String uid = SPUtils.getInstance().getString("uid","");
                     if(TextUtils.isEmpty(uid)){
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
