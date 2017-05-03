@@ -84,21 +84,34 @@
                         android:src="@mipmap/arrow_rig"/>
                 </LinearLayout>-->
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-                <TextView
-                    android:id="@+id/select_shop_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="本二诺叵右"
-                    android:maxEms="10"
-                    android:ellipsize="end"
-                    />
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/select_shop_address"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:text="本二诺叵右"-->
+                    <!--android:maxEms="10"-->
+                    <!--android:ellipsize="end"-->
+                    <!--/>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/jifen_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/yellow_900"
+                    android:text="消费100送100积分"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -117,35 +130,35 @@
                     android:layout_alignParentLeft="true"
                     android:isIndicator="true"
                     android:progressDrawable="@drawable/star_full" />-->
-                <com.shanfu.tianxia.view.MyRatingBar
-                    android:id="@+id/select_shop_star"
+                <!--<com.shanfu.tianxia.view.MyRatingBar-->
+                    <!--android:id="@+id/select_shop_star"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--app:starmyCount="5"-->
+                    <!--app:starmyEmpty="@drawable/star_empty"-->
+                    <!--app:starmyFill="@drawable/star_full"-->
+                    <!--app:starImageSize="15dp"-->
+                    <!--app:starPadding="5dp">-->
+                <!--</com.shanfu.tianxia.view.MyRatingBar>-->
+                <TextView
+                    android:id="@+id/select_shop_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    app:starmyCount="5"
-                    app:starmyEmpty="@drawable/star_empty"
-                    app:starmyFill="@drawable/star_full"
-                    app:starImageSize="15dp"
-                    app:starPadding="5dp"
-
-                    ></com.shanfu.tianxia.view.MyRatingBar>
+                    android:layout_marginTop="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:text="本二诺叵右"
+                    android:maxEms="10"
+                    android:ellipsize="end"/>
                 <ImageView
                     android:id="@+id/select_shop_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_alignParentRight="true"
-                    android:src="@mipmap/iphone_select"
-
-                    />
-            </RelativeLayout>
-
-
+                    android:src="@mipmap/iphone_select" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
-
-
-
 </LinearLayout>

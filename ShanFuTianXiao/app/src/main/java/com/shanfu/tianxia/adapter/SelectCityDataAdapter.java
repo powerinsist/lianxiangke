@@ -73,8 +73,8 @@ public class SelectCityDataAdapter extends RecyclerView.Adapter<SelectCityDataAd
         TextView select_shop_name;
         @Bind(R.id.select_shop_distance)
         TextView select_shop_distance;
-        @Bind(R.id.select_shop_star)
-        MyRatingBar select_shop_star;
+//        @Bind(R.id.select_shop_star)
+//        MyRatingBar select_shop_star;
         @Bind(R.id.select_shop_address)
         TextView select_shop_address;
         @Bind(R.id.select_shop_phone)
@@ -106,12 +106,12 @@ public class SelectCityDataAdapter extends RecyclerView.Adapter<SelectCityDataAd
        // Glide.with(mContext).load(dataList.get(position).getImg()).into(holder.select_shop_iv);
         NetworkManager.getInstance().setImageUrl(holder.select_shop_iv, dataList.get(position).getImg());
         grade = dataList.get(position).getGrade();
-        holder.select_shop_star.setClickable(false);
-        if(TextUtils.isEmpty(grade)){
-            holder.select_shop_star.setStar(0);
-        }else{
-            holder.select_shop_star.setStar(Float.valueOf(grade));
-        }
+//        holder.select_shop_star.setClickable(false);
+//        if(TextUtils.isEmpty(grade)){
+//            holder.select_shop_star.setStar(0);
+//        }else{
+//            holder.select_shop_star.setStar(Float.valueOf(grade));
+//        }
 
         holder.itemView.setTag(position);
         holder.item_home_gridlayout.setOnClickListener(new View.OnClickListener() {

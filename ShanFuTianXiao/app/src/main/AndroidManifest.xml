@@ -281,11 +281,6 @@
 
         </activity>
 
-        <!--<activity android:name=".ui.CallCenterActivity"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:screenOrientation="portrait">-->
-
-        <!--</activity>-->
     </application>
 
 </manifest>

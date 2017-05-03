@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_300">
+    <include
+        android:id="@+id/forget_pay_pwd_top"
+        layout="@layout/activity_toplayout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:text="@string/regest_num"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+
+
+
+            <TextView
+                android:id="@+id/forget_pay_phone_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:background="@null"
+                android:textSize="16sp"
+                android:enabled="false"
+                style="@style/Gainsboro_textview"
+                android:textColorHint="@color/grey_700" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/black_textview"
+                android:text="@string/yanzhengma"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            >
+            <EditText
+                android:id="@+id/froget_pay_yanzhengma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:maxLength="6"
+                android:inputType="number"
+                android:textSize="16sp"
+                style="@style/Gainsboro_textview"
+                android:textColorHint="@color/grey_700"
+                android:hint="@string/input_yanzhengma"/>
+
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/forget_pay_send"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--style="@style/black_textview"-->
+                <!--android:background="@null"-->
+                <!--android:src="@drawable/registered_send"-->
+                <!--/>-->
+
+            <RelativeLayout
+                android:id="@+id/forget_pay_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/withdrawal">
+                <TextView
+                    android:id="@+id/forget_pay_send_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"
+                    style="@style/Gainsboro_textview"
+                    android:textSize="14sp"
+                    android:text="获取验证码"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/froget_pay_pwd_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@mipmap/button"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

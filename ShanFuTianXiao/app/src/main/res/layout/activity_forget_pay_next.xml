@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_300"
+    >
+    <include
+        android:id="@+id/forget_pay_pwd_next_top"
+        layout="@layout/activity_toplayout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:text="@string/reset"/>
+        </RelativeLayout>
+
+
+
+        <EditText
+            android:id="@+id/forget_pay_pwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:layout_marginLeft="30dp"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:background="@null"
+            style="@style/Gainsboro_textview"
+            android:textColorHint="@color/grey_700"
+            android:hint="请输入6位新密码"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/black_textview"
+                android:text="@string/queren"/>
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/froget_pay_pwd_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:layout_marginLeft="30dp"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:background="@null"
+            style="@style/Gainsboro_textview"
+            android:textColorHint="@color/grey_700"
+            android:hint="@string/queren_new_pay_pwd"/>
+
+
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/froget_pay_pwd_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@mipmap/button"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

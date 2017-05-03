@@ -580,11 +580,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             listView.setDivider(null);
 
         }
-
-
     }
-
-
-
-
 }

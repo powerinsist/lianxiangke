@@ -1,5 +1,6 @@
 package com.shanfu.tianxia.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,6 +22,7 @@ import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.bean.RsultBean;
 import com.shanfu.tianxia.fragment.MineFragment;
 import com.shanfu.tianxia.listener.DialogCallback;
+import com.shanfu.tianxia.listener.JsonCallback;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
@@ -28,6 +30,7 @@ import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
+import com.shanfu.tianxia.view.LoadingDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -152,8 +155,6 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
 
                 }
                 register(phoneNum,yanzhengma, MD5Utils.MD5(login_pwd),tui_jian_ren);
-                Intent intent = new Intent(RegeditActivity.this,MainActivity.class);
-                startActivity(intent);
                 break;
             //发送验证码
             case R.id.re_send:
@@ -217,13 +218,14 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
             SPUtils.getInstance().putString("uid", regeditBean.getData().getUid());
             SPUtils.getInstance().putString("ptoken", regeditBean.getData().getPtoken());
             this.finish();
+            Intent intent = new Intent(RegeditActivity.this,MainActivity.class);
+            startActivity(intent);
         }
         else{
             TUtils.showShort(RegeditActivity.this,msg);
         }
 
     }
-
 
     private void registerCode(String phone){
         try {

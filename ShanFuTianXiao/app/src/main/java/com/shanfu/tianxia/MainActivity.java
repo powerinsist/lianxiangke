@@ -118,7 +118,6 @@ public class MainActivity extends BaseFragmentActivity {
 
     }
 
-
     private void initLocation() {
         mLocationClient = new AMapLocationClient(MainActivity.this);
         AMapLocationClientOption option = new AMapLocationClientOption();
@@ -183,8 +182,6 @@ public class MainActivity extends BaseFragmentActivity {
         });
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-
-
         for (TabHostBean tab : mTabs) {
 
             TabHost.TabSpec tabSpec = mTabHost.newTabSpec(getString(tab.getTitle()));
@@ -231,8 +228,6 @@ public class MainActivity extends BaseFragmentActivity {
 
 
     }
-
-
 
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                                      int[] grantResults) {

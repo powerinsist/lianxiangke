@@ -25,6 +25,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/Black</item>
     </style>
+    <style name="black_textview_mine">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/Black</item>
+    </style>
     <style name="red_textview">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/common_red</item>

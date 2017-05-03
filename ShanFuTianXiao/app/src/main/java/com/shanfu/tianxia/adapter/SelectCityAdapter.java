@@ -69,7 +69,7 @@ public class SelectCityAdapter extends BaseAdapter {
         holder.select_shop_distance.setText(item.getJuli()+"km");
         holder.select_shop_address.setText(item.getAddress());
         NetworkManager.getInstance().setImageUrl(holder.select_shop_iv, item.getImg());
-        holder.select_shop_star.setNumStars(1);
+//        holder.select_shop_star.setNumStars(1);
         //holder.select_shop_star.setRating(Float.valueOf(item.getGrade()));
      //   holder.select_shop_star.setNumStars(Integer.valueOf(item.getGrade()));
        /* if(item.getImg()!=null){
@@ -95,8 +95,8 @@ public class SelectCityAdapter extends BaseAdapter {
         TextView select_shop_name;
         @Bind(R.id.select_shop_distance)
         TextView select_shop_distance;
-        @Bind(R.id.select_shop_star)
-        RatingBar select_shop_star;
+//        @Bind(R.id.select_shop_star)
+//        RatingBar select_shop_star;
         @Bind(R.id.select_shop_address)
         TextView select_shop_address;
         @Bind(R.id.select_shop_phone)

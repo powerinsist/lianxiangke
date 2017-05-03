@@ -47,8 +47,8 @@
                     app:starmyFill="@drawable/star_full"
                     app:starImageSize="15dp"
                     app:starPadding="5dp"
-                    app:starStep="0"
-                    ></com.shanfu.tianxia.view.MyRatingBar>
+                    app:starStep="0">
+                </com.shanfu.tianxia.view.MyRatingBar>
 
             </LinearLayout>
             <View
