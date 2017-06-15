@@ -12,7 +12,7 @@
         android:id="@+id/my_qrcode_title_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_red">
+        android:background="@color/common_black">
 
         <RelativeLayout
             android:id="@+id/content_head_back"

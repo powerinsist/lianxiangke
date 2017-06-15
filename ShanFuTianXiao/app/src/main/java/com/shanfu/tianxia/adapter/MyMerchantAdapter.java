@@ -20,11 +20,12 @@ import butterknife.ButterKnife;
  */
 public class MyMerchantAdapter extends BaseAdapter {
 
-    private List<MyMerchantBean.MyMerchantListBean> lists;
+    private List<MyMerchantBean.DataBean.ListBean> lists;
     private LayoutInflater inflater;
     private String shop_name, sign_time, discount, recommend;
+    private String shoptype;
 
-    public MyMerchantAdapter(Context mContext, List<MyMerchantBean.MyMerchantListBean> lists) {
+    public MyMerchantAdapter(Context mContext, List<MyMerchantBean.DataBean.ListBean> lists) {
         inflater = LayoutInflater.from(mContext);
         this.lists = lists;
     }
@@ -54,11 +55,55 @@ public class MyMerchantAdapter extends BaseAdapter {
         shop_name = lists.get(position).getShop_name();
         sign_time = lists.get(position).getSign_time();
         discount = lists.get(position).getDiscount();
+        shoptype = lists.get(position).getShoptype();
         //recommend = lists.get(position).getRecommend();
         holder.shop_name_tv.setText(shop_name);
         holder.sign_time_tv.setText(sign_time);
-        holder.discount_tv.setText(discount);
+//        holder.discount_tv.setText(discount);
        // holder.recommend_tv.setText(recommend);
+        if (shoptype != null){
+            switch (shoptype){
+                case "A":
+                    holder.discount_tv.setText("A类95折");
+                    break;
+                case "B":
+                    holder.discount_tv.setText("B类9折");
+                    break;
+                case "C":
+                    holder.discount_tv.setText("C类85折");
+                    break;
+                case "D":
+                    holder.discount_tv.setText("D类8折");
+                    break;
+                case "E":
+                    holder.discount_tv.setText("E类7折");
+                    break;
+                case "F":
+                    holder.discount_tv.setText("F类6折");
+                    break;
+                case "G":
+                    holder.discount_tv.setText("G类5折");
+                    break;
+                case "H":
+                    holder.discount_tv.setText("H类4折");
+                    break;
+                case "I":
+                    holder.discount_tv.setText("I类3折");
+                    break;
+                case "J":
+                    holder.discount_tv.setText("J类2折");
+                    break;
+                case "K":
+                    holder.discount_tv.setText("K类1折");
+                    break;
+                case "L":
+                    holder.discount_tv.setText("L类0折");
+                    break;
+            }
+        }else {
+            holder.discount_tv.setText("");
+        }
+
 
         return convertView;
 

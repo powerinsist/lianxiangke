@@ -1,16 +1,24 @@
 package com.shanfu.tianxia;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -18,20 +26,34 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.appconfig.AppManager;
+import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.GetLLInfoBean;
+import com.shanfu.tianxia.bean.ResultTrueBean;
+import com.shanfu.tianxia.bean.SaoMaCodeBean;
 import com.shanfu.tianxia.bean.TabHostBean;
 import com.shanfu.tianxia.fragment.FragmentTabHost;
 import com.shanfu.tianxia.fragment.HomeFragment;
 import com.shanfu.tianxia.fragment.MineFragment;
 import com.shanfu.tianxia.fragment.ScanningFragment;
+import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.network.NetworkManager;
 import com.shanfu.tianxia.ui.CaptureTwoActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.PaymentActivity;
+import com.shanfu.tianxia.ui.RealNameFirstActivity;
+import com.shanfu.tianxia.utils.DateUtils;
+import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
+import com.shanfu.tianxia.utils.Urls;
 import com.umeng.socialize.PlatformConfig;
+
+
+//import com.umeng.socialize.PlatformConfig;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,9 +66,12 @@ import butterknife.ButterKnife;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class MainActivity extends BaseFragmentActivity {
 
+    private static final String TAG = "LOG";
     private long exitTime = 0;
     private FragmentTabHost mTabHost;
     private LayoutInflater  mInflater;
@@ -57,6 +82,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Bind(R.id.scanning_img)
     ImageView scanning_img;
     private AMapLocationClient mLocationClient;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +112,9 @@ public class MainActivity extends BaseFragmentActivity {
                 checkCamare();
             }
         });
+
+        String uid = SPUtils.getInstance().getString("uid","");
+
         initTabs();
 
         //微信平台的配置
@@ -93,8 +122,11 @@ public class MainActivity extends BaseFragmentActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
+    }
 
     @PermissionSuccess(requestCode = 100)
     public void doSomething(){
@@ -151,7 +183,6 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
 
-
     private void initTabs() {
         TabHostBean tab_home = new TabHostBean(HomeFragment.class, R.string.home, R.drawable.selector_icon_home);
         TabHostBean tab_scan = new TabHostBean(ScanningFragment.class, R.string.mine, R.drawable.selector_icon_scanning);
@@ -164,6 +195,7 @@ public class MainActivity extends BaseFragmentActivity {
         mInflater = LayoutInflater.from(this);
         mTabHost = (FragmentTabHost) this.findViewById(android.R.id.tabhost);
 
+
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -171,12 +203,26 @@ public class MainActivity extends BaseFragmentActivity {
                     checkCamare();
                 }
                 if("个人中心".equals(tabId)){
-                    String uid = SPUtils.getInstance().getString("uid","");
+                    uid = SPUtils.getInstance().getString("uid","");
                     if(TextUtils.isEmpty(uid)){
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                        // intent.putExtra("comefrom","home");
                         startActivity(intent);
                     }
+                    /*else if (TextUtils.isEmpty(user_id)){
+                        showDialog();
+                    }*/
+//                    else {
+//                        requestInfo();
+
+//                    }
+
+//                    mTabHost.setCurrentTab(2);
+//                    if (TextUtils.isEmpty(user_id)){
+//                        requestInfo();
+//                        openPopup();
+//                    }
+
                 }
             }
         });
@@ -185,12 +231,9 @@ public class MainActivity extends BaseFragmentActivity {
         for (TabHostBean tab : mTabs) {
 
             TabHost.TabSpec tabSpec = mTabHost.newTabSpec(getString(tab.getTitle()));
-
             tabSpec.setIndicator(buildIndicator(tab));
-
                 mTabHost.addTab(tabSpec, tab.getFragment(), null);
         }
-
         mTabHost.setCurrentTab(0);
     }
 
@@ -237,7 +280,6 @@ public class MainActivity extends BaseFragmentActivity {
        // super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-
     private String shopid,shopname,shopresult;
 
     @Override
@@ -247,25 +289,77 @@ public class MainActivity extends BaseFragmentActivity {
         switch (requestCode)
         {
             case REQ_CODE:
-                if (data != null)
-                {
-                    String result = data.getStringExtra("result");
-                    if(result.contains("/shopname/")){
-                        shopresult = result.split("/shopname/")[0];
-                        shopname = result.split("/shopname/")[1];
-                        if(shopresult.contains("id/")){
-                            shopid = shopresult.split("id/")[1];
-                        }
-                    }else{
-                        shopid =result.split("id/")[1];
-                    }
-
-                    Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
-                    intent.putExtra("shopid",shopid);
-                    intent.putExtra("shopname",shopname);
+                String uid = SPUtils.getInstance().getString("uid","");
+                if (TextUtils.isEmpty(uid)){
+                    TUtils.showShort(MainActivity.this,"您还没有登陆！");
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
-                   /* if (result != null)
-                        tv.setText(result);*/
+                } else if (data != null) {
+                    final String result = data.getStringExtra("result");
+                    Log.i(TAG, "onActivityResult: " + result);
+                    // http://www.lianxiangke.cn/Home/Shop/show/id/100090   未实名
+                    //http://www.lianxiangke.cn/Home/Shop/show/id/100143    已实名
+//                    requestResult(result);
+                    if (result.contains("/show/")){
+                        OkGo.get(result)
+                                .tag(this)
+                                .url(result)
+                                .execute(new DialogCallback<ResultTrueBean>(this) {
+                                    @Override
+                                    public void onSuccess(ResultTrueBean resultTrueBean, Call call, Response response) {
+                                        String id = resultTrueBean.getId();
+                                        String shopname = resultTrueBean.getShopname();
+                                        String user_id = resultTrueBean.getUser_id();
+                                        String name_user = resultTrueBean.getName_user();
+                                        Log.e("LOG", "------OkGo---------" + user_id);
+
+                                        if (result.contains("/show/")) {
+                                            Log.e("LOG", result);
+                                            if (TextUtils.isEmpty(user_id)) {
+                                                Log.e("LOG", "-----null----" + user_id);
+                                                TUtils.showShort(MainActivity.this, "对不起，该商户未开通钱包功能！");
+                                                return;
+                                            }
+                                            if (result.contains("/shopname/")) {
+                                                shopresult = result.split("/shopname/")[0];
+                                                shopname = result.split("/shopname/")[1];
+                                                if (shopresult.contains("id/")) {
+                                                    shopid = shopresult.split("id/")[1];
+                                                }
+                                            } else {
+                                                shopid = result.split("id/")[1];
+                                            }
+                                            Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+                                            intent.putExtra("shopid", shopid);
+                                            intent.putExtra("shopname", shopname);
+                                            intent.putExtra("url", result);
+                                            startActivity(intent);
+                                        }
+                                    }
+                                });
+                    } else if (result.contains("/user_id/")) {
+                        String result1 = result.split("=/")[1];
+                        String[] ss = result1.split("/");
+                        String id_person = ss[1];
+                        if (id_person.equals(uid)) {
+                            TUtils.showShort(MainActivity.this, "自己不能向自己付款！");
+                            return;
+                        }else {
+                            String name_user_person = ss[5];
+                            String money = ss[7];
+                            String user_id_person = ss[3];
+
+                            Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+                            intent.putExtra("person_id", id_person);
+                            intent.putExtra("person_name", name_user_person);
+                            intent.putExtra("person_money", money);
+                            intent.putExtra("person_user_id", user_id_person);
+                            startActivity(intent);
+                        }
+                    } else {
+                        TUtils.showShort(MainActivity.this, "请扫描正确的二维码");
+                        return;
+                    }
                 }
                 break;
 
@@ -296,9 +390,8 @@ public class MainActivity extends BaseFragmentActivity {
                 //TUtils.showShort(MainActivity.this, "扫码结果：" + result);
             }
         }*/
-
-
     }
+
 
     public  static String sHA1(Context context) {
         try {
@@ -325,7 +418,6 @@ public class MainActivity extends BaseFragmentActivity {
         }
         return null;
     }
-
 
     @Override
     protected void onNewIntent(Intent intent) {

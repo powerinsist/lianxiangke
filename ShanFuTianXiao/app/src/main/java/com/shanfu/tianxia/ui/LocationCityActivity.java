@@ -105,8 +105,6 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
     }
 
 
-
-
     private void initLocation() {
         mLocationClient = new AMapLocationClient(this.getApplicationContext());
         AMapLocationClientOption option = new AMapLocationClientOption();
@@ -119,6 +117,7 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
                 if (aMapLocation != null) {
                     if (aMapLocation.getErrorCode() == 0) {
                         String city = aMapLocation.getCity();
+                        Log.e("LOG","--------定位---------"+city);
 //                        Log.e("LOG",city);
                        // String district = aMapLocation.getDistrict();
                        // String location = StringUtils.extractLocation(city, district);
@@ -126,7 +125,8 @@ public class LocationCityActivity extends BaseFragmentActivity implements View.O
                         //  double longitude = aMapLocation.getLongitude();
                        // LogUtil.log(LogType.ERROR,getClass(),latitude+"");
                        // LogUtil.log(LogType.ERROR,getClass(),longitude+"");
-                       // LogUtil.log(LogType.ERROR,getClass(),city+"----");//LogUtil.log(LogType.ERROR, getClass(), city + "----");
+                       // LogUtil.log(LogType.ERROR,getClass(),city+"----");
+                        // LogUtil.log(LogType.ERROR, getClass(), city + "----");
                         mCityAdapter.updateLocateState(LocateState.SUCCESS, city);
                     } else {
                         //定位失败

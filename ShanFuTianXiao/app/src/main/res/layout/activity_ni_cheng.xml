@@ -8,7 +8,7 @@
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:background="@color/common_red"
+       android:background="@color/common_black"
        >
     <RelativeLayout
         android:id="@+id/ni_cheng_back"
@@ -81,6 +81,6 @@
         android:layout_marginTop="10dp"
         style="@style/Gainsboro_textview"
         android:layout_marginLeft="20dp"
-        android:text="4-20个字符,可由中文,数字,"/>
+        android:text="1-20个字符,可由中文,数字,"/>
 
 </LinearLayout>

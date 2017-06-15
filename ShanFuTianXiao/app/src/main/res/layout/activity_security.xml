@@ -5,8 +5,7 @@
     android:background="@color/gray">
     <include
         android:id="@+id/safe_setting_top"
-        layout="@layout/activity_toplayout"/>
-
+        layout="@layout/activity_toplaynewtop"/>
 
     <RelativeLayout
         android:id="@+id/setting_login_pwd"

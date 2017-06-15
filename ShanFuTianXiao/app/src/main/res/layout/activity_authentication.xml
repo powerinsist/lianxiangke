@@ -7,13 +7,19 @@
 
     <include
         android:id="@+id/authentication_top"
-        layout="@layout/activity_toplayout"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/smrz"/>
-
+        layout="@layout/activity_toplaynewtop"/>
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:src="@drawable/smrz"/>-->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="请填写本人真实身份证号"-->
+        <!--android:textColor="@color/Gainsboro"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingLeft="10dp"/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,16 +43,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="6">
-
-        <EditText
-            android:id="@+id/real_name"
+        <TextView
+            android:id="@+id/real_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-                       android:maxLength="11"
-            android:background="@null"
-            style="@style/Gainsboro_textview"
-            android:textColorHint="@color/grey_700"
-            android:hint="请输入本人真实姓名"/>
+            android:textColor="@color/black"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:textSize="16dp"/>
+        <!--<EditText-->
+            <!--android:id="@+id/real_name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:maxLength="11"-->
+            <!--android:background="@null"-->
+            <!--style="@style/Gainsboro_textview"-->
+            <!--android:textColorHint="@color/grey_700"-->
+            <!--android:hint="请输入2-4个汉字"-->
+            <!--android:gravity="right"/>-->
         </RelativeLayout>
 
     </LinearLayout>
@@ -78,31 +92,38 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="6">
-
-        <EditText
-            android:id="@+id/ed_regedit_aut_idcard"
+        <TextView
+            android:id="@+id/aut_idcard_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:digits="0123456789xyzXYZ"
-            android:background="@null"
-            style="@style/Gainsboro_textview"
-            android:textColorHint="@color/grey_700"
-            android:hint="请输入本人真实身份证号码"/>
+            android:textColor="@color/black"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:textSize="16dp"/>
+        <!--<EditText-->
+            <!--android:id="@+id/ed_regedit_aut_idcard"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:digits="0123456789xyzXYZ"-->
+            <!--android:background="@null"-->
+            <!--style="@style/Gainsboro_textview"-->
+            <!--android:textColorHint="@color/grey_700"-->
+            <!--android:hint="请输入18位数字"-->
+            <!--android:gravity="right"/>-->
         </RelativeLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/regedit_next"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:textColor="@color/white"
-        android:background="@mipmap/button"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="下一步"  />
+    <!--<Button-->
+        <!--android:id="@+id/regedit_next"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:background="@mipmap/wallet_money_mm_btn_blue"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="同意并绑定"  />-->
 
 </LinearLayout>

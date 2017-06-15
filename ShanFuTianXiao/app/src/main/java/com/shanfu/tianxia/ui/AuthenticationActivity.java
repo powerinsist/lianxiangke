@@ -16,6 +16,7 @@ import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.GetLLInfoBean;
 import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
@@ -39,13 +40,14 @@ public class AuthenticationActivity extends BaseFragmentActivity implements View
     private RelativeLayout content_head_back;
     private TextView content_head_title;
 
-    @Bind(R.id.regedit_next)
-    Button regedit_next;
-    @Bind(R.id.real_name)
-    EditText real_name;
-    @Bind(R.id.ed_regedit_aut_idcard)
-    EditText ed_regedit_aut_idcard;
+    @Bind(R.id.real_name_tv)
+    TextView real_name_tv;
+    @Bind(R.id.aut_idcard_tv)
+    TextView aut_idcard_tv;
     private String t_status,p_status,b_status;
+    private String idcard;
+    private String name_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,59 @@ public class AuthenticationActivity extends BaseFragmentActivity implements View
         t_status = SPUtils.getInstance().getString("t_status","");
         p_status = SPUtils.getInstance().getString("p_status","");
         b_status = SPUtils.getInstance().getString("b_status","");
+
+        requestInfo();
+
         initView();
+
+    }
+
+    private void requestInfo() {
+        try {
+            String time = DateUtils.getLinuxTime();
+            String token = MD5Utils.MD5(Constants.appKey + time);
+            String uid = SPUtils.getInstance().getString("uid","");
+
+            HttpParams params = new HttpParams();
+            params.put("time", time);
+            params.put("token", token);
+            params.put("uid",uid);
+
+            OkGo.post(Urls.getllinfo)
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<GetLLInfoBean>(this) {
+                        @Override
+                        public void onSuccess(GetLLInfoBean getLLInfoBean, Call call, Response response) {
+                            decodeInfo(getLLInfoBean);
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void decodeInfo(GetLLInfoBean getLLInfoBean) {
+        String code = getLLInfoBean.getErr_code();
+        String msg = getLLInfoBean.getErr_msg();
+
+        if(!"200".equals(code)){
+            TUtils.showShort(this,msg);
+
+        }else {
+            idcard = getLLInfoBean.getData().getData().getIdcard();
+            name_user = getLLInfoBean.getData().getData().getName_user();
+            real_name_tv.setText(name_user);
+            String idcard_start = idcard.substring(0, 6);
+            String idcard_end = idcard.substring(idcard.length() - 4, idcard.length());
+            aut_idcard_tv.setText(idcard_start+" **** **** "+idcard_end);
+            SPUtils.getInstance().putString("name_user", name_user);
+        }
     }
 
     private void initView() {
@@ -63,7 +117,7 @@ public class AuthenticationActivity extends BaseFragmentActivity implements View
         content_head_title = (TextView) authentication_top.findViewById(R.id.content_head_title);
         content_head_title.setText("实名认证");
         content_head_back.setOnClickListener(this);
-        regedit_next.setOnClickListener(this);
+
 
     }
 
@@ -73,23 +127,23 @@ public class AuthenticationActivity extends BaseFragmentActivity implements View
             case R.id.content_head_back:
                 finish();
                 break;
-            case R.id.regedit_next:
-
-                String id_num = ed_regedit_aut_idcard.getText().toString().trim();
-                String name = real_name.getText().toString().trim();
-                if(TextUtils.isEmpty(id_num)){
-                    TUtils.showShort(AuthenticationActivity.this,"姓名不能为空");
-                    return;
-                }
-                if(TextUtils.isEmpty(name)){
-                    TUtils.showShort(AuthenticationActivity.this,"身份证号码不能为空");
-                    return;
-                }
-               // Intent intent = new Intent(this,SetUpPwdActivity.class);
-                //startActivity(intent);
-                requestData(name,id_num);
-
-                break;
+//            case R.id.regedit_next:
+//
+//                /*String id_num = ed_regedit_aut_idcard.getText().toString().trim();
+//                String name = real_name.getText().toString().trim();
+//                if(TextUtils.isEmpty(id_num)){
+//                    TUtils.showShort(AuthenticationActivity.this,"姓名不能为空");
+//                    return;
+//                }
+//                if(TextUtils.isEmpty(name)){
+//                    TUtils.showShort(AuthenticationActivity.this,"身份证号码不能为空");
+//                    return;
+//                }*/
+//               // Intent intent = new Intent(this,SetUpPwdActivity.class);
+//                //startActivity(intent);
+////                requestData(name,id_num);
+//
+//                break;
         }
 
     }
@@ -109,7 +163,6 @@ public class AuthenticationActivity extends BaseFragmentActivity implements View
             params.put("version", version);
             params.put("ptoken", ptoken);
             params.put("uid", uid);
-            Log.e("LOG",uid);
             OkGo.post(Urls.setTruename)
                     .tag(this)
                     .params(params)

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#2D3132">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_red"
+        android:background="@color/common_newblack"
        >
     <RelativeLayout
         android:id="@+id/content_head_back"
@@ -36,22 +38,20 @@
             />
         <ImageView
             android:id="@+id/content_head_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="20dp"
-           android:layout_alignParentRight="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/add_card"
-
-            />
+            android:src="@mipmap/add_card" />
     </RelativeLayout>
 
     <ListView
         android:id="@+id/bankList"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"/>
+        android:divider="@null"
+        android:background="#2D3132"/>
 
 
 

@@ -91,4 +91,39 @@
         </attr>
     </declare-styleable>
 
+
+    <!-- PagerSlidingTab -->
+    <declare-styleable name="PagerSlidingTab">
+        <attr name="indicatorColor" format="color" />
+        <attr name="underlineColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="underlineHeight" format="dimension" />
+        <attr name="pst_dividerPadding" format="dimension" />
+        <attr name="tabPaddingLeftRight" format="dimension" />
+        <attr name="scrollOffset" format="dimension" />
+        <attr name="tabBackground" format="reference" />
+        <attr name="shouldExpand" format="boolean" />
+        <attr name="pst_textAllCaps" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio" format="float"/>
+    </declare-styleable>
+
+
+        <declare-styleable name="NumberPicker">
+            <attr name="normalTextColor" format="color" />
+            <attr name="normalTextSize" format="dimension" />
+            <attr name="selecredTextColor" format="color" />
+            <attr name="selecredTextSize" format="dimension" />
+            <attr name="unitHight" format="dimension" />
+            <attr name="itemNumber" format="integer"/>
+            <attr name="lineColor" format="color" />
+            <attr name="maskHight" format="dimension"/>
+            <attr name="noEmpty" format="boolean"/>
+            <attr name="isEnable" format="boolean"/>
+        </declare-styleable>
+
+
 </resources>

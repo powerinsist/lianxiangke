@@ -1,14 +1,18 @@
 package com.shanfu.tianxia.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.RegeditBean;
+import com.shanfu.tianxia.date.ChangeDatePopwindow;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -44,20 +49,31 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
     private RelativeLayout bind_card_top;
     private RelativeLayout content_head_back;
     private TextView content_head_title;
+
+    @Bind(R.id.support_card_tv)
+    TextView support_card_tv;
+    @Bind(R.id.binding_bank_card_name)
+    EditText binding_bank_card_name;
+    @Bind(R.id.select_band_card)
+    Spinner select_band_card;
     @Bind(R.id.binding_bank_card_number)
     EditText binding_bank_card_number;
-    @Bind(R.id.binding_bank_card_phone_number)
-    EditText binding_bank_card_phone_number;
+    @Bind(R.id.date_rl)
+    RelativeLayout date_rl;
+    @Bind(R.id.date_tv)
+    TextView date_tv;
+    @Bind(R.id.cvv2_ed)
+    EditText cvv2_ed;
     @Bind(R.id.binding_card)
     Button binding_card;
-//    @Bind(R.id.select_band_card)
-//    Spinner select_band_card;
+    @Bind(R.id.gone_ll)
+    LinearLayout gone_ll;
 
     private String cardNum,phoneNum;
     private String t_status,p_status,b_status;
     private List<String> list;
-    private Spinner mSpinner;
     private String bank;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +84,6 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
         p_status = SPUtils.getInstance().getString("p_status","");
         b_status = SPUtils.getInstance().getString("b_status","");
 
-
         initView();
 
     }
@@ -77,25 +92,32 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
         bind_card_top = (RelativeLayout) findViewById(R.id.bind_card_top);
         content_head_back = (RelativeLayout) bind_card_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) bind_card_top.findViewById(R.id.content_head_title);
-
-        mSpinner = (Spinner) findViewById(R.id.select_band_card);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,getDatabanks());
-        mSpinner.setAdapter(adapter);
-        mSpinner.setOnItemSelectedListener(new OnItemSelectedListenerSpinner());
-
         content_head_title.setText("添加银行卡");
         content_head_back.setOnClickListener(this);
+
         binding_card.setOnClickListener(this);
+        support_card_tv.setOnClickListener(this);
+        date_rl.setOnClickListener(this);
+
+        /*选择银行卡类别*/
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,getDatabanks());
+        select_band_card.setAdapter(adapter);
+        select_band_card.setOnItemSelectedListener(new OnItemSelectedListenerSpinner());
+        /*年*/
+
     }
     private class OnItemSelectedListenerSpinner implements AdapterView.OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//            bank = parent.getItemAtPosition(position).toString();
-            bank = mSpinner.getSelectedItem().toString();
-            Log.e("LOG",bank);
+            //银行卡类别 bank
+            bank = select_band_card.getSelectedItem().toString();
+            if ("借记卡".equals(bank)||"选择类别".equals(bank)){
+                gone_ll.setVisibility(View.GONE);
+            } else {
+                gone_ll.setVisibility(View.VISIBLE);
+            }
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
@@ -105,51 +127,128 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
 
     public List<String> getDatabanks(){
         list = new ArrayList<>();
-        list.add("请选择开户银行");
-        list.add("中国工商银行");
-        list.add("中国农业银行");
-        list.add("中国建设银行");
-        list.add("中国银行");
-        list.add("交通银行");
-        list.add("招商银行");
-        list.add("中信银行");
-        list.add("其它银行");
+        list.add("选择类别");
+        list.add("借记卡");
+        list.add("信用卡");
         return list;
     }
+
+    private String[] selectDate() {
+        final String[] str = new String[10];
+        final ChangeDatePopwindow mChangeBirthDialog = new ChangeDatePopwindow(BindingBankCardActivity.this);
+        mChangeBirthDialog.showAtLocation(date_rl, Gravity.BOTTOM, 0, 0);
+        mChangeBirthDialog.setBirthdayListener(new ChangeDatePopwindow.OnBirthListener() {
+
+            @Override
+            public void onClick(String year, String month, String day) {
+                // TODO Auto-generated method stub
+//                    Toast.makeText(MainActivity.this,year + "-" + month + "-" + day,Toast.LENGTH_LONG).show();
+                StringBuilder sb = new StringBuilder();
+                sb.append(year.substring(0, year.length() - 1)).append("-").append(month.substring(0, day.length() - 1)).append("-").append(day);
+                str[0] = year + "-" + month + "-" + day;
+                str[1] = sb.toString();
+                if (month.length() != 2){
+                    month = "0"+month;
+                }
+                date_tv.setText(year + month);
+
+            }
+        });
+        return str;
+    }
+
     @Override
     public void onClick(View v) {
-//        mSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                bank = parent.getItemAtPosition(position).toString();
-//            }
-//        });
-//        Log.e("LOG",bank);
         switch (v.getId()){
             case R.id.content_head_back:
                 finish();
                 break;
             case R.id.binding_card:
-                cardNum = binding_bank_card_number.getText().toString().trim();
-//                String bankNum = cardNum.substring(0,5);
-                phoneNum = binding_bank_card_phone_number.getText().toString().trim();
-                if(TextUtils.isEmpty(cardNum)){
+                String name = binding_bank_card_name.getText().toString().trim();
+                String number = binding_bank_card_number.getText().toString().trim();
+                String date = date_tv.getText().toString().trim();
+                String cvv2 = cvv2_ed.getText().toString().trim();
+                if (TextUtils.isEmpty(name)||name.length()>6){
+                    TUtils.showShort(BindingBankCardActivity.this,"请填写持卡人姓名");
+                    return;
+                }
+                if (TextUtils.isEmpty(number)){
                     TUtils.showShort(BindingBankCardActivity.this,"银行卡号不能为空");
                     return;
                 }
-                if(TextUtils.isEmpty(phoneNum)){
-                    TUtils.showShort(BindingBankCardActivity.this,"手机号不能为空");
+                if ("选择类别".equals(bank)){
+                    TUtils.showShort(BindingBankCardActivity.this,"请选择银行卡类别");
                     return;
                 }
-                if(phoneNum.length()!=11){
-                    TUtils.showShort(BindingBankCardActivity.this, "请输入正确的手机号码");
-                    return;
+                if ("借记卡".equals(bank)){
+                    intent = new Intent(BindingBankCardActivity.this,BindBankNextActivity.class);
+                    intent.putExtra("name",name);
+                    intent.putExtra("number",number);
+                    intent.putExtra("bank",bank);
+                    startActivity(intent);
+                    finish();
                 }
-                requestData(cardNum,phoneNum);
+                if ("信用卡".equals(bank)){
+                    if ("请选择".equals(date)){
+                        TUtils.showShort(BindingBankCardActivity.this,"请选择正确有效期");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(cvv2)){
+                        TUtils.showShort(BindingBankCardActivity.this,"请输入CVV2号");
+                        return;
+                    }
+                    String date_four = date.substring(date.length()-4, date.length());
+                    intent = new Intent(BindingBankCardActivity.this,BindBankNextActivity.class);
+                    intent.putExtra("name",name);
+                    intent.putExtra("number",number);
+                    intent.putExtra("bank",bank);
+                    intent.putExtra("date",date_four);
+                    intent.putExtra("cvv2",cvv2);
+                    startActivity(intent);
+                    finish();
+                }
+                break;
+//            case R.id.binding_card:
+//                cardNum = binding_bank_card_number.getText().toString().trim();
+//                String bankNum = cardNum.substring(0,5);
+//                phoneNum = binding_bank_card_phone_number.getText().toString().trim();
+//                if(TextUtils.isEmpty(cardNum)){
+//                    TUtils.showShort(BindingBankCardActivity.this,"银行卡号不能为空");
+//                    return;
+//                }
+//                if(TextUtils.isEmpty(phoneNum)){
+//                    TUtils.showShort(BindingBankCardActivity.this,"手机号不能为空");
+//                    return;
+//                }
+//                if(phoneNum.length()!=11){
+//                    TUtils.showShort(BindingBankCardActivity.this, "请输入正确的手机号码");
+//                    return;
+//                }
+//                requestData(cardNum,phoneNum);
+//                intent = new Intent(BindingBankCardActivity.this,BindBankNextActivity.class);
+//                startActivity(intent);
+//                break;
+            case R.id.support_card_tv:
+                intent = new Intent(BindingBankCardActivity.this,SupportBankActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.date_rl:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(binding_bank_card_number.getWindowToken(), 0);
+                selectDate();
                 break;
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void requestData(String card,String num){
         try {
             String time = DateUtils.getLinuxTime();
@@ -205,10 +304,9 @@ public class BindingBankCardActivity extends BaseFragmentActivity implements Vie
         }else if("103".equals(err_code)){
             Intent intent = new Intent(BindingBankCardActivity.this,LoginActivity.class);
             startActivity(intent);
+            finish();
         }else{
             TUtils.showShort(BindingBankCardActivity.this, msg);
         }
-
-
     }
 }

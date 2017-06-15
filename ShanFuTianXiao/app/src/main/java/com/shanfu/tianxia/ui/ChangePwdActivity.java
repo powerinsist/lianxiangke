@@ -16,6 +16,7 @@ import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.PayPwdModifyBean;
 import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.bean.RusltPhoneBean;
 import com.shanfu.tianxia.listener.DialogCallback;
@@ -48,8 +49,7 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
     EditText input_queren_new_pay_pwd;
     @Bind(R.id.set_longin_pwd_button)
     Button set_longin_pwd_button;
-    @Bind(R.id.forget_pay_password)
-    TextView forget_pay_password;
+
     private Intent intent;
     private String old_pwd;
     private String new_pwd;
@@ -62,7 +62,6 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pwd);
         ButterKnife.bind(this);
-        requestphone(phone);
         initView();
 
 
@@ -74,10 +73,10 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
         change_pwd_top = (RelativeLayout) findViewById(R.id.change_pwd_top);
         content_head_back = (RelativeLayout) change_pwd_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) change_pwd_top.findViewById(R.id.content_head_title);
-        content_head_title.setText("修改提现密码");
+        content_head_title.setText("修改交易密码");
         content_head_back.setOnClickListener(this);
+
         set_longin_pwd_button.setOnClickListener(this);
-        forget_pay_password.setOnClickListener(this);
 
     }
 
@@ -88,13 +87,6 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
             case R.id.content_head_back:
                 finish();
                 break;
-
-            case R.id.forget_pay_password:
-                intent = new Intent(ChangePwdActivity.this,ForgetPayPwdActivity.class);
-                intent.putExtra("phone",phone);
-                startActivity(intent);
-                break;
-
             case R.id.set_longin_pwd_button:
                 old_pwd = input_old_pay_pwd.getText().toString().trim();
                 new_pwd = input_new_pay_pwd.getText().toString().trim();
@@ -118,36 +110,36 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
                     return ;
                 }
 
-                requestData(MD5Utils.MD5(old_pwd),MD5Utils.MD5(new_pwd),MD5Utils.MD5(queren_new_pwd));
+                requestData();
                 break;
 
         }
     }
 
-    private void requestData(String oldPwd,String newPwd,String queren){
+    private void requestData(){
         try {
             String time = DateUtils.getLinuxTime();
             String token = MD5Utils.MD5(Constants.appKey + time);
-            String version = AppUtils.getVerName(ChangePwdActivity.this);
-            String ptoken = SPUtils.getInstance().getString("ptoken", "");
             String uid = SPUtils.getInstance().getString("uid","");
+            String user_id = SPUtils.getInstance().getString("user_id", "");
+
             HttpParams params = new HttpParams();
             params.put("time", time);
             params.put("token", token);
-            params.put("version", version);
-            params.put("ptoken", ptoken);
-            params.put("oldpassword", oldPwd);
-            params.put("uid", uid);
-            params.put("newpassword", newPwd);
-            params.put("confirmpaypassword", queren);
+            params.put("uid",uid);
+            params.put("user_id", user_id);
 
-            OkGo.post(Urls.updatePaypassword)
+            params.put("pwd_pay",old_pwd);
+            params.put("pwd_pay_new",new_pwd);
+
+            OkGo.post(Urls.paypwdmodify)
                     .tag(this)
                     .params(params)
-                    .execute(new DialogCallback<RegeditBean>(this) {
+                    .execute(new DialogCallback<PayPwdModifyBean>(this) {
+
                         @Override
-                        public void onSuccess(RegeditBean rsultBean, Call call, Response response) {
-                            decodeResult(rsultBean);
+                        public void onSuccess(PayPwdModifyBean payPwdModifyBean, Call call, Response response) {
+                            decodeData(payPwdModifyBean);
                         }
 
                         @Override
@@ -160,59 +152,22 @@ public class ChangePwdActivity extends BaseFragmentActivity implements View.OnCl
             e.printStackTrace();
         }
     }
-    private void decodeResult(RegeditBean rsultBean){
-        String err_code = rsultBean.getErr_code();
-        String msg = rsultBean.getErr_msg();
-        if("200".equals(err_code)){
-            SPUtils.getInstance().putString("ptoken", rsultBean.getData().getPtoken());
+    private void decodeData(PayPwdModifyBean payPwdModifyBean){
+        String err_code = payPwdModifyBean.getErr_code();
+        String err_msg = payPwdModifyBean.getErr_msg();
+        String ret_code = payPwdModifyBean.getData().getData().getRet_code();
+        String ret_msg = payPwdModifyBean.getData().getData().getRet_msg();
+
+        if("200".equals(err_code)&&"0000".equals(ret_code)){
             TUtils.showShort(ChangePwdActivity.this, "修改密码成功");
-            finish();
-        }else if("103".equals(err_code)){
-            Intent intent = new Intent(ChangePwdActivity.this,LoginActivity.class);
+            SPUtils.getInstance().putString("pwd_pay",new_pwd);
+            intent = new Intent(ChangePwdActivity.this,MyWalletActivity.class);
             startActivity(intent);
-        }
-        else if ("100".equals(err_code)){
-            TUtils.showShort(ChangePwdActivity.this,msg);
+            finish();
         }
         else{
-            TUtils.showShort(ChangePwdActivity.this, msg);
+            TUtils.showShort(ChangePwdActivity.this,ret_msg);
         }
     }
 
-    private void requestphone(String phone){
-        try {
-            String time = DateUtils.getLinuxTime();
-            String token = MD5Utils.MD5(Constants.appKey + time);
-            String ptoken = SPUtils.getInstance().getString("ptoken", "");
-            String uid = SPUtils.getInstance().getString("uid","");
-            HttpParams params = new HttpParams();
-            params.put("time", time);
-            params.put("token", token);
-            params.put("ptoken", ptoken);
-            params.put("uid", uid);
-
-            OkGo.post(Urls.forget_phone)
-                    .tag(this)
-                    .params(params)
-                    .execute(new DialogCallback<RusltPhoneBean>(this) {
-                        @Override
-                        public void onSuccess(RusltPhoneBean rusltPhoneBean, Call call, Response response) {
-//                            phoneResult(rusltPhoneBean);
-                            phoneResult(rusltPhoneBean);
-                        }
-
-                        @Override
-                        public void onError(Call call, Response response, Exception e) {
-                            TUtils.showShort(ChangePwdActivity.this, "数据获取失败，请检查网络后重试");
-                        }
-                    });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void phoneResult(RusltPhoneBean rusltPhoneBean){
-        phone = rusltPhoneBean.getData().getPhone();
-
-    }
 }

@@ -32,15 +32,20 @@ import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.GetLLInfoBean;
+import com.shanfu.tianxia.bean.LogoutEvent;
 import com.shanfu.tianxia.bean.UploadUserImg;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
+import com.shanfu.tianxia.utils.DataCleanManager;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 import com.shanfu.tianxia.view.CircleImageView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -57,10 +62,12 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
 
     @Bind(R.id.setting_login_pwd_layout)
     RelativeLayout setting_login_pwd_layout;
-    @Bind(R.id.setting_pay_pwd_layout)
-    RelativeLayout setting_pay_pwd_layout;
-    @Bind(R.id.real_name_authentication_layout)
-    RelativeLayout real_name_authentication_layout;
+//    @Bind(R.id.setting_pay_pwd_layout)
+//    RelativeLayout setting_pay_pwd_layout;
+//    @Bind(R.id.real_name_authentication_layout)
+//    RelativeLayout real_name_authentication_layout;
+    @Bind(R.id.setting_real_info_rl)
+    RelativeLayout setting_real_info_rl;
     @Bind(R.id.safe_exit)
     RelativeLayout safe_exit;
     @Bind(R.id.qqLayout)
@@ -73,6 +80,10 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
     TextView ni_cheng;
     @Bind(R.id.ni_cheng_layout)
     RelativeLayout ni_cheng_layout;
+    @Bind(R.id.myshop_adress_rl)
+    RelativeLayout myshop_adress_rl;
+    @Bind(R.id.my_qrcode_rl)
+    RelativeLayout my_qrcode_rl;
 
 
 
@@ -93,6 +104,8 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
 
     private Intent intent;
     private String avater;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,18 +126,69 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
             NineGridView.getImageLoader().onDisplayImage(SettingActivity.this, head_image1, avater);
         }
 
-
-        user_num.setText(SPUtils.getInstance().getString("phoneNum", ""));
+        String phoneNum = SPUtils.getInstance().getString("phoneNum", "");
+        user_num.setText(phoneNum);
+//        requestInfo();
+//        user_num.setText(SPUtils.getInstance().getString("phoneNum", ""));
         setting_login_pwd_layout.setOnClickListener(this);
-        setting_pay_pwd_layout.setOnClickListener(this);
-        real_name_authentication_layout.setOnClickListener(this);
+//        setting_pay_pwd_layout.setOnClickListener(this);
+//        real_name_authentication_layout.setOnClickListener(this);
         safe_exit.setOnClickListener(this);
         qqLayout.setOnClickListener(this);
         ni_cheng_layout.setOnClickListener(this);
-
-
+        myshop_adress_rl.setOnClickListener(this);
+        setting_real_info_rl.setOnClickListener(this);
+        my_qrcode_rl.setOnClickListener(this);
 
     }
+
+    private void requestInfo() {
+        try {
+            String time = DateUtils.getLinuxTime();
+            String token = MD5Utils.MD5(Constants.appKey + time);
+            String uid = SPUtils.getInstance().getString("uid","");
+
+            HttpParams params = new HttpParams();
+            params.put("time", time);
+            params.put("token", token);
+            params.put("uid",uid);
+
+            OkGo.post(Urls.getllinfo)
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<GetLLInfoBean>(this) {
+                        @Override
+                        public void onSuccess(GetLLInfoBean getLLInfoBean, Call call, Response response) {
+                            decodeInfo(getLLInfoBean);
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            TUtils.showShort(SettingActivity.this,"数据获取失败，请检查网络后重试");
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void decodeInfo(GetLLInfoBean getLLInfoBean) {
+        String code = getLLInfoBean.getErr_code();
+        String msg = getLLInfoBean.getErr_msg();
+
+        if(!"200".equals(code)){
+//            TUtils.showShort(this,msg);
+
+        }else {
+            String user_id = getLLInfoBean.getData().getData().getUser_id();
+            String name_user = getLLInfoBean.getData().getData().getName_user();
+            String idcard = getLLInfoBean.getData().getData().getIdcard();
+
+        }
+    }
+
+
     /**
      * 创建调用系统照相机待存储的临时文件
      *
@@ -170,27 +234,32 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                 intent = new Intent(this,SettingLoginPwdActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.setting_real_info_rl:
+                intent = new Intent(this,SettingRealInfoActivity.class);
+                startActivity(intent);
+                break;
             //修改交易密码
-            case R.id.setting_pay_pwd_layout:
-                if("1".equals(p_status)){
-                    intent = new Intent(this,ChangePwdActivity.class);
-                    startActivity(intent);
-                }else{
-                    intent = new Intent(this,SetUpPwdActivity.class);
-                    startActivity(intent);
-                }
-
-                break;
+//            case R.id.setting_pay_pwd_layout:
+//                if("1".equals(p_status)){
+//                    intent = new Intent(this,ChangePwdActivity.class);
+//                    startActivity(intent);
+//                }else{
+//                    intent = new Intent(this,SetUpPwdActivity.class);
+//                    startActivity(intent);
+//                }
+//
+//                break;
             //实名认证
-            case R.id.real_name_authentication_layout:
-
-                if(!"1".equals(t_status)){
-                    intent = new Intent(this,AuthenticationActivity.class);
-                    startActivity(intent);
-                }
-
-
-                break;
+//            case R.id.real_name_authentication_layout:
+//
+//                if(!"1".equals(t_status)){
+//                    intent = new Intent(this,AuthenticationActivity.class);
+//                    startActivity(intent);
+//                }else {
+//                    TUtils.showShort(this,"已实名认证");
+//                }
+//
+//                break;
             //安全退出
             case R.id.safe_exit:
                 SPUtils.getInstance().putString("uid","");
@@ -198,11 +267,20 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                 SPUtils.getInstance().putString("p_status","");
                 SPUtils.getInstance().putString("t_status","");
                 SPUtils.getInstance().putString("bankcard","");
+                SPUtils.getInstance().putString("user_id","");
+                SPUtils.getInstance().putString("nickname1","");
+                SPUtils.getInstance().putString("shop_userid_qrcode","");
                 //SPUtils.getInstance().putString("phoneNum","");
                 SPUtils.getInstance().putBoolean("request",false);
-//                Log.e("LOG","11111111");
+                DataCleanManager dataCleanManager = new DataCleanManager(getApplicationContext());
+                dataCleanManager.cleanApplicationData(this);
+                //TODO
+                EventBus.getDefault().post(new LogoutEvent());
+                String user_id = SPUtils.getInstance().getString("user_id", "");
+                Log.e("LOG","退出-------------"+user_id);
                 intent = new Intent(SettingActivity.this, MainActivity.class);
                 intent.putExtra("comefrom","home");
+
                 startActivity(intent);
                 finish();
                 break;
@@ -217,6 +295,17 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
                 intent = new Intent(SettingActivity.this,NiChengActivity.class);
                 startActivity(intent);
                 break;
+
+            //我的收货地址
+            case R.id.myshop_adress_rl:
+                TUtils.showShort(SettingActivity.this,"暂未开放，敬请期待");
+                /*intent = new Intent(SettingActivity.this,MyShopAdressActivity.class);
+                startActivity(intent);*/
+                break;
+            case R.id.my_qrcode_rl:
+                intent = new Intent(SettingActivity.this,MyQrCodeActivity.class);
+                startActivity(intent);
+                finish();
         }
     }
 
@@ -480,11 +569,15 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
         t_status = SPUtils.getInstance().getString("t_status","");
         p_status = SPUtils.getInstance().getString("p_status","");
         b_status = SPUtils.getInstance().getString("b_status","");
-        if(!TextUtils.isEmpty(nickname)){
-            ni_cheng.setText(nickname);
-        }
-
-
+//        if(!TextUtils.isEmpty(nickname)){
+//            ni_cheng.setText(nickname);
+//        }
+        String nicheng_name = SPUtils.getInstance().getString("nickname1", "");
+        String name_user = SPUtils.getInstance().getString("name_user", "");
+//        if (TextUtils.isEmpty(nicheng_name)){
+//            ni_cheng.setText(name_user);
+//        }else
+        ni_cheng.setText(nicheng_name);
     }
 
 }

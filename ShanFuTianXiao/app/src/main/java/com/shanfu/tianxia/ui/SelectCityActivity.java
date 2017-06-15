@@ -46,9 +46,9 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
     private DropDownMenu mMenu;
 
 
-    private int city_index;
-    private int sex_index;
-    private int age_index;
+    private int city_index;//分类
+    private int sex_index;//地区
+    private int age_index;//排序
     private List<String> data;
    // final String[] arr1=new String[]{"全部城市","北京","上海","广州","深圳"};
    // final String[] arr2=new String[]{"性别","男","女"};
@@ -222,6 +222,20 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
+    private void decodeInit(InitSearchBean initSearchBean){
+        String code = initSearchBean.getErr_code();
+        String msg = initSearchBean.getErr_msg();
+        if("200".equals(code)){
+            areas = initSearchBean.getData().getArea();
+            categorys = initSearchBean.getData().getCategory();
+            paixus = initSearchBean.getData().getPaixue();
+            init();
+        }else{
+            madapter.clearData();
+            TUtils.showShort(SelectCityActivity.this,msg);
+        }
+    }
+
     private void requestListShops(String tid,String lx,String ly,String page){
 
         try {
@@ -316,20 +330,6 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
         } catch (Exception e) {
             LogUtil.log(LogType.ERROR,getClass(),e.toString());
             e.printStackTrace();
-        }
-    }
-
-    private void decodeInit(InitSearchBean initSearchBean){
-        String code = initSearchBean.getErr_code();
-        String msg = initSearchBean.getErr_msg();
-        if("200".equals(code)){
-            areas = initSearchBean.getData().getArea();
-            categorys = initSearchBean.getData().getCategory();
-            paixus = initSearchBean.getData().getPaixue();
-            init();
-        }else{
-            madapter.clearData();
-            TUtils.showShort(SelectCityActivity.this,msg);
         }
     }
 

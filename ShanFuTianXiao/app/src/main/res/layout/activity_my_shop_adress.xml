@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_fenge"
+    android:orientation="vertical"
+    tools:context="com.shanfu.tianxia.ui.MyShopAdressActivity">
+    <include
+        android:id="@+id/setting_top"
+        layout="@layout/activity_toplaynewtop"/>
+    <ListView
+        android:layout_below="@+id/setting_top"
+        android:id="@+id/adress_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:scrollbars="none">
+    </ListView>
+    <TextView
+        android:id="@+id/add_adress_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="添加新地址"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="#20AFE7"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

@@ -1,14 +1,11 @@
 package com.shanfu.tianxia.ui;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,9 +17,7 @@ import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.bean.RsultBean;
-import com.shanfu.tianxia.fragment.MineFragment;
 import com.shanfu.tianxia.listener.DialogCallback;
-import com.shanfu.tianxia.listener.JsonCallback;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
@@ -30,7 +25,6 @@ import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
-import com.shanfu.tianxia.view.LoadingDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -219,6 +213,7 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
             SPUtils.getInstance().putString("ptoken", regeditBean.getData().getPtoken());
             this.finish();
             Intent intent = new Intent(RegeditActivity.this,MainActivity.class);
+            intent.putExtra("comefrom","home");
             startActivity(intent);
         }
         else{

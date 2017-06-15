@@ -52,7 +52,7 @@
     <string name="input_tui_jian_ren">请填写推荐人的ID(必填)</string>
     <string name="change_pwd_toast">为保障您的账户安全，请注意保密，登录密码与提现密码不能相同</string>
 
-    <string name="old_pay_pwd">原提现密码</string>
+    <string name="old_pay_pwd">原交易密码</string>
     <string name="input_old_pay_pwd">请输入当前密码</string>
     <string name="new_pay_pwd">新密码</string>
     <string name="input_new_pay_pwd">请输入新密码</string>
@@ -91,5 +91,21 @@
     <string name="general_max_per_image">图片过大，超过200k上限。</string>
 
     <string name="msg_default_status">将二维码放入框内，即可自动扫描</string>
+    <!--兑换专区-->
+    <string name="zone_phone">数码手机</string>
+    <string name="zone_art">珠宝艺术品</string>
+    <string name="zone_fitment">家具厨具</string>
+    <string name="zone_home">家具家装</string>
+    <string name="zone_drink">酒水饮料</string>
+    <string name="zone_clothes">服装鞋包</string>
+    <string name="zone_face">美妆个护</string>
+    <string name="zone_rest">休闲零食</string>
+    <!--兑换商品详情-->
+    <string-array name="tabs">
+        <item>商品</item>
+        <item>详情</item>
+        <item>参数</item>
+    </string-array>
+
 
 </resources>

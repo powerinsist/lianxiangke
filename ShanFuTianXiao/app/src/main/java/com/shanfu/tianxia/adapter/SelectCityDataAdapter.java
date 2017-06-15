@@ -81,7 +81,12 @@ public class SelectCityDataAdapter extends RecyclerView.Adapter<SelectCityDataAd
         ImageView select_shop_phone;
         @Bind(R.id.item_home_gridlayout)
         LinearLayout item_home_gridlayout;
-
+        @Bind(R.id.score)
+        TextView score;
+        @Bind(R.id.shop_type_ll)
+        LinearLayout shop_type_ll;
+        @Bind(R.id.jifen_tv)
+        TextView jifen_tv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -112,7 +117,47 @@ public class SelectCityDataAdapter extends RecyclerView.Adapter<SelectCityDataAd
 //        }else{
 //            holder.select_shop_star.setStar(Float.valueOf(grade));
 //        }
+        String shoptype = dataList.get(position).getShoptype();
+        switch (shoptype){
+            case "A":
 
+                holder.shop_type_ll.setVisibility(View.GONE);
+                holder.jifen_tv.setText("消费1元送0.05张联享票");
+                break;
+            case "B":
+                holder.shop_type_ll.setVisibility(View.GONE);
+                break;
+            case "C":
+                holder.score.setText("5%");
+                break;
+            case "D":
+                holder.score.setText("10%");
+                break;
+            case "E":
+                holder.score.setText("20%");
+                break;
+            case "F":
+                holder.score.setText("30%");
+                break;
+            case "G":
+                holder.score.setText("40%");
+                break;
+            case "H":
+                holder.score.setText("50%");
+                break;
+            case "I":
+                holder.score.setText("60%");
+                break;
+            case "J":
+                holder.score.setText("70%");
+                break;
+            case "K":
+                holder.score.setText("80%");
+                break;
+            case "L":
+                holder.score.setText("90%");
+                break;
+        }
         holder.itemView.setTag(position);
         holder.item_home_gridlayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -63,8 +63,8 @@ public class NiChengActivity extends BaseFragmentActivity implements View.OnClic
                     TUtils.showShort(NiChengActivity.this,"请输入昵称");
                     return;
                 }
-                if(nicheng.length()<4||nicheng.length()>20){
-                    TUtils.showShort(NiChengActivity.this,"请输入4-20位长度的昵称");
+                if(nicheng.length()<1||nicheng.length()>20){
+                    TUtils.showShort(NiChengActivity.this,"请输入3-20位长度的昵称");
                     return;
                 }
                 requestData(nicheng);
@@ -110,7 +110,7 @@ public class NiChengActivity extends BaseFragmentActivity implements View.OnClic
         String msg = uploadUserImg.getErr_msg();
         if("200".equals(code)){
             SPUtils.getInstance().putString("ptoken",uploadUserImg.getData().getPtoken());
-            SPUtils.getInstance().putString("nickname", nicheng);
+            SPUtils.getInstance().putString("nickname1",nicheng);
             TUtils.showShort(NiChengActivity.this,msg);
             finish();
         }else if("103".equals(code)){

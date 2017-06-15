@@ -21,6 +21,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="white_smtextview">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style name="black_textview">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/Black</item>
@@ -40,6 +44,10 @@
     <!-- 灰色 -->
     <style name="Gainsboro_textview">
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/Gainsboro</item>
+    </style>
+    <style name="Gainsboro_textview_sm">
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/Gainsboro</item>
     </style>
     <!-- 黑灰色 12sp -->
@@ -89,7 +97,5 @@
         <item name="android:windowExitAnimation">@anim/hide2bottom</item>
         <!-- 指定消失的动画xml -->
     </style>
-
-
 
 </resources>

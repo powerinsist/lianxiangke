@@ -56,13 +56,8 @@ public class SecurityActivity extends BaseFragmentActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.setting_pay_pwd:
-                if("1".equals(p_status)){
-                    intent = new Intent(this,ChangePwdActivity.class);
-                    startActivity(intent);
-                }else{
-                    intent = new Intent(this,SetUpPwdActivity.class);
-                    startActivity(intent);
-                }
+                intent = new Intent(this,ChangePwdActivity.class);
+                startActivity(intent);
                 break;
 
         }

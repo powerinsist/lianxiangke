@@ -20,11 +20,13 @@ import butterknife.ButterKnife;
  */
 public class ConsumptionAdapter extends BaseAdapter {
 
-    private List<ConsumptionBean.ConsumptionDataListBean> lists;
+    private List<ConsumptionBean.DataBean.ListBean> lists;
     private LayoutInflater inflater;
     private String consume_shop, consume_time, remission_coins, consume_money;
+    private String redpacketmoney;
+    private String ticketnum;
 
-    public ConsumptionAdapter(Context mContext, List<ConsumptionBean.ConsumptionDataListBean> lists) {
+    public ConsumptionAdapter(Context mContext, List<ConsumptionBean.DataBean.ListBean> lists) {
         inflater = LayoutInflater.from(mContext);
         this.lists = lists;
     }
@@ -51,13 +53,15 @@ public class ConsumptionAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        consume_shop = lists.get(position).getConsume_shop();
-        consume_time = lists.get(position).getConsume_time();
-        remission_coins = lists.get(position).getRemission_coins();
-        consume_money = lists.get(position).getConsume_money();
+        consume_shop = lists.get(position).getShopid();
+        consume_time = lists.get(position).getTime();
+        redpacketmoney = lists.get(position).getRedpacketmoney();
+        ticketnum = lists.get(position).getTicketnum();
+        consume_money = lists.get(position).getMoney();
+        holder.remission_coins_tv.setTextSize(10);
         holder.consume_shop_tv.setText(consume_shop);
         holder.consume_time_tv.setText(consume_time);
-        holder.remission_coins_tv.setText(remission_coins);
+        holder.remission_coins_tv.setText(redpacketmoney);
         holder.consume_money_tv.setText(consume_money);
 
         return convertView;

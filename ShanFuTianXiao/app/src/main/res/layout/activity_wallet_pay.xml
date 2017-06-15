@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/common_fenge"
+    tools:context="com.shanfu.tianxia.ui.WalletPayActivity">
+
+    <include
+        android:id="@+id/setting_top"
+        layout="@layout/activity_quxiaotop"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:id="@+id/relativeLayout1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="收款金额"
+            android:padding="17dp"
+            android:layout_marginLeft="20dp"
+            style="@style/black_textview"
+            android:id="@+id/textView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:layout_marginLeft="60dp"
+                    android:text="￥"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6">
+
+                <EditText
+                    android:id="@+id/amount_entered"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:textSize="25dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="15dp"
+                    android:textColorHint="@color/grey_700" />
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/gray" />
+        <Button
+            android:id="@+id/wallet_pay_next"
+            android:layout_marginTop="26dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="26dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/btn_bule"
+            style="@style/white_textview"
+            android:text="下一步"/>
+    </LinearLayout>
+</LinearLayout>

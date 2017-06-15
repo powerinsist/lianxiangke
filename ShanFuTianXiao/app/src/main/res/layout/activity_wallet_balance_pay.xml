@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shanfu.tianxia.ui.WalletBalancePayActivity"
+    android:id="@+id/root_view_red">
+    <ImageView
+        android:id="@+id/wallet_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/wallet_balance_pay_iv"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="110dp"/>
+    <TextView
+        android:id="@+id/pay_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付成功"
+        android:textColor="@color/common_blue"
+        android:layout_below="@+id/wallet_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"/>
+    <TextView
+        android:id="@+id/money_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:layout_below="@+id/pay_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
+    <Button
+        android:id="@+id/pay_ok_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/walle_pay_next"
+        android:layout_below="@+id/money_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
+</RelativeLayout>

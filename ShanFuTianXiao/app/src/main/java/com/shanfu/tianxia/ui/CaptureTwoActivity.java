@@ -114,6 +114,7 @@ public class CaptureTwoActivity extends BaseFragmentActivity  implements Callbac
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         capture_flashlight = (ImageView) findViewById(R.id.capture_flashlight);
+        //返回键，推出扫描
         capture_flashlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +125,7 @@ public class CaptureTwoActivity extends BaseFragmentActivity  implements Callbac
             }
         });
         capture_scan_photo = (LinearLayout) findViewById(R.id.capture_scan_photo);
+        //扫描页面，打开系统相册
         capture_scan_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

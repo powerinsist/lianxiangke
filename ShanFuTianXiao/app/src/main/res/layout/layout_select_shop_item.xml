@@ -37,10 +37,11 @@
             android:layout_gravity="center_vertical">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:id="@+id/relativeLayout1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                >
+                android:layout_marginTop="5dp">
+
                 <TextView
                     android:id="@+id/select_shop_name"
                     android:layout_width="wrap_content"
@@ -59,9 +60,29 @@
                     android:layout_alignParentRight="true"
                     style="@style/red_textview"
                     android:visibility="gone"
-                    android:layout_gravity="center_vertical"
-
-                    />
+                    android:layout_gravity="center_vertical" />
+                <LinearLayout
+                    android:id="@+id/shop_type_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp">
+                    <TextView
+                        android:id="@+id/score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/common_red"
+                        android:text="10%"
+                        android:layout_gravity="center"
+                        android:textSize="14dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="消费奖励"
+                        android:textSize="12dp"/>
+                </LinearLayout>
                <!-- <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/yellow_900"
-                    android:text="消费100送100积分"/>
+                    android:text="消费1元送0.01张联享票"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -148,6 +169,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_alignParentLeft="true"
                     android:text="本二诺叵右"
+                    android:singleLine="true"
                     android:maxEms="10"
                     android:ellipsize="end"/>
                 <ImageView

@@ -6,11 +6,19 @@
     <color name="gainsboro">#dcdcdc</color>
    <!-- <color name="common_red">#fd5656</color>-->
     <color name="common_red">#f95f00</color>
+    <color name="common_orange">#FA6003</color>
+    <color name="common_blue">#08AEEA</color>
+    <color name="common_blue_record">#2DB0E4</color>
+    <color name="common_black">#464646</color>
+    <color name="common_newblack">#212229</color>
+    <color name="common_lightBlack">#525252</color>
     <color name="white">#ffffff</color>
+    <color name="common_fenge">#f1f1f1</color>
     <color name="Black">#333333</color>
     <color name="gray">#DCDCDC</color>
     <color name="yellow">#FFFF00</color>
     <color name="Gainsboro">#999999</color>
+    <color name="common_gray">#fafafa</color>
 
     <color name="capture_text_cover_bg">#99535353</color>
 
@@ -56,5 +64,19 @@
 
     <color name="title_tv_color">#ffffffff</color>
     <color name="backgroud">#ffffffff</color>
+
+    <color name="slidingtab_indicatorcolor">#000000</color>
+
+
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+
+    <color name="bocop_dialog_bg">#77000000</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_e84515">#e84515</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="color_323232">#323232</color>
+    <color name="province_line_border">#D0D0D0</color>
 
 </resources>

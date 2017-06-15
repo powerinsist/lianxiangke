@@ -37,7 +37,7 @@ public class MyMerchantActivity extends BaseFragmentActivity implements View.OnC
     private RelativeLayout my_merchant_top;
     private RelativeLayout content_head_back;
     private TextView content_head_title;
-    private List<MyMerchantBean.MyMerchantListBean> lists;
+    private List<MyMerchantBean.DataBean.ListBean> lists;
     private MyMerchantAdapter adapter;
 
     @Bind(R.id.my_merchant_listview)

@@ -5,7 +5,7 @@
     android:background="@color/gray">
     <include
         android:id="@+id/change_login_top"
-        layout="@layout/activity_toplayout"/>
+        layout="@layout/activity_toplaynewtop"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:textColor="@color/white"
-        android:background="@mipmap/button"
+        android:background="@mipmap/wallet_money_mm_btn_blue"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="50dp"

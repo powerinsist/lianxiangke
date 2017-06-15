@@ -7,7 +7,7 @@
     android:background="@color/gray">
     <include
         android:id="@+id/setting_top"
-        layout="@layout/activity_toplayout"/>
+        layout="@layout/activity_toplaynewtop"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -55,7 +55,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-
         android:background="@color/gray" />
 
     <RelativeLayout
@@ -88,14 +87,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                style="@style/black_textview"
-                />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/arrow_rig"/>
+                style="@style/black_textview" />
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@mipmap/arrow_rig"/>-->
         </LinearLayout>
     </RelativeLayout>
     <View
@@ -132,7 +130,6 @@
                 android:id="@+id/ni_cheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_centerVertical="true"
                 style="@style/black_textview"
                 android:text="未设置"/>
@@ -182,7 +179,7 @@
         android:layout_height="1px"
         android:background="@color/gray" />
     <RelativeLayout
-        android:id="@+id/setting_pay_pwd_layout"
+        android:id="@+id/setting_real_info_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -198,7 +195,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             style="@style/black_textview"
-            android:text="@string/setting_pay_pwd"/>
+            android:text="修改实名信息"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,15 +208,44 @@
         android:layout_height="1px"
         android:background="@color/gray" />
 
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="20dp"
         android:background="@color/gray" />
 
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/real_name_authentication_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:background="@color/white">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--style="@style/black_textview"-->
+            <!--android:text="@string/con_my_con_name_normal"/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@mipmap/arrow_rig"/>-->
+    <!--</RelativeLayout>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
     <RelativeLayout
-        android:id="@+id/real_name_authentication_layout"
+        android:id="@+id/my_qrcode_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -234,7 +260,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             style="@style/black_textview"
-            android:text="@string/con_my_con_name_normal"/>
+            android:text="我的二维码"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -242,6 +268,36 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/arrow_rig"/>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+    <RelativeLayout
+        android:id="@+id/myshop_adress_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="20dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            style="@style/black_textview"
+            android:text="我的收货地址"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/arrow_rig"/>
+    </RelativeLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"

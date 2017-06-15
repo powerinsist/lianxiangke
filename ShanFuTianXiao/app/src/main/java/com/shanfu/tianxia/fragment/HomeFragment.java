@@ -4,8 +4,11 @@ package com.shanfu.tianxia.fragment;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,16 @@ import com.amap.api.location.AMapLocationClient;
 import com.android.volley.toolbox.NetworkImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
+import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.adapter.HomeListAdapter;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragment;
 import com.shanfu.tianxia.bean.BannerImageUrlBean;
+import com.shanfu.tianxia.bean.GetLLInfoBean;
 import com.shanfu.tianxia.bean.HotShopBean;
+import com.shanfu.tianxia.bean.LoginEvent;
+import com.shanfu.tianxia.bean.LogoutEvent;
 import com.shanfu.tianxia.bean.MiddleAdvertisementBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.model.HomeFloorData;
@@ -32,6 +39,7 @@ import com.shanfu.tianxia.model.ProductData;
 import com.shanfu.tianxia.network.NetworkManager;
 import com.shanfu.tianxia.noscrollview.NoScrollListView;
 import com.shanfu.tianxia.ui.LocationCityActivity;
+import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.SelectCityActivity;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -42,6 +50,10 @@ import com.shanfu.tianxia.utils.Urls;
 import com.shanfu.tianxia.view.HomeUpdateDialogs;
 import com.shanfu.tianxia.viewpagerindicator.CirclePageIndicator;
 import com.zaaach.citypicker.CityPickerActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +73,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private static final int REQUEST_CODE_PICK_CITY = 233;
     TextView location_city;
     private NetworkImageView new_user;
+    public static boolean flag = true;
 
     /**
      * 广告自动循环切换的时间间隔
@@ -112,6 +125,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private String get_city;
 
     private String lx,ly;
+    private String uid;
+
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -120,6 +135,40 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         initView(view);
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogoutEvent(LogoutEvent event) {
+//        refreshData();
+        //TODO  不知道这样行不行，先试试吧
+//        lx = SPUtils.getInstance().getString("lx","0.0");
+//        ly = SPUtils.getInstance().getString("ly","0.0");
+//        requestDataBanner();
+//        requestDataMiddlead();
+//        requestHotShop(get_city,lx,ly);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogoutEvent(LoginEvent event) {
+//        refreshData();
+//        lx = SPUtils.getInstance().getString("lx","0.0");
+//        ly = SPUtils.getInstance().getString("ly","0.0");
+//        requestDataBanner();
+//        requestDataMiddlead();
+//        requestHotShop(get_city,lx,ly);
+    }
+
 
     @Override
     public void init() {
@@ -132,16 +181,65 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         relax.setOnClickListener(this);
         life.setOnClickListener(this);
         beauty.setOnClickListener(this);
-
-
     }
     @Override
     public void onResume() {
         super.onResume();
-
-
-
+//        refreshData();
+        uid = SPUtils.getInstance().getString("uid", "");
     }
+
+    /**
+     * 收到广播的时候，调用一下这个就行了
+     */
+    public void refreshData(){
+        Log.e("HomeFragment", "------refreshData------>>>>>>>");
+//        OkGo.getInstance().cancelTag(this);
+//        requestInfo();
+    }
+
+    private void requestInfo() {
+        try {
+            String time = DateUtils.getLinuxTime();
+            String token = MD5Utils.MD5(Constants.appKey + time);
+//            String uid = SPUtils.getInstance().getString("uid","");
+
+            HttpParams params = new HttpParams();
+            params.put("time", time);
+            params.put("token", token);
+            params.put("uid",uid);
+            OkGo.post(Urls.getllinfo)
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<GetLLInfoBean>(getActivity()) {
+                        @Override
+                        public void onSuccess(GetLLInfoBean getLLInfoBean, Call call, Response response) {
+                            decodeInfo(getLLInfoBean,call);
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            TUtils.showShort(getActivity(), "数据获取失败，请检查网络后重试");
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void decodeInfo(GetLLInfoBean getLLInfoBean,Call call) {
+        String code = getLLInfoBean.getErr_code();
+        String msg = getLLInfoBean.getErr_msg();
+
+        if("200".equals(code)){
+            String user_id = getLLInfoBean.getData().getData().getUser_id();
+            String name_user = getLLInfoBean.getData().getData().getName_user();
+            SPUtils.getInstance().putString("name_user", name_user);
+            SPUtils.getInstance().putString("user_id",user_id);
+        }
+    }
+
 
     /**
      * 初始化视图
@@ -165,17 +263,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         etSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*intent = new Intent(getActivity(), SelectCityActivity.class);
-                startActivity(intent);*/
+                intent = new Intent(getActivity(), SelectCityActivity.class);
+                startActivity(intent);
             }
         });
-
         home_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(uid)){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("comefrom","mine");
+                    startActivity(intent);
+                }
 
-                /* intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent); */
 
             }
         });
@@ -216,7 +319,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
      */
     private ArrayList<String> getImageUrls() {
         ArrayList<String> list = new ArrayList<String>();
-      /* for(int x=0;x<datas.size();x++){
+      /*for(int x=0;x<datas.size();x++){
             list.add(datas.get(x).getPic());
         }*/
         // //////////////////////////////////////
@@ -369,6 +472,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         @Override
                         public void onSuccess(BannerImageUrlBean bannerImageUrlBean, Call call, Response response) {
                             decodeBanner(bannerImageUrlBean);
+                            OkGo.getInstance().debug("OkHttpUtils");
                         }
 
                         @Override
@@ -441,8 +545,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             viewPager.setInterval(AUTO_SCROLL_INTERVAL);
             viewPager.startAutoScroll();
         }
-
-
     }
 
 
@@ -481,9 +583,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private String locationProvider = null;
     private double latitude=0.0;
     private double longitude =0.0;
-
-
-
 
 
     private String code,msg,updaversion,updataurl,version,apkUrl;
@@ -528,7 +627,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     .execute(new DialogCallback<HotShopBean>(getActivity()) {
                         @Override
                         public void onSuccess(HotShopBean hotShopBean, Call call, Response response) {
-                            decodeHotShop(hotShopBean);
+                            decodeHotShop(hotShopBean,call);
                         }
                         @Override
                         public void onError(Call call, Response response, Exception e) {
@@ -542,7 +641,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
     HomeFloorData floor;
 
-    private void decodeHotShop(HotShopBean hotShopBean){
+    private void decodeHotShop(HotShopBean hotShopBean,Call call){
 
         String errorCode = hotShopBean.getErr_code();
         String msg = hotShopBean.getErr_msg();
@@ -569,8 +668,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             viewPager.setFocusable(true);
             viewPager.setFocusableInTouchMode(true);
             viewPager.requestFocus();
-
-
+//            call.cancel();
         }else{
             TUtils.showShort(getActivity(),msg);
             floorDatas = new ArrayList<HomeFloorData>();
@@ -578,7 +676,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     R.layout.item_home_lv);
             listView.setAdapter(listAdapter);
             listView.setDivider(null);
-
         }
     }
 }

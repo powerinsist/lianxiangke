@@ -5,8 +5,10 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.mtxc.universallistview.UniversalAdapter;
@@ -29,8 +31,7 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 //	private MyRatingBar star;
 	private NetworkImageView iv;
 
-	public HomeGridAdapter(Context context, List<ProductData> datas,
-			int itemLayoutId) {
+	public HomeGridAdapter(Context context, List<ProductData> datas, int itemLayoutId) {
 		super(context, datas, itemLayoutId);
 
 		dm = new DisplayMetrics();
@@ -48,8 +49,7 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 		layoutParams.width = screenWidth  - (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 9, dm);
 		layoutParams.height = (int)(screenWidth * 1.5 /5);
 		layout.setLayoutParams(layoutParams);
-		iv = (NetworkImageView) holder
-				.getView(R.id.item_home_iv);
+		iv = (NetworkImageView) holder.getView(R.id.item_home_iv);
 //		star = holder.getView(R.id.star);
 //		star.setClickable(false);
 		//star.setRating(Float.valueOf(data.getGrade()));
@@ -59,7 +59,48 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 //		}else{
 //			star.setStar(0);
 //		}
-
+		TextView score = holder.getView(R.id.score);
+		LinearLayout type_ll = holder.getView(R.id.shop_type_ll);
+		String shoptype = data.getShoptype();
+		switch (shoptype){
+			case "A":
+				type_ll.setVisibility(View.GONE);
+				holder.setTextViewText(R.id.jifen_tv,"消费1元送0.05张联享票");
+				break;
+			case "B":
+				type_ll.setVisibility(View.GONE);
+				break;
+			case "C":
+				score.setText("5%");
+				break;
+			case "D":
+				score.setText("10%");
+				break;
+			case "E":
+				score.setText("20%");
+				break;
+			case "F":
+				score.setText("30%");
+				break;
+			case "G":
+				score.setText("40%");
+				break;
+			case "H":
+				score.setText("50%");
+				break;
+			case "I":
+				score.setText("60%");
+				break;
+			case "J":
+				score.setText("70%");
+				break;
+			case "K":
+				score.setText("80%");
+				break;
+			case "L":
+				score.setText("90%");
+				break;
+		}
 		//star.setNumStars(DateTransformation.getint(data.getGrade()));
 		//NetworkManager.getInstance().setImageUrl(iv, data.getImgUrl());
 		NetworkManager.getInstance().setImageUrl(iv, data.getImg());

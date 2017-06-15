@@ -46,6 +46,21 @@ public class SelectCityBean implements Serializable {
         private String grade;
         private String id;
         private String img;
+        private String shoptype;
+        private String juli;
+        private String logo;
+        private String name;
+        private String phone;
+        private String shopaddr;
+        private String shopname;
+
+        public String getShoptype() {
+            return shoptype;
+        }
+
+        public void setShoptype(String shoptype) {
+            this.shoptype = shoptype;
+        }
 
         public String getAddress() {
             return address;
@@ -135,11 +150,6 @@ public class SelectCityBean implements Serializable {
             this.shopname = shopname;
         }
 
-        private String juli;
-        private String logo;
-        private String name;
-        private String phone;
-        private String shopaddr;
-        private String shopname;
+
     }
 }

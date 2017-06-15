@@ -33,7 +33,6 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-
     public abstract View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     public abstract void init();

@@ -23,6 +23,7 @@ import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -125,6 +126,7 @@ public class QueryIncomeActivity extends BaseFragmentActivity implements View.On
             lists = queryIncomeBean.getData().getList();
             String accumulated_income = queryIncomeBean.getData().getAccumulated_income();
             query_income_leiji.setText("累计收入 ： " + accumulated_income + " 元");
+            Collections.reverse(lists);
             if (adapter == null) {
                 adapter = new QueryIncomeAdapter(QueryIncomeActivity.this, lists);
                 query_icome_listview.setAdapter(adapter);

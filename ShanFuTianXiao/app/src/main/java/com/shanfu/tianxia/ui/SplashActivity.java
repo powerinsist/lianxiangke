@@ -13,7 +13,6 @@ import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
-import com.umeng.socialize.PlatformConfig;
 
 
 public class SplashActivity extends BaseFragmentActivity {

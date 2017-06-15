@@ -10,6 +10,10 @@ import java.util.List;
 public class BannerImageUrlBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private String err_code;
+    private String err_msg;
+    public List<Data> data;
+
     public List<Data> getData() {
         return data;
     }
@@ -17,8 +21,6 @@ public class BannerImageUrlBean implements Serializable {
     public void setData(List<Data> data) {
         this.data = data;
     }
-
-    public List<Data> data;
 
     public String getErr_code() {
         return err_code;
@@ -36,8 +38,6 @@ public class BannerImageUrlBean implements Serializable {
         this.err_msg = err_msg;
     }
 
-    private String err_code;
-    private String err_msg;
 
     public class Data{
         public String getId() {

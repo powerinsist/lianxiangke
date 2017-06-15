@@ -37,7 +37,7 @@ public class ConsumptionActivity extends BaseFragmentActivity implements View.On
     private RelativeLayout consumption_top;
     private RelativeLayout content_head_back;
     private TextView content_head_title;
-    private List<ConsumptionBean.ConsumptionDataListBean> lists;
+    private List<ConsumptionBean.DataBean.ListBean> lists;
     private ConsumptionAdapter adapter;
 
     @Bind(R.id.consumption_listview)
@@ -95,6 +95,7 @@ public class ConsumptionActivity extends BaseFragmentActivity implements View.On
             SPUtils.getInstance().putString("ptoken", consumptionBean.getData().getPtoken());
             lists = consumptionBean.getData().getList();
             if(adapter ==null){
+                
                 adapter = new ConsumptionAdapter(ConsumptionActivity.this,lists);
                 consumption_listview.setAdapter(adapter);
             }

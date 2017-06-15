@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -86,7 +87,7 @@ public class CommodityDetailsActivity extends BaseFragmentActivity implements Vi
         grade = getIntent().getStringExtra("grade");
         img = getIntent().getStringExtra("img");
         initView();
-
+        Log.e("LOG",shopid);
         //requestItemData(1);
 
     }
@@ -187,7 +188,6 @@ public class CommodityDetailsActivity extends BaseFragmentActivity implements Vi
         } else {
             TUtils.showShort(CommodityDetailsActivity.this, err_msg);
         }
-
     }
 
     private void requestData() {

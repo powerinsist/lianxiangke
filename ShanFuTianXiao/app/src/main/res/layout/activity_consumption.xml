@@ -7,14 +7,14 @@
     >
     <include
         android:id="@+id/consumption_top"
-        layout="@layout/activity_toplayout"/>
+        layout="@layout/activity_toplaynewtop"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@color/yellow_900">
+        android:background="@color/common_newblack">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -82,7 +82,7 @@
                 style="@style/white_textview"
                 android:textSize="14sp"
                 android:layout_centerInParent="true"
-                android:text="积分赠送"/>
+                android:text="消费奖励"/>
         </RelativeLayout>
     </LinearLayout>
 

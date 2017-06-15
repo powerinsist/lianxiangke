@@ -16,6 +16,7 @@ import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.LoginEvent;
 import com.shanfu.tianxia.bean.RegeditBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.AppUtils;
@@ -24,6 +25,8 @@ import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,8 +56,6 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
         sp_phoneNum = SPUtils.getInstance().getString("phoneNum","");
         comefrom = getIntent().getStringExtra("comefrom");
         init();
-
-
     }
 
 
@@ -144,7 +145,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
                     .execute(new DialogCallback<RegeditBean>(this) {
                         @Override
                         public void onSuccess(RegeditBean regeditBean, Call call, Response response) {
-                            decodeResult(regeditBean);
+                            decodeResult(regeditBean,call);
                         }
                         @Override
                         public void onError(Call call, Response response, Exception e) {
@@ -157,7 +158,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
         }
     }
 
-    private void decodeResult(RegeditBean regeditBean){
+    private void decodeResult(RegeditBean regeditBean,Call call){
 
        String errCode = regeditBean.getErr_code();
         String msg =  regeditBean.getErr_msg();
@@ -171,11 +172,16 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
             SPUtils.getInstance().putBoolean("request", true);
             //TUtils.showShort(LoginActivity.this,msg);
 
+            //TODO  发送广播A
+            EventBus.getDefault().post(new LoginEvent());
+
+            intent = new Intent(LoginActivity.this,MainActivity.class);
+            intent.putExtra("comefrom","home");
+            startActivity(intent);
             this.finish();
         }else{
             TUtils.showShort(LoginActivity.this, msg);
         }
-       // SPUtils.getInstance().putString("uid","1");
 
     }
     @Override
