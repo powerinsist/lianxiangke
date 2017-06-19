@@ -36,16 +36,10 @@ import okhttp3.Response;
 
 public class MyLianxpActivity extends BaseFragmentActivity implements View.OnClickListener {
 
-
     private static final String TAG = "LOG";
     private RelativeLayout setting_top;
     private RelativeLayout content_head_back;
     private TextView content_head_title;
-
-    private List<TicktListBean.DataBean.List1Bean> list1;
-    private List<TicktListBean.DataBean.List2Bean> list2;
-    private int size1;
-    private int size2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +65,10 @@ public class MyLianxpActivity extends BaseFragmentActivity implements View.OnCli
 
         viewPager.setOffscreenPageLimit(3);
 
-//        requestData();
-
         MylianxpAdapter adapter = new MylianxpAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         pagerSlidingTab.setViewPager(viewPager);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override

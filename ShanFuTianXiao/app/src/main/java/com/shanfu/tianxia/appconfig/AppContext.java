@@ -3,6 +3,7 @@ package com.shanfu.tianxia.appconfig;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.multidex.MultiDex;
 import android.widget.ImageView;
 
 import com.lzy.imagepicker.ImagePicker;
@@ -36,6 +37,12 @@ public class AppContext extends Application {
 	}
 
 	@Override
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(base);
+	}
+
+	@Override
 	public void onCreate() {
 		super.onCreate();
 		registerUncaughtExceptionHandler();
@@ -43,10 +50,6 @@ public class AppContext extends Application {
 
 		NineGridView.setImageLoader(new PicassoImageLoader());
 		//initImagePicker();
-
-
-
-
 	}
 
 	private void initImagePicker(){

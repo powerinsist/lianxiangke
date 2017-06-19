@@ -49,7 +49,7 @@ public class UnusedAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null){
-            view = View.inflate(context,R.layout.lxp_used_item,null);
+            view = LayoutInflater.from(context).inflate(R.layout.lxp_used_item,null,false);
         }else {
             view = convertView;
         }

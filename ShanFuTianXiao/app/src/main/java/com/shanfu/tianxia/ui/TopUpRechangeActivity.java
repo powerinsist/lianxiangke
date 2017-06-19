@@ -213,6 +213,7 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
             String substring = card_no1.substring(card_no1.length() - 4, card_no1.length());
             String bankdeltail = bankname1 + "(" + substring + ")";
             bank_select_tv.setText(bankdeltail);
+            Log.e("LOG","-------card_no-----------"+card_no1);
 
         } else {
             TUtils.showShort(this, err_msg);
@@ -435,9 +436,16 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                     TUtils.showShort(TopUpRechangeActivity.this,"请填写手机号码");
                     return;
                 }
+                if (dataname == null){
+                    Log.i(TAG, "decodePassWord: 默认"+dataname+"");
+                    requestData1();
+                }
+                if (dataname != null){
+                    Log.i(TAG, "decodePassWord: 选择"+dataname+"");
+                    requestData();
+                }
                 TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,code_send_tv,code_send);
                 timeCountUtil.start();
-                requestData();
             }
         });
         pay_btn.setOnClickListener(new View.OnClickListener() {

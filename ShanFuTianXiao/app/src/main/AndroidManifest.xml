@@ -218,11 +218,6 @@
         <activity android:name=".ui.TraceActivity" />
         <activity android:name=".ui.MyShopAdressActivity" />
         <activity android:name=".ui.AddAdressActivity" />
-        <activity android:name=".ui.RedLxpDetailsActivity" />
-        <activity android:name=".ui.GreenLxpDetailsActivity" />
-        <activity android:name=".ui.BlueLxpDetailsActivity" />
-        <activity android:name=".ui.YellowLxpDetailsActivity" />
-        <activity android:name=".ui.BrownLxpDetailsActivity" />
         <activity android:name=".ui.CheckForTheDetailActivity" />
         <activity android:name=".ui.DropShipingActivity" />
         <activity android:name=".ui.ShippedActivity" />

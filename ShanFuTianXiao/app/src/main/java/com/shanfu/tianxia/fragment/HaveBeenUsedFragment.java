@@ -23,22 +23,11 @@ import android.widget.TextView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.R;
-import com.shanfu.tianxia.adapter.HaveBeenUsedAdapter;
-import com.shanfu.tianxia.adapter.MylianxpAdapter;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.bean.BonusBean;
-import com.shanfu.tianxia.bean.BonusRedPacketBean;
-import com.shanfu.tianxia.bean.RedLxpBean;
 import com.shanfu.tianxia.bean.TicktListBean;
 import com.shanfu.tianxia.listener.DialogCallback;
-import com.shanfu.tianxia.ui.BlueLxpDetailsActivity;
-import com.shanfu.tianxia.ui.BrownLxpDetailsActivity;
-import com.shanfu.tianxia.ui.GreenLxpDetailsActivity;
-import com.shanfu.tianxia.ui.RedLxpDetailsActivity;
 import com.shanfu.tianxia.ui.RedPacketRecordActivity;
-import com.shanfu.tianxia.ui.RedPayPacketRecordActivity;
-import com.shanfu.tianxia.ui.WalletBalancePayActivity;
-import com.shanfu.tianxia.ui.YellowLxpDetailsActivity;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.SPUtils;
@@ -61,7 +50,6 @@ import okhttp3.Response;
 public class HaveBeenUsedFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "LOG";
-    private Intent intent;
 //    private List<TicktListBean.DataBean.List1Bean> list = new ArrayList<>();
     private ListView lxp_list;
     private View view;
@@ -87,10 +75,7 @@ public class HaveBeenUsedFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
-//        if (adapter != null){
-//            list.clear();
-//            adapter.notifyDataSetChanged();
-//        }
+
         requestData();
     }
 

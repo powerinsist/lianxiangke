@@ -3,21 +3,17 @@ package com.shanfu.tianxia.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.adapter.UnusedAdapter;
 import com.shanfu.tianxia.appconfig.Constants;
-import com.shanfu.tianxia.bean.RedLxpBean;
 import com.shanfu.tianxia.bean.TicktListBean;
-import com.shanfu.tianxia.bean.UnusedBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
@@ -43,7 +39,6 @@ public class UnusedFragment extends Fragment implements View.OnClickListener{
     private ListView lxp_list;
     private UnusedAdapter adapter;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,29 +54,33 @@ public class UnusedFragment extends Fragment implements View.OnClickListener{
     }
 
     private void requestData() {
-        String time = DateUtils.getLinuxTime();
-        String token = MD5Utils.MD5(Constants.appKey + time);
-        String uid = SPUtils.getInstance().getString("uid", "");
+        try {
+            String time = DateUtils.getLinuxTime();
+            String token = MD5Utils.MD5(Constants.appKey + time);
+            String uid = SPUtils.getInstance().getString("uid", "");
 
-        HttpParams params = new HttpParams();
-        params.put("time", time);
-        params.put("token", token);
-        params.put("uid", uid);
+            HttpParams params = new HttpParams();
+            params.put("time", time);
+            params.put("token", token);
+            params.put("uid", uid);
 
-        OkGo.post(Urls.ticktlist)
-                .tag(this)
-                .params(params)
-                .execute(new DialogCallback<TicktListBean>(getActivity()) {
-                    @Override
-                    public void onSuccess(TicktListBean ticktListBean, Call call, Response response) {
-                        decodeData(ticktListBean);
-                    }
+            OkGo.post(Urls.ticktlist)
+                    .tag(this)
+                    .params(params)
+                    .execute(new DialogCallback<TicktListBean>(getActivity()) {
+                        @Override
+                        public void onSuccess(TicktListBean ticktListBean, Call call, Response response) {
+                            decodeData(ticktListBean);
+                        }
 
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                    }
-                });
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void decodeData(TicktListBean ticktListBean) {
