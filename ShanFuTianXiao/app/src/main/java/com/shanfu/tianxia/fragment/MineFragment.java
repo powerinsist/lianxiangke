@@ -30,6 +30,7 @@ import com.shanfu.tianxia.bean.MineBean;
 import com.shanfu.tianxia.bean.SingleUserQueryBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.ui.ConsumptionActivity;
+import com.shanfu.tianxia.ui.KeFuJiaXinActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.MerchantsInActivity;
 import com.shanfu.tianxia.ui.MyLianxpActivity;
@@ -512,7 +513,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //客服中心
             case R.id.mine_kefucenter:
-                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+//                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+                intent = new Intent(getActivity(), KeFuJiaXinActivity.class);
+                startActivity(intent);
                 break;
         }
     }
