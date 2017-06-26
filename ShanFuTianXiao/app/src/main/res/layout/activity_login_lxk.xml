@@ -117,13 +117,15 @@
 
 
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:background="@mipmap/login_button"/>
+            android:background="@mipmap/wallet_money_mm_btn_blue"
+            android:text="登陆"
+            android:textColor="@color/white"/>
 
         <!--<Button
             android:id="@+id/btn_login"

@@ -125,5 +125,4 @@
             <attr name="isEnable" format="boolean"/>
         </declare-styleable>
 
-
 </resources>

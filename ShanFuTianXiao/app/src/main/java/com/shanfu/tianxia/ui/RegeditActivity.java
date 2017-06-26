@@ -57,6 +57,9 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
     Button regist_button;
     @Bind(R.id.re_send_rl)
     RelativeLayout re_send_rl;
+    @Bind(R.id.lxk_xieyi_tv)
+    TextView lxk_xieyi_tv;
+
 
     private String phoneNum;
 
@@ -82,6 +85,7 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
 
         regist_button.setOnClickListener(this);
         re_send.setOnClickListener(this);
+        lxk_xieyi_tv.setOnClickListener(this);
 
     }
 
@@ -165,6 +169,10 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                     TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,re_send,re_send_rl);
                     timeCountUtil.start();
                 }
+                break;
+            case R.id.lxk_xieyi_tv:
+                Intent intent = new Intent(RegeditActivity.this,LxkAllowActivity.class);
+                startActivity(intent);
                 break;
         }
     }

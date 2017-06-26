@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,7 +37,7 @@ import okhttp3.Response;
 public class LoginActivity extends BaseFragmentActivity implements View.OnClickListener {
     EditText ed_login_user_name;
     EditText ed_login_password;
-    ImageButton btn_login;
+    Button btn_login;
     TextView tv_login_forget_password;
     TextView tv_login_quick_regedit;
 //    ImageView dl_baomi;
@@ -51,7 +52,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_lxk);
         ButterKnife.bind(this);
         sp_phoneNum = SPUtils.getInstance().getString("phoneNum","");
         comefrom = getIntent().getStringExtra("comefrom");
@@ -67,7 +68,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
             ed_login_user_name.setText(sp_phoneNum);
             ed_login_user_name.setSelection(sp_phoneNum.length());
         }
-        btn_login = (ImageButton) findViewById(R.id.btn_login);
+        btn_login = (Button) findViewById(R.id.btn_login);
         tv_login_quick_regedit = (TextView) findViewById(R.id.tv_login_quick_regedit);
         tv_login_forget_password = (TextView) findViewById(R.id.tv_login_forget_password);
         login_close = (ImageView) findViewById(R.id.login_close);

@@ -5,7 +5,7 @@
     android:background="@color/gray">
     <include
         android:id="@+id/regist_top"
-        layout="@layout/activity_toplayout"/>
+        layout="@layout/activity_toplaynewtop"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -272,13 +272,38 @@
     <Button
         android:id="@+id/regist_button"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:textColor="@color/white"
-        android:background="@mipmap/registered_button"
+        android:background="@mipmap/wallet_money_mm_btn_blue"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        />
+        android:text="注册" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/allow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="轻触上面的“注册”按钮，即表示你同意"
+            android:textSize="12dp"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/lxk_xieyi_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《联享客软件许可及服务协议》"
+            android:textSize="12dp"
+            android:textColor="@color/blue"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
 
 </LinearLayout>

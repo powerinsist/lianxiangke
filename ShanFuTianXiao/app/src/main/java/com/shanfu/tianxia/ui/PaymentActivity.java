@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -505,10 +506,11 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
 
         Button btn_close = (Button) popupThrid.findViewById(R.id.btn_close);
         TextView tishi_tv = (TextView) popupThrid.findViewById(R.id.tishi_tv);
-        final EditText phone_ed = (EditText) popupThrid.findViewById(R.id.phone_ed);
+        LinearLayout phone_ll  = (LinearLayout) popupThrid.findViewById(R.id.phone_ll);
+        final TextView phone_ed = (TextView) popupThrid.findViewById(R.id.phone_ed);
         final EditText pay_code = (EditText) popupThrid.findViewById(R.id.pay_code);
-        final RelativeLayout code_send = (RelativeLayout) popupThrid.findViewById(R.id.code_send);
-        final TextView code_send_tv = (TextView) popupThrid.findViewById(R.id.code_send_tv);
+//        final RelativeLayout code_send = (RelativeLayout) popupThrid.findViewById(R.id.code_send);
+//        final TextView code_send_tv = (TextView) popupThrid.findViewById(R.id.code_send_tv);
         Button pay_btn = (Button) popupThrid.findViewById(R.id.pay_btn);
         final PopupWindow popupWindow = new PopupWindow(popupThrid,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 //        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
@@ -527,6 +529,46 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 getWindow().setAttributes(params);
             }
         });
+        //TODO 判断手机号
+        String yu_e = chang_pay_tv.getText().toString().trim();
+        if (!yu_e.equals("余额支付"+"("+balance+")")){
+            //会员之间转账
+            if (TextUtils.isEmpty(url1)){
+                if (dataname == null){
+                    //默认银行卡
+                    Log.i(TAG, "openPupThrid: "+ bind_mob);
+                    phone_ll.setVisibility(View.GONE);
+                    phone_ed.setText(bind_mob);
+                }
+                if (dataname != null){
+                    //列表选择的银行卡信息
+                    Log.i(TAG, "openPupThrid: "+bind_mob1);
+                    phone_ll.setVisibility(View.GONE);
+                    phone_ed.setText(bind_mob1);
+                }
+            }else if (dataname == null){
+                //默认银行卡
+                phone_ll.setVisibility(View.GONE);
+                phone_ed.setText(bind_mob1);
+            }else if (dataname != null){
+                //列表银行卡
+                phone_ll.setVisibility(View.GONE);
+                phone_ed.setText(bind_mob);
+            }
+
+        }else {
+            //TODO 余额支付
+            if (TextUtils.isEmpty(url1)){
+                //会员之间转账（余额支付，大于1000）
+                String user_id = SPUtils.getInstance().getString("user_id", "");
+                phone_ed.setText(user_id);
+            }else {
+                String user_id = SPUtils.getInstance().getString("user_id", "");
+                phone_ed.setText(user_id);
+            }
+        }
+
+
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -534,7 +576,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 openPopup();
             }
         });
-        code_send.setOnClickListener(new View.OnClickListener() {
+        /*code_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone_num = phone_ed.getText().toString().trim();
@@ -545,7 +587,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,code_send_tv,code_send);
                 timeCountUtil.start();
                 String yu_e = chang_pay_tv.getText().toString().trim();
-                //TODO  银行卡支付（大于1000）第一步
+                //TODO  银行卡支付第一步
                 if (!yu_e.equals("余额支付"+"("+balance+")")){
                     if (dataname == null){
                         //默认银行卡
@@ -575,7 +617,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                     }
                 }
             }
-        });
+        });*/
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1015,6 +1057,8 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
 
             tokens = (String) bankCardPrepayBean.getData().getToken();
             no_order = bankCardPrepayBean.getData().getData().getNo_order();
+
+            openPupThrid();
         }else {
             TUtils.showShort(PaymentActivity.this,ret_msg);
         }
@@ -1104,6 +1148,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 pwd = pwd_edittext.getText().toString().trim();
 
                 requestPassWord();
+                popupWindow.dismiss();
             }
 
             private void requestPassWord() {
@@ -1145,8 +1190,45 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 String err_msg = verifyPassWordBean.getErr_msg();
 
                 if ("200".equals(err_code)) {
+                    String yu_e = chang_pay_tv.getText().toString().trim();
+                    //TODO 银行卡支付
+                    if (!yu_e.equals("余额支付"+"("+balance+")")){
+                        //会员之间转账（银行卡支付，小于1000）input_payment_money.isFocusable() == false
+                        if (TextUtils.isEmpty(url1)){
+                            if (dataname == null){
+                                //默认银行卡
+                                requestBankPaymentOne1();
+                            }
+                            if (dataname != null){
+                                //列表选择的银行卡信息
+                                requestBankPaymentOne();
+                            }
+                        }else if (dataname == null){ //请求服务器 银行卡支付第一步
+                            //默认银行卡
+                            requestBankPay1();
+                        }else if (dataname != null){
+                            //点击进入银行卡列表后的银行卡支付
+                            requestBankPay();
+                        }
 
-                    float money1 = Float.parseFloat(PaymentActivity.this.money);
+                    }else {
+                        //TODO 余额支付
+                        //请求服务器 余额支付第一步 跳转成功与否页面
+                        if (TextUtils.isEmpty(url1)) {
+                            //会员之间转账
+                            requsetReceivables();
+
+                        } else {
+                            float money_fl = Float.parseFloat(money);
+                            float balance_fl = Float.parseFloat(balance);
+                            if (money_fl > balance_fl) {
+                                TUtils.showShort(PaymentActivity.this, "您的余额不足，请更换支付方式");
+                                return;
+                            }
+                            requsetBalancePay();
+                        }
+                    }
+                    /*float money1 = Float.parseFloat(PaymentActivity.this.money);
                     if (money1 >= 1000){
                         //TODO 金额大于1000的情况下，跳转到短信验证界面
                         popupWindow.dismiss();
@@ -1195,7 +1277,7 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                             }
 
                         }
-                    };
+                    };*/
                 }else {
                     TUtils.showShort(PaymentActivity.this, err_msg);
                 }
@@ -1351,6 +1433,8 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
 
             token_bank_person = bankCardPaymentOneBean.getData().getData().getToken();
             no_order_bank_person = bankCardPaymentOneBean.getData().getData().getNo_order();
+
+            openPupThrid();
         }else {
             TUtils.showShort(this,ret_msg);
         }
@@ -1416,6 +1500,8 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
             //TODO  捕获tokens---未完成
             person_token = myReceivablesBean.getData().getData().getToken();
             person_no_order = myReceivablesBean.getData().getData().getNo_order();
+
+            openPupThrid();
         }else {
             TUtils.showShort(this,ret_msg);
         }
@@ -1496,6 +1582,8 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
             TUtils.showShort(this,"短信已下发，请注意查收");
             tokens_balance = balancePwdPayBean.getData().getData().getToken();
             no_order_balance = balancePwdPayBean.getData().getData().getNo_order();
+
+            openPupThrid();
         }else {
             TUtils.showShort(this,ret_msg);
         }

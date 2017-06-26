@@ -290,6 +290,11 @@ public class MainActivity extends BaseFragmentActivity {
         {
             case REQ_CODE:
                 String uid = SPUtils.getInstance().getString("uid","");
+                String user_id_yonghu = SPUtils.getInstance().getString("user_id", "");
+                if (TextUtils.isEmpty(user_id_yonghu)){
+                    TUtils.showShort(MainActivity.this,"您还没有实名认证！");
+                    return;
+                }
                 if (TextUtils.isEmpty(uid)){
                     TUtils.showShort(MainActivity.this,"您还没有登陆！");
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);

@@ -240,7 +240,9 @@
         <activity android:name=".ui.MerchantsInActivity" />
         <activity android:name=".ui.SettingRealInfoNextActivity" />
         <activity android:name=".ui.BindAccountActivity" />
-        <activity android:name=".ui.KeFuJiaXinActivity"></activity>
+        <activity android:name=".ui.KeFuJiaXinActivity" />
+        <activity android:name=".ui.LxkDetailsActivity" />
+        <activity android:name=".ui.LxkAllowActivity"></activity>
     </application>
 
 </manifest>

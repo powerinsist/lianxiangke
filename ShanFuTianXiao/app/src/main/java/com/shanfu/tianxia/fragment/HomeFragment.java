@@ -40,6 +40,7 @@ import com.shanfu.tianxia.network.NetworkManager;
 import com.shanfu.tianxia.noscrollview.NoScrollListView;
 import com.shanfu.tianxia.ui.LocationCityActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
+import com.shanfu.tianxia.ui.LxkDetailsActivity;
 import com.shanfu.tianxia.ui.SelectCityActivity;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -280,6 +281,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 }
 
 
+            }
+        });
+        new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getActivity(), LxkDetailsActivity.class);
+                startActivity(intent);
             }
         });
 

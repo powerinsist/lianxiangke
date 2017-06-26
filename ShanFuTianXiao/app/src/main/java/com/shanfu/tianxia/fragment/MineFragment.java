@@ -3,6 +3,7 @@ package com.shanfu.tianxia.fragment;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.lzy.ninegrid.NineGridView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -41,6 +41,7 @@ import com.shanfu.tianxia.ui.OnLineActivity;
 import com.shanfu.tianxia.ui.QueryIncomeActivity;
 import com.shanfu.tianxia.ui.RealNameFirstActivity;
 import com.shanfu.tianxia.ui.SecurityActivity;
+import com.shanfu.tianxia.ui.SelectRedPayPacketActivity;
 import com.shanfu.tianxia.ui.SettingActivity;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -114,14 +115,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.mine_alredycargo)
     RelativeLayout mine_alredycargo;
     //我的积分id
-    @Bind(R.id.mine_my_count)
-    RelativeLayout mine_my_count;
+//    @Bind(R.id.mine_my_count)
+//    RelativeLayout mine_my_count;
     //消费明细id
     @Bind(R.id.mine_consumption)
     RelativeLayout mine_consumption;
     //市场收入id
-    @Bind(R.id.revenue_inquiry)
-    RelativeLayout revenue_inquiry;
+//    @Bind(R.id.revenue_inquiry)
+//    RelativeLayout revenue_inquiry;
     //商户入驻id
     @Bind(R.id.mine_shopinto)
     RelativeLayout mine_shopinto;
@@ -137,6 +138,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     //客服中心id
     @Bind(R.id.mine_kefucenter)
     RelativeLayout mine_kefucenter;
+    @Bind(R.id.my_walletbalance_rl)
+    RelativeLayout my_walletbalance_rl;
+    @Bind(R.id.my_con_rl)
+    RelativeLayout my_con_rl;
+    @Bind(R.id.con_my_con_goback_rl)
+    RelativeLayout con_my_con_goback_rl;
+
     private View view;
 
 
@@ -159,16 +167,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_selectduihuan.setOnClickListener(this);
         mine_waitcargo.setOnClickListener(this);
         mine_alredycargo.setOnClickListener(this);
-        mine_my_count.setOnClickListener(this);
+//        mine_my_count.setOnClickListener(this);
         mine_consumption.setOnClickListener(this);
-        revenue_inquiry.setOnClickListener(this);
+//        revenue_inquiry.setOnClickListener(this);
         mine_shopinto.setOnClickListener(this);
         my_merchant.setOnClickListener(this);
         mine_on_line.setOnClickListener(this);
         mine_safe_normal.setOnClickListener(this);
         mine_kefucenter.setOnClickListener(this);
-
-
+        my_walletbalance_rl.setOnClickListener(this);
+        my_con_rl.setOnClickListener(this);
+        con_my_con_goback_rl.setOnClickListener(this);
     }
 
     @Override
@@ -459,32 +468,24 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 //                startActivity(intent);
                 break;
             // 账户零钱
-            case R.id.mine_my_count:
-                String user_id2 = SPUtils.getInstance().getString("user_id", "");
-
-                if (user_id2 != ""){
-                    intent = new Intent(getActivity(), MyWalletBalanceActivity.class);
-                    startActivity(intent);
-                }else {
-                    showDialog();
-                }
-                break;
+//            case R.id.mine_my_count:
+//                String user_id2 = SPUtils.getInstance().getString("user_id", "");
+//
+//                if (user_id2 != ""){
+//                    intent = new Intent(getActivity(), MyWalletBalanceActivity.class);
+//                    startActivity(intent);
+//                }else {
+//                    showDialog();
+//                }
+//                break;
             //消费明细
             case R.id.mine_consumption:
                 intent = new Intent(getActivity(), ConsumptionActivity.class);
                 startActivity(intent);
                 break;
             //市场收入
-            case R.id.revenue_inquiry:
-                String user_id3 = SPUtils.getInstance().getString("user_id", "");
+//            case R.id.revenue_inquiry:
 
-                if (user_id3 != ""){
-                    intent = new Intent(getActivity(), QueryIncomeActivity.class);
-                    startActivity(intent);
-                }else {
-                    showDialog();
-                }
-                break;
             //商户入驻
             case R.id.mine_shopinto:
                 intent = new Intent(getActivity(), MerchantsInActivity.class);
@@ -513,9 +514,37 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //客服中心
             case R.id.mine_kefucenter:
-//                TUtils.showShort(getActivity(), "即将开放，敬请期待");
-                intent = new Intent(getActivity(), KeFuJiaXinActivity.class);
-                startActivity(intent);
+                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+//                startActivity(new Intent(getActivity(), JXInitActivity.class));
+                break;
+            case R.id.my_walletbalance_rl:
+                String user_id7 = SPUtils.getInstance().getString("user_id", "");
+
+                if (user_id7 != ""){
+                    intent = new Intent(getActivity(), MyWalletBalanceActivity.class);
+                    startActivity(intent);
+                }else {
+                    showDialog();
+                }
+                break;
+            case R.id.my_con_rl:
+                String user_id3 = SPUtils.getInstance().getString("user_id", "");
+
+                if (user_id3 != ""){
+                    intent = new Intent(getActivity(), QueryIncomeActivity.class);
+                    startActivity(intent);
+                }else {
+                    showDialog();
+                }
+                break;
+            case R.id.con_my_con_goback_rl:
+                String user_id2 = SPUtils.getInstance().getString("user_id", "");
+                if (user_id2 != ""){
+                    intent = new Intent(getActivity(), SelectRedPayPacketActivity.class);
+                    startActivity(intent);
+                }else {
+                    showDialog();
+                }
                 break;
         }
     }

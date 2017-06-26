@@ -261,3 +261,30 @@
     -keep class com.linkedin.** { *; }
     -keepattributes Signature
 
+    -ignorewarnings
+
+    #佳信
+#    -dontwarn org.jxmpp.**
+#    -dontwarn com.jxccp.**
+#    -dontwarn de.measite.minidns.**
+#    -dontwarn org.jivesoftware.smack.**
+#    -dontwarn org.jivesoftware.smackx.**
+#    -dontwarn android.support.v4.**
+#    -dontwarn android.support.v7.**
+#
+#    -keep class de.measite.minidns.** {*;}
+#    -keep class org.jivesoftware.smack.** {*;}
+#    -keep class org.jivesoftware.smackx.** {*;}
+#    -keep class org.jxmpp.** {*;}
+#    -keep class com.jxccp.** {*;}
+#    # Keep the support library
+#    -keep class android.support.v4.** { *; }
+#    -keep interface android.support.v4.** { *; }
+#    # Keep the support library
+#    -keep class android.support.v7.** { *; }
+#    -keep interface android.support.v7.** { *; }
+#    -keep public class * implements com.bumptech.glide.module.GlideModule
+#    -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+#      **[] $VALUES;
+#      public *;
+#    }

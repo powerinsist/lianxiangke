@@ -61,7 +61,14 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 //		}
 		TextView score = holder.getView(R.id.score);
 		LinearLayout type_ll = holder.getView(R.id.shop_type_ll);
-		String shoptype = data.getShoptype();
+		holder.setTextViewText(R.id.jifen_tv,data.getTickrule());
+		if (data.getRewardrule().equals("0")){
+			type_ll.setVisibility(View.GONE);
+		}else {
+			holder.setTextViewText(R.id.score,data.getRewardrule());
+
+		}
+		/*String shoptype = data.getShoptype();
 		switch (shoptype){
 			case "A":
 				type_ll.setVisibility(View.GONE);
@@ -100,7 +107,7 @@ public class HomeGridAdapter extends UniversalAdapter<ProductData> {
 			case "L":
 				score.setText("90%");
 				break;
-		}
+		}*/
 		//star.setNumStars(DateTransformation.getint(data.getGrade()));
 		//NetworkManager.getInstance().setImageUrl(iv, data.getImgUrl());
 		NetworkManager.getInstance().setImageUrl(iv, data.getImg());

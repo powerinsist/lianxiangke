@@ -371,7 +371,7 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                 String err_code = verifyPassWordBean.getErr_code();
                 String err_msg = verifyPassWordBean.getErr_msg();
                 if ("200".equals(err_code)) {
-                    if (moneyint < 1000){
+//                    if (moneyint < 1000){
                         popupWindow.dismiss();
                         if (dataname == null){
                             Log.i(TAG, "decodePassWord: 默认"+dataname+"");
@@ -382,11 +382,12 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                             requestData();
                         }
 
-                    }else {
+//                    }
+                    /*else {
                         //跳转到验证界面
                         popupWindow.dismiss();
                         openPupThrid();
-                    }
+                    }*/
                 }else {
                     TUtils.showShort(TopUpRechangeActivity.this, err_msg);
                 }
@@ -399,10 +400,10 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
 
         Button btn_close = (Button) popupThrid.findViewById(R.id.btn_close);
         TextView tishi_tv = (TextView) popupThrid.findViewById(R.id.tishi_tv);
-        final EditText phone_ed = (EditText) popupThrid.findViewById(R.id.phone_ed);
+        final TextView phone_ed = (TextView) popupThrid.findViewById(R.id.phone_ed);
         final EditText pay_code = (EditText) popupThrid.findViewById(R.id.pay_code);
-        final RelativeLayout code_send = (RelativeLayout) popupThrid.findViewById(R.id.code_send);
-        final TextView code_send_tv = (TextView) popupThrid.findViewById(R.id.code_send_tv);
+//        final RelativeLayout code_send = (RelativeLayout) popupThrid.findViewById(R.id.code_send);
+//        final TextView code_send_tv = (TextView) popupThrid.findViewById(R.id.code_send_tv);
         Button pay_btn = (Button) popupThrid.findViewById(R.id.pay_btn);
         final PopupWindow popupWindow = new PopupWindow(popupThrid, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
@@ -421,6 +422,14 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                 getWindow().setAttributes(params);
             }
         });
+
+        if (dataname == null){
+            phone_ed.setText(bind_mob1);
+        }
+        if (dataname != null){
+            phone_ed.setText(bind_mob);
+        }
+
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -428,7 +437,7 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                 finish();
             }
         });
-        code_send.setOnClickListener(new View.OnClickListener() {
+        /*code_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone_num = phone_ed.getText().toString().trim();
@@ -447,7 +456,7 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
                 TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,code_send_tv,code_send);
                 timeCountUtil.start();
             }
-        });
+        });*/
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -569,6 +578,8 @@ public class TopUpRechangeActivity extends BaseFragmentActivity implements View.
 
             tokens = balanceRechargeBean.getData().getData().getToken();
             no_order = balanceRechargeBean.getData().getData().getNo_order();
+
+            openPupThrid();
         }else {
             TUtils.showShort(this,ret_msg);
         }

@@ -19,6 +19,24 @@ public class ProductData implements Serializable{
 	private String name;
 	private String shoptype;
 	private String address;
+	private String tickrule;
+	private String rewardrule;
+
+	public String getTickrule() {
+		return tickrule;
+	}
+
+	public void setTickrule(String tickrule) {
+		this.tickrule = tickrule;
+	}
+
+	public String getRewardrule() {
+		return rewardrule;
+	}
+
+	public void setRewardrule(String rewardrule) {
+		this.rewardrule = rewardrule;
+	}
 
 	public String getAddress() {
 		return address;

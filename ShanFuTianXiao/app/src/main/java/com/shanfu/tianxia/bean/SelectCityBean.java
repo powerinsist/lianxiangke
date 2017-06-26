@@ -53,6 +53,24 @@ public class SelectCityBean implements Serializable {
         private String phone;
         private String shopaddr;
         private String shopname;
+        private String tickrule;
+        private String rewardrule;
+
+        public String getTickrule() {
+            return tickrule;
+        }
+
+        public void setTickrule(String tickrule) {
+            this.tickrule = tickrule;
+        }
+
+        public String getRewardrule() {
+            return rewardrule;
+        }
+
+        public void setRewardrule(String rewardrule) {
+            this.rewardrule = rewardrule;
+        }
 
         public String getShoptype() {
             return shoptype;

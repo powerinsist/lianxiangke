@@ -55,13 +55,13 @@ public class ConsumptionAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         consume_shop = lists.get(position).getShopid();
         consume_time = lists.get(position).getTime();
-        redpacketmoney = lists.get(position).getRedpacketmoney();
+        redpacketmoney = lists.get(position).getRedpacketmoney1();
         ticketnum = lists.get(position).getTicketnum();
         consume_money = lists.get(position).getMoney();
         holder.remission_coins_tv.setTextSize(10);
         holder.consume_shop_tv.setText(consume_shop);
         holder.consume_time_tv.setText(consume_time);
-        holder.remission_coins_tv.setText(redpacketmoney);
+        holder.remission_coins_tv.setText(redpacketmoney+"\n"+ticketnum);
         holder.consume_money_tv.setText(consume_money);
 
         return convertView;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.multidex.MultiDex;
 import android.widget.ImageView;
-
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.ninegrid.NineGridView;
@@ -50,6 +49,10 @@ public class AppContext extends Application {
 
 		NineGridView.setImageLoader(new PicassoImageLoader());
 		//initImagePicker();
+
+//		JXImManager.getInstance().init(getApplicationContext(), "adjynnhzexc0eg#lxk255#10001");
+//		JXImManager.getInstance().setDebugMode(true);
+//		JXImManager.Login.getInstance().setAutoLogin(false);
 	}
 
 	private void initImagePicker(){

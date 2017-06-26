@@ -1,8 +1,7 @@
 package com.shanfu.tianxia.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.support.v7.app.AppCompatActivity;
 import com.shanfu.tianxia.R;
 
 public class KeFuJiaXinActivity extends AppCompatActivity {
@@ -12,4 +11,5 @@ public class KeFuJiaXinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ke_fu_jia_xin);
     }
+
 }

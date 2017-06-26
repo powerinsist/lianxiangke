@@ -90,6 +90,15 @@ public class ConsumptionBean implements Serializable {
             private String money;
             private String redpacketmoney;
             private String ticketnum;
+            private String redpacketmoney1;
+
+            public String getRedpacketmoney1() {
+                return redpacketmoney1;
+            }
+
+            public void setRedpacketmoney1(String redpacketmoney1) {
+                this.redpacketmoney1 = redpacketmoney1;
+            }
 
             public String getTime() {
                 return time;

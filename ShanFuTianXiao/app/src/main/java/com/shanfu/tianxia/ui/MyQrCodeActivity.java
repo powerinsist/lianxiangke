@@ -53,7 +53,7 @@ public class MyQrCodeActivity extends BaseFragmentActivity implements View.OnCli
 
     private void initView(){
         String id = SPUtils.getInstance().getString("uid","");
-        String weburl = "https://api.lianxiangke.cn/Home/Reg/show/id/";
+        String weburl = "https://api.lianxiangke.cn/Home/Reg/spread/id/";
 
         url = weburl + id;
 
