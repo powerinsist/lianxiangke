@@ -2,8 +2,6 @@ package com.shanfu.tianxia.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,9 +15,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,10 +34,8 @@ import com.shanfu.tianxia.utils.MD5Utils;
 import com.shanfu.tianxia.utils.PwdEditText;
 import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
-import com.shanfu.tianxia.utils.TimeCountUtil;
 import com.shanfu.tianxia.utils.Urls;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

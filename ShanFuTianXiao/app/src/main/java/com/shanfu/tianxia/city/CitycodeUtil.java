@@ -80,6 +80,20 @@ public class CitycodeUtil {
 
 	}
 
+	public ArrayList<String> getProvinceId(List<Cityinfo> proviceId){
+		if (province_list_code.size() > 0) {
+			province_list_code.clear();
+		}
+		if (province_list.size() > 0) {
+			province_list.clear();
+		}
+		for (int i = 0; i < proviceId.size(); i++) {
+			province_list.add(proviceId.get(i).getCity_name());
+			province_list_code.add(proviceId.get(i).getId());
+		}
+		return province_list_code;
+	}
+
 	public ArrayList<String> getCity(
             HashMap<String, List<Cityinfo>> cityHashMap, String provicecode) {
 		if (city_list_code.size() > 0) {

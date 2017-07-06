@@ -33,6 +33,7 @@ import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.GetLLInfoBean;
 import com.shanfu.tianxia.bean.ResultTrueBean;
+import com.shanfu.tianxia.bean.RsultBean;
 import com.shanfu.tianxia.bean.SaoMaCodeBean;
 import com.shanfu.tianxia.bean.TabHostBean;
 import com.shanfu.tianxia.fragment.FragmentTabHost;
@@ -130,8 +131,8 @@ public class MainActivity extends BaseFragmentActivity {
 
     @PermissionSuccess(requestCode = 100)
     public void doSomething(){
-       Intent intent = new Intent(MainActivity.this, CaptureTwoActivity.class);
-        startActivityForResult(intent, REQ_CODE);
+        requestOnly1();
+
        // initLocation();
 
     }
@@ -214,7 +215,6 @@ public class MainActivity extends BaseFragmentActivity {
                     }*/
 //                    else {
 //                        requestInfo();
-
 //                    }
 
 //                    mTabHost.setCurrentTab(2);
@@ -222,6 +222,7 @@ public class MainActivity extends BaseFragmentActivity {
 //                        requestInfo();
 //                        openPopup();
 //                    }
+                    requestOnly();
 
                 }
             }
@@ -434,4 +435,110 @@ public class MainActivity extends BaseFragmentActivity {
             mTabHost.setCurrentTab(2);
         }
     }
+
+    private void requestOnly() {
+        String time = DateUtils.getLinuxTime();
+        String token = MD5Utils.MD5(Constants.appKey + time);
+        String uid = SPUtils.getInstance().getString("uid", "");
+        String logintoken = SPUtils.getInstance().getString("logintoken", "");
+
+        HttpParams params = new HttpParams();
+        params.put("time", time);
+        params.put("token", token);
+        params.put("uid", uid);
+        params.put("logintoken",logintoken);
+
+        OkGo.post(Urls.loginverification)
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<RsultBean>(this) {
+                    @Override
+                    public void onSuccess(RsultBean rsultBean, Call call, Response response) {
+                        decodeOnly(rsultBean);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        TUtils.showShort(MainActivity.this, "数据获取失败，请检查网络后重试");
+                    }
+                });
+    }
+
+    private void decodeOnly(RsultBean rsultBean) {
+        String err_code = rsultBean.getErr_code();
+        String err_msg = rsultBean.getErr_msg();
+        if (err_code.equals("100")){
+            Log.e("LOG","main------------");
+            showOnlyDialog();
+        }
+    }
+
+    private void requestOnly1() {
+        String time = DateUtils.getLinuxTime();
+        String token = MD5Utils.MD5(Constants.appKey + time);
+        String uid = SPUtils.getInstance().getString("uid", "");
+        String logintoken = SPUtils.getInstance().getString("logintoken", "");
+
+        HttpParams params = new HttpParams();
+        params.put("time", time);
+        params.put("token", token);
+        params.put("uid", uid);
+        params.put("logintoken",logintoken);
+
+        OkGo.post(Urls.loginverification)
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<RsultBean>(this) {
+                    @Override
+                    public void onSuccess(RsultBean rsultBean, Call call, Response response) {
+                        decodeOnly1(rsultBean);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        TUtils.showShort(MainActivity.this, "数据获取失败，请检查网络后重试");
+                    }
+                });
+    }
+
+    private void decodeOnly1(RsultBean rsultBean) {
+        String err_code = rsultBean.getErr_code();
+        String err_msg = rsultBean.getErr_msg();
+        if (err_code.equals("100")){
+            Log.e("LOG","main------------");
+            showOnlyDialog();
+        }else {
+            Intent intent = new Intent(MainActivity.this, CaptureTwoActivity.class);
+            startActivityForResult(intent, REQ_CODE);
+        }
+    }
+
+    private void showOnlyDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();//创建对象
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.layout_only_login_dialog,null);//自定义布局
+        TextView query_tv = (TextView) dialogView.findViewById(R.id.query_tv);
+        //把自定义的布局设置到dialog中，注意，布局设置一定要在show之前。从第二个参数分别填充内容与边框之间左、上、右、下、的像素
+        dialog.setView(dialogView,0,0,0,0);
+        //一定要先show出来再设置dialog的参数，不然就不会改变dialog的大小了
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        int width = getWindowManager().getDefaultDisplay().getWidth();//得到当前显示设备的宽度，单位是像素
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();//得到这个dialog界面的参数对象
+//        params.width = width-(width/3);//设置dialog的界面宽度
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog的界面宽度
+        params.height =  ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog高度为包裹内容
+        params.gravity = Gravity.CENTER;//设置dialog的重心
+        dialog.getWindow().setAttributes(params);//最后把这个参数对象设置进去，即与dialog绑定
+        query_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mTabHost.setCurrentTab(0);
+                dialog.dismiss();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

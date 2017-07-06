@@ -41,6 +41,15 @@ public class RegeditBean {
         private String p_status;
         private String t_status;
         private String b_status;
+        private String logintoken;
+
+        public String getLogintoken() {
+            return logintoken;
+        }
+
+        public void setLogintoken(String logintoken) {
+            this.logintoken = logintoken;
+        }
 
         public String getPhone() {
             return phone;

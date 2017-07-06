@@ -3,29 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="240dp"
     android:id="@+id/item_home_gridlayout"
-    android:background="@color/common_fenge">
+    android:background="@color/common_fenge"
+    android:layout_marginRight="5dp">
     <RelativeLayout
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/zone_grid_shop_iv"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@mipmap/pci_zone_shop"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="5dp"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/zone_grid_shop_tv"
             android:layout_marginLeft="10dp"
@@ -37,7 +39,7 @@
             android:textColor="@color/black"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/white">
@@ -47,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2张橙联享票+100元"
+            android:text="2张联享票+100元"
             android:textSize="12dp"
             android:textColor="#ff0000"
             android:id="@+id/zone_grid_lxp_tv" />
@@ -58,8 +60,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="41dp"
-            android:layout_marginEnd="41dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
             <ImageView
                 android:layout_centerInParent="true"
                 android:layout_width="40dp"
@@ -89,7 +91,7 @@
                 android:id="@+id/text_1"
                 android:layout_marginLeft="5dp"
                 android:textSize="12dp"
-                android:layout_toRightOf="@+id/zone_lxp_first_iv"
+                android:layout_toRightOf="@+id/baiyou_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已兑换："/>

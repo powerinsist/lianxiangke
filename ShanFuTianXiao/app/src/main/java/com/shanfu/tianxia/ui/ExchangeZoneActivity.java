@@ -3,13 +3,18 @@ package com.shanfu.tianxia.ui;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,21 +22,18 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.shanfu.tianxia.R;
-import com.shanfu.tianxia.adapter.SelectCityDataAdapter;
+import com.shanfu.tianxia.adapter.GridItemDecoration;
 import com.shanfu.tianxia.adapter.ZoneGridAdapter;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
-import com.shanfu.tianxia.bean.BannerImageUrlBean;
-import com.shanfu.tianxia.bean.HotShopBean;
 import com.shanfu.tianxia.bean.ZoneImageUrlBean;
 import com.shanfu.tianxia.bean.ZoneProductBean;
 import com.shanfu.tianxia.listener.DialogCallback;
-import com.shanfu.tianxia.model.ZoneFloorData;
 import com.shanfu.tianxia.network.NetworkManager;
-import com.shanfu.tianxia.noscrollview.NoScrollGridView;
-import com.shanfu.tianxia.utils.AppUtils;
+import com.shanfu.tianxia.noscrollview.FullyGridLayoutManager;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
+import com.shanfu.tianxia.utils.PwdEditText;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 import com.shanfu.tianxia.viewpagerindicator.CirclePageIndicator;
@@ -44,7 +46,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class ExchangeZoneActivity extends BaseFragmentActivity implements View.OnClickListener,PullLoadMoreRecyclerView.PullLoadMoreListener {
@@ -79,7 +80,7 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
     private RelativeLayout content_head_back;
     private TextView content_head_title;
 
-    //数码手机
+    /*//数码手机
     @Bind(R.id.zone_phone)
     LinearLayout zone_phone;
     //珠宝艺术品
@@ -101,9 +102,10 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
     @Bind(R.id.zone_face)
     LinearLayout zone_face;
     //休闲零食
-    @Bind(R.id.zone_rest)
-    LinearLayout zone_rest;
+    @Bind(R.id.zone_rest)*/
+//    LinearLayout zone_rest;
     private Intent intent;
+    private TextView content_head_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +115,7 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
         init();
 //        initData();
         initList();
-        requestDataBanner();
+//        requestDataBanner();
         requestHotShop();
     }
 
@@ -124,20 +126,23 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
         content_head_back = (RelativeLayout) setting_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) setting_top.findViewById(R.id.content_head_title);
         content_head_title.setText("兑换专区");
+        content_head_right = (TextView) setting_top.findViewById(R.id.content_head_right);
+        content_head_right.setText("更多");
+        content_head_right.setOnClickListener(this);
         content_head_back.setOnClickListener(this);
 
-        zone_phone.setOnClickListener(this);
+        /*zone_phone.setOnClickListener(this);
         zone_art.setOnClickListener(this);
         zone_fitment.setOnClickListener(this);
         zone_home.setOnClickListener(this);
         zone_drink.setOnClickListener(this);
         zone_clothes.setOnClickListener(this);
-        zone_face.setOnClickListener(this);
-        zone_rest.setOnClickListener(this);
+        zone_face.setOnClickListener(this);*/
+//        zone_rest.setOnClickListener(this);
 
-        viewPager = (AutoScrollViewPager) findViewById(R.id.zone_viewPager);
-        indicator = (CirclePageIndicator) findViewById(R.id.zone_indicator);
-        mList = (PullLoadMoreRecyclerView) findViewById(R.id.item_zone_grid);
+       /* viewPager = (AutoScrollViewPager) findViewById(R.id.zone_viewPager);
+        indicator = (CirclePageIndicator) findViewById(R.id.zone_indicator);*/
+
 
     }
     /**
@@ -237,7 +242,7 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
             indicator.setViewPager(viewPager);
             viewPager.setInterval(AUTO_SCROLL_INTERVAL);
             viewPager.startAutoScroll();
-
+            requestHotShop();
         }
     }
     /**
@@ -248,6 +253,38 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
             pagerAdapter.notifyDataSetChanged();
         if (indicator != null)
             indicator.notifyDataSetChanged();
+    }
+
+    private void initList(){
+        //获取mRecyclerView对象
+        mRecyclerView = mList.getRecyclerView();
+//        mRecyclerView.setNestedScrollingEnabled(false);
+        //代码设置scrollbar无效？未解决！
+        mRecyclerView.setVerticalScrollBarEnabled(true);
+
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new GridItemDecoration(this, true));
+
+        //设置是否可以下拉刷新
+        mList.setPullRefreshEnable(true);
+        //设置是否可以上拉刷新
+        mList.setPushRefreshEnable(true);
+        //显示下拉刷新
+        mList.setRefreshing(true);
+        //设置上拉刷新文字
+        mList.setFooterViewText("加载中...");
+        /*FullyGridLayoutManager fullyGridLayoutManager = new FullyGridLayoutManager(ExchangeZoneActivity.this,2);
+        fullyGridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(fullyGridLayoutManager);*/
+        mList.setGridLayout(2);
+        mList.setOnPullLoadMoreListener(this);
+        listAdapter = new ZoneGridAdapter(ExchangeZoneActivity.this);
+        mList.setAdapter(listAdapter);
+
+        View header = LayoutInflater.from(this).inflate(R.layout.nice_zone_headview, null, false);
+        viewPager = (AutoScrollViewPager) header.findViewById(R.id.zone_viewPager);
+        indicator = (CirclePageIndicator) header.findViewById(R.id.zone_indicator);
+        listAdapter.setHeaderView(header);
     }
 
     /**
@@ -261,7 +298,7 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
             HttpParams params = new HttpParams();
             params.put("time", time);
             params.put("token", token);
-//            params.put("page", "1");
+            params.put("p", page);
 //            params.put("pageSize", "50");
 
             OkGo.post(Urls.goodslist)
@@ -271,7 +308,6 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
                         @Override
                         public void onSuccess(ZoneProductBean zoneProductBean, Call call, Response response) {
                             decodeHotShop(zoneProductBean);
-                            Log.e("LOG",zoneProductBean.getData().getList().toString());
                         }
 
                         @Override
@@ -296,25 +332,6 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
             mList.setPullLoadMoreCompleted();
             TUtils.showShort(ExchangeZoneActivity.this,msg);
         }
-    }
-
-    private void initList(){
-        //获取mRecyclerView对象
-        mRecyclerView = mList.getRecyclerView();
-        //代码设置scrollbar无效？未解决！
-        mRecyclerView.setVerticalScrollBarEnabled(true);
-        //设置是否可以下拉刷新
-        mList.setPullRefreshEnable(false);
-        //设置是否可以上拉刷新
-        mList.setPushRefreshEnable(true);
-        //显示下拉刷新
-        mList.setRefreshing(true);
-        //设置上拉刷新文字
-        mList.setFooterViewText("加载中...");
-        mList.setGridLayout(2);
-        mList.setOnPullLoadMoreListener(this);
-        listAdapter = new ZoneGridAdapter(this);
-        mList.setAdapter(listAdapter);
     }
 
     private void initData(){
@@ -347,7 +364,7 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.zone_phone:
+            /*case R.id.zone_phone:
                 intent = new Intent(ExchangeZoneActivity.this,ZoneSelectActivity.class);
 //                intent = new Intent(ExchangeZoneActivity.this, SelectCityActivity.class);
                 startActivity(intent);
@@ -365,15 +382,67 @@ public class ExchangeZoneActivity extends BaseFragmentActivity implements View.O
             case R.id.zone_face:
                 break;
             case R.id.zone_rest:
-                break;
+                break;*/
             case R.id.content_head_back:
                 finish();
+                break;
+            case R.id.content_head_right:
+                openPopup();
                 break;
         }
     }
 
+    private void openPopup() {
+        View popupPayView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_zone_select_popup,null);
+        final PopupWindow popupWindow = new PopupWindow(popupPayView, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout mine_alredycargo_ll = (LinearLayout) popupPayView.findViewById(R.id.mine_alredycargo_ll);
+        LinearLayout mine_waitcargo_ll = (LinearLayout) popupPayView.findViewById(R.id.mine_waitcargo_ll);
+        LinearLayout zone_dingdan_mingxi_ll = (LinearLayout) popupPayView.findViewById(R.id.zone_dingdan_mingxi_ll);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(true);
+        popupWindow.setTouchable(true);
+        View parent = findViewById(R.id.content_head_right);
+        popupWindow.showAtLocation(parent, Gravity.RIGHT|Gravity.TOP,50,140);
+        final WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    params.alpha = 1.0f;
+                    getWindow().setAttributes(params);
+                }
+            });
+        mine_alredycargo_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                intent = new Intent(ExchangeZoneActivity.this, ShippedActivity.class);
+                startActivity(intent);
+            }
+        });
+        mine_waitcargo_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                intent = new Intent(ExchangeZoneActivity.this, DropShipingActivity.class);
+                startActivity(intent);
+            }
+        });
+        zone_dingdan_mingxi_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                intent = new Intent(ExchangeZoneActivity.this, CheckForTheDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     @Override
     public void onRefresh() {
+        page = page + 1;
 //        setRefresh();
 //        initList();
         requestHotShop();

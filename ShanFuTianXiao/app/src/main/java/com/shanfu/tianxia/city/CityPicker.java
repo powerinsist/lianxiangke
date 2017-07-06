@@ -94,6 +94,7 @@ public class CityPicker extends LinearLayout {
 				cityinfo.setCity_name(entry.getValue().getAsString());
 				cityinfo.setId(entry.getKey());
 				province_list_code.add(entry.getKey());
+
 				list.add(cityinfo);
 			}
 			System.out.println(province_list_code.size());
@@ -121,6 +122,7 @@ public class CityPicker extends LinearLayout {
 							.getAsString());
 					city_list_code.add(array.get(i).getAsJsonArray().get(1)
 							.getAsString());
+
 					list.add(cityinfo);
 				}
 				hashMap.put(entry.getKey(), list);
@@ -141,6 +143,10 @@ public class CityPicker extends LinearLayout {
 		counyPicker = (ScrollerNumberPicker) findViewById(R.id.couny);
 		provincePicker.setData(citycodeUtil.getProvince(province_list));
 		provincePicker.setDefault(1);
+
+//		provincePicker.setData(citycodeUtil.getProvinceId(province_list));
+//		provincePicker.setDefault(1);
+
 		cityPicker.setData(citycodeUtil.getCity(city_map, citycodeUtil
 				.getProvince_list_code().get(1)));
 		cityPicker.setDefault(1);

@@ -3,6 +3,7 @@ package com.shanfu.tianxia.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -171,8 +172,9 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
             SPUtils.getInstance().putString("p_status", regeditBean.getData().getP_status());
             SPUtils.getInstance().putString("t_status", regeditBean.getData().getT_status());
             SPUtils.getInstance().putBoolean("request", true);
+            SPUtils.getInstance().putString("logintoken",regeditBean.getData().getLogintoken());
             //TUtils.showShort(LoginActivity.this,msg);
-
+            Log.e("LOG",regeditBean.getData().getLogintoken());
             //TODO  发送广播A
             EventBus.getDefault().post(new LoginEvent());
 
@@ -185,6 +187,7 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
         }
 
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub

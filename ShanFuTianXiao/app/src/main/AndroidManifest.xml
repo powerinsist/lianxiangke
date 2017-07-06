@@ -242,7 +242,8 @@
         <activity android:name=".ui.BindAccountActivity" />
         <activity android:name=".ui.KeFuJiaXinActivity" />
         <activity android:name=".ui.LxkDetailsActivity" />
-        <activity android:name=".ui.LxkAllowActivity"></activity>
+        <activity android:name=".ui.LxkAllowActivity" />
+        <activity android:name=".ui.NiceZoneActivity"></activity>
     </application>
 
 </manifest>

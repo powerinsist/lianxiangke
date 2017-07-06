@@ -17,9 +17,13 @@ public class Urls {
     //首页轮播图
     public static final String zone_banner = shop_url+"Shopclass/getexchangeimage";
     //管理收货地址
-    public static final String adress_manager = shop_url+"Address/address_list";
+    public static final String address_list = shop_url+"Address/address_list";
+    //商品详情  https://api.lianxiangke.cn/Shop/Shopclass/gooddetail
+    public static final String gooddetail = shop_url+"Shopclass/gooddetail";
     //添加收货地址
     public static final String add_adress = shop_url+"Address/address_add";
+    //删除收货地址    https://api.lianxiangke.cn/Shop/Address/address_delete
+    public static final String address_delete = shop_url+"Address/address_delete";
     //地址修改接口 https://api.lianxiangke.cn/Shop/Address/address_save
     public static final String adress_save = shop_url+"Address/address_save";
     //首页下部商品列表 https://api.lianxiangke.cn/Shop/Shopclass/goodslist
@@ -96,7 +100,8 @@ public class Urls {
     public static final String bindbankuser = api_url+"Lianlian/bindbankuser";
     //获取银行卡绑卡接口  https://api.lianxiangke.cn/Api/Lianlian/getbindbankuser
     public static final String getbindbankuser = api_url+"Lianlian/getbindbankuser";
-
+    //唯一登陆接口 https://api.lianxiangke.cn/Api/login/loginverification
+    public static final String loginverification = api_url+"login/loginverification";
 
 
 
@@ -133,7 +138,7 @@ public class Urls {
     public static final String register_code = api_url+"login/sendcodeByregister";
     //发送验证码（提现）
     public static final String withDrawCode = api_url+"login/withDrawCode";
-    //发送验证码（注册）
+    //发送验证码（忘记密码）
     public static final String sendcodeByfoundpassword = api_url+"login/sendcodeByfoundpassword";
     //登录
     public static final String login = api_url+"login/login";

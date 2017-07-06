@@ -73,7 +73,6 @@ public class ScrollerNumberPicker extends View {
 	private static final int MOVE_NUMBER = 5;
 	/** 是否允许选空 */
 	private boolean noEmpty = false;
-	
 	/** 正在修改数据，避免ConcurrentModificationException异常 */
 	private boolean isClearing = false;
 

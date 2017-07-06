@@ -46,7 +46,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OPPOA57   3GB+32GB内存版   玫瑰金   全网通   4G   双卡双待"
                     android:textSize="12dp"
                     android:textColor="@color/black"/>
             </RelativeLayout>
@@ -61,14 +60,14 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2张橙联享票 + 3张绿联享票"
+                    android:text=""
                     android:textSize="12dp"
                     android:textColor="#ff0000"
                     android:id="@+id/zone_grid_lxp_tv" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="原价：2599"
+                    android:text=""
                     android:textColor="@color/theme_body_dark"
                     android:layout_alignBottom="@+id/zone_grid_lxp_tv"
                     android:layout_alignParentRight="true"
@@ -80,7 +79,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/relativeLayout2"
+                    android:layout_below="@+id/zone_grid_lxp_tv"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:id="@+id/relativeLayout4">
@@ -89,34 +88,41 @@
                         android:id="@+id/kucun_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="库存：8888件"
                         android:textColor="@color/Gainsboro"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp" />
+                    <TextView
+                        android:id="@+id/peisong_tv"
+                        android:textColor="@color/Gainsboro"
+                        android:layout_toRightOf="@+id/kucun_tv"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignLeft="@+id/zone_grid_lxp_tv"
-                    android:layout_alignStart="@+id/zone_grid_lxp_tv"
-                    android:id="@+id/relativeLayout2">
-                    <ImageView
-                        android:id="@+id/zone_lxp_first_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/myticket_exchange_arrow_red"/>
-                    <ImageView
-                        android:id="@+id/zone_lxp_second_iv"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/myticket_exchange_arrow_green"/>
-                </RelativeLayout>
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_alignLeft="@+id/zone_grid_lxp_tv"-->
+                    <!--android:layout_alignStart="@+id/zone_grid_lxp_tv"-->
+                    <!--android:id="@+id/relativeLayout2">-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/zone_lxp_first_iv"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:src="@mipmap/myticket_exchange_arrow_red"/>-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/zone_lxp_second_iv"-->
+                        <!--android:layout_marginLeft="15dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:src="@mipmap/myticket_exchange_arrow_green"/>-->
+                <!--</RelativeLayout>-->
 
                 <TextView
                     android:id="@+id/yiduihuan_tv"
@@ -126,7 +132,6 @@
                     android:layout_alignBottom="@+id/relativeLayout4"
                     android:layout_alignEnd="@+id/yuanjia_tv"
                     android:layout_alignRight="@+id/yuanjia_tv"
-                    android:text="已兑换：88件"
                     android:textColor="@color/Gainsboro" />
 
             </RelativeLayout>

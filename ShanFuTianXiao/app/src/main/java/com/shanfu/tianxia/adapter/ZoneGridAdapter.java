@@ -3,7 +3,10 @@ package com.shanfu.tianxia.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.util.SparseArrayCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -39,39 +42,95 @@ public class ZoneGridAdapter extends RecyclerView.Adapter<ZoneGridAdapter.ViewHo
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private Intent intent;
 
+
+    public static final int TYPE_HEADER = 0;
+    public static final int TYPE_NORMAL = 1;
+    private View mHeaderView;
+
+    public void setHeaderView(View headerView) {
+        mHeaderView = headerView;
+        notifyItemInserted(0);
+    }
+    public View getHeaderView() {
+        return mHeaderView;
+    }
+
     public ZoneGridAdapter(Context context){
         this.context = context;
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if(mHeaderView == null) return TYPE_NORMAL;
+        if(position == 0) return TYPE_HEADER;
+        return TYPE_NORMAL;
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("LOG","000");
+        if(mHeaderView != null && viewType == TYPE_HEADER) return new ViewHolder(mHeaderView);
         View view = LayoutInflater.from(context).inflate(R.layout.item_zone_grid,null,false);
-        Log.e("LOG","111");
+
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ZoneGridAdapter.ViewHolder holder, int position) {
-        holder.lxp_count.setText(listBeans.get(position).getRed()+"张联享票+100元");
-        holder.name.setText(listBeans.get(position).getName());
-        Log.e("LOG","aaaa");
-        holder.price.setText(listBeans.get(position).getPrice());
-        NetworkManager.getInstance().setImageUrl(holder.image,listBeans.get(position).getImage());
-        holder.itemView.setTag(position);
-        holder.item_home_gridlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(context, ZoneGoodsDetailsActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        if(getItemViewType(position) == TYPE_HEADER) return;
+
+            holder.lxp_count.setText(listBeans.get(position).getRed()+"张联享票+100元");
+            holder.name.setText(listBeans.get(position).getName());
+            Log.e("LOG","aaaa");
+            holder.price.setText(listBeans.get(position).getNow_price());
+            NetworkManager.getInstance().setImageUrl(holder.image,listBeans.get(position).getImage());
+            holder.itemView.setTag(position);
+            holder.item_home_gridlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intent = new Intent(context, ZoneGoodsDetailsActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if(manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return getItemViewType(position) == TYPE_HEADER
+                            ? gridManager.getSpanCount() : 1;
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+        if(lp != null
+                && lp instanceof StaggeredGridLayoutManager.LayoutParams
+                && holder.getLayoutPosition() == 0) {
+            StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+            p.setFullSpan(true);
+        }
+    }
+
+    public int getRealPosition(RecyclerView.ViewHolder holder) {
+        int position = holder.getLayoutPosition();
+        return mHeaderView == null ? position : position - 1;
     }
 
     @Override
     public int getItemCount() {
-        return listBeans.size();
+        return mHeaderView == null ? listBeans.size() : listBeans.size() + 1;
     }
 
     @Override
@@ -99,6 +158,7 @@ public class ZoneGridAdapter extends RecyclerView.Adapter<ZoneGridAdapter.ViewHo
         LinearLayout item_home_gridlayout;
         public ViewHolder(View itemView) {
             super(itemView);
+            if(itemView == mHeaderView) return;
             ButterKnife.bind(this,itemView);
         }
     }

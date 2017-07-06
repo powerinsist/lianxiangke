@@ -74,14 +74,14 @@ public class ZoneSelectActivity extends BaseFragmentActivity implements View.OnC
         mList.setGridLayout(2);
 
         list = new ArrayList<>();
-        String url = "http://pic1.sc.chinaz.com/files/pic/pic9/201312/apic2333.jpg";
-        for (int i  = 0;i < 5;i++){
-//            ZoneProductBean zoneProductBean = new ZoneProductBean();
-//            zoneProductBean.setShopname("苹果8 plus 64G 全网通"+i);
-//            zoneProductBean.setShopprice("6888");
-//            zoneProductBean.setShopimage(url);
-//            list.add(zoneProductBean);
-        }
+//        String url = "http://pic1.sc.chinaz.com/files/pic/pic9/201312/apic2333.jpg";
+//        for (int i  = 0;i < 5;i++){
+////            ZoneProductBean zoneProductBean = new ZoneProductBean();
+////            zoneProductBean.setShopname("苹果8 plus 64G 全网通"+i);
+////            zoneProductBean.setShopprice("6888");
+////            zoneProductBean.setShopimage(url);
+////            list.add(zoneProductBean);
+//        }
         mList.setOnPullLoadMoreListener(this);
 
         ZoneSelectDataAdapter adapter = new ZoneSelectDataAdapter(ZoneSelectActivity.this,list);

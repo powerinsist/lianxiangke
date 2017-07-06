@@ -27,9 +27,13 @@ import com.shanfu.tianxia.bean.GetLLInfoBean;
 import com.shanfu.tianxia.bean.LoginEvent;
 import com.shanfu.tianxia.bean.LogoutEvent;
 import com.shanfu.tianxia.bean.MineBean;
+import com.shanfu.tianxia.bean.RsultBean;
 import com.shanfu.tianxia.bean.SingleUserQueryBean;
 import com.shanfu.tianxia.listener.DialogCallback;
+import com.shanfu.tianxia.ui.CheckForTheDetailActivity;
 import com.shanfu.tianxia.ui.ConsumptionActivity;
+import com.shanfu.tianxia.ui.DropShipingActivity;
+import com.shanfu.tianxia.ui.ExchangeZoneActivity;
 import com.shanfu.tianxia.ui.KeFuJiaXinActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.MerchantsInActivity;
@@ -37,12 +41,14 @@ import com.shanfu.tianxia.ui.MyLianxpActivity;
 import com.shanfu.tianxia.ui.MyMerchantActivity;
 import com.shanfu.tianxia.ui.MyWalletActivity;
 import com.shanfu.tianxia.ui.MyWalletBalanceActivity;
+import com.shanfu.tianxia.ui.NiceZoneActivity;
 import com.shanfu.tianxia.ui.OnLineActivity;
 import com.shanfu.tianxia.ui.QueryIncomeActivity;
 import com.shanfu.tianxia.ui.RealNameFirstActivity;
 import com.shanfu.tianxia.ui.SecurityActivity;
 import com.shanfu.tianxia.ui.SelectRedPayPacketActivity;
 import com.shanfu.tianxia.ui.SettingActivity;
+import com.shanfu.tianxia.ui.ShippedActivity;
 import com.shanfu.tianxia.utils.AppUtils;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
@@ -102,7 +108,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     //兑换专区id
     @Bind(R.id.mine_duihuan)
     LinearLayout mine_duihuan;
-    //兑换明细id
+    /*//兑换明细id
     @Bind(R.id.mine_duihuanmingxi)
     RelativeLayout mine_duihuanmingxi;
     //查看全部id
@@ -113,7 +119,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout mine_waitcargo;
     //已发货id
     @Bind(R.id.mine_alredycargo)
-    RelativeLayout mine_alredycargo;
+    RelativeLayout mine_alredycargo;*/
     //我的积分id
 //    @Bind(R.id.mine_my_count)
 //    RelativeLayout mine_my_count;
@@ -144,6 +150,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     RelativeLayout my_con_rl;
     @Bind(R.id.con_my_con_goback_rl)
     RelativeLayout con_my_con_goback_rl;
+    //平台公告
+    @Bind(R.id.platform_announcement)
+    RelativeLayout platform_announcement_rl;
+    @Bind(R.id.help_center)
+    RelativeLayout help_center_rl;
 
     private View view;
 
@@ -164,9 +175,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         mine_wallet.setOnClickListener(this);
         mine_lianxiangpiao.setOnClickListener(this);
         mine_duihuan.setOnClickListener(this);
-        mine_selectduihuan.setOnClickListener(this);
-        mine_waitcargo.setOnClickListener(this);
-        mine_alredycargo.setOnClickListener(this);
+//        mine_selectduihuan.setOnClickListener(this);
+//        mine_waitcargo.setOnClickListener(this);
+//        mine_alredycargo.setOnClickListener(this);
 //        mine_my_count.setOnClickListener(this);
         mine_consumption.setOnClickListener(this);
 //        revenue_inquiry.setOnClickListener(this);
@@ -178,6 +189,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         my_walletbalance_rl.setOnClickListener(this);
         my_con_rl.setOnClickListener(this);
         con_my_con_goback_rl.setOnClickListener(this);
+        platform_announcement_rl.setOnClickListener(this);
+        help_center_rl.setOnClickListener(this);
     }
 
     @Override
@@ -186,10 +199,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         EventBus.getDefault().register(this);
     }
 
-    public void onDestroyBroadCast(){
-       // getActivity().unregisterReceiver(myBroadCastReciver);
-        //取消注册广播
-    }
     @Override
     public void onResume() {
         super.onResume();
@@ -281,7 +290,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             requestData1();
         }else {
             //没有登录 走到这了
-            //直接把账户育儿设置为0，或者不显示就行了
+            //直接把账户余额设置为0，或者不显示就行了
             //重新登录账号后也走到这了
             con_my_con_balance.setText("0.00");
             String user_id = SPUtils.getInstance().getString("user_id", "");
@@ -393,6 +402,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             //ID
             uid_tv.setText("ID:" + mineBean.getData().getUid());
             NineGridView.getImageLoader().onDisplayImage(getActivity(), profile_image, avater);
+
+            /**
+             * 设备唯一登陆
+             */
+            requestOnly();
+
         } else if ("103".equals(code)) {
             Log.e("MineFragment", "---8---requestInfo------>>>>>>>");
             intent = new Intent(getActivity(), LoginActivity.class);
@@ -404,6 +419,72 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             intent.putExtra("comefrom", "home");
             startActivity(intent);
         }
+    }
+
+    private void requestOnly() {
+        String time = DateUtils.getLinuxTime();
+        String token = MD5Utils.MD5(Constants.appKey + time);
+        String uid = SPUtils.getInstance().getString("uid", "");
+        String logintoken = SPUtils.getInstance().getString("logintoken", "");
+        Log.e("LOG",logintoken);
+
+        HttpParams params = new HttpParams();
+        params.put("time", time);
+        params.put("token", token);
+        params.put("uid", uid);
+        params.put("logintoken",logintoken);
+
+        OkGo.post(Urls.loginverification)
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<RsultBean>(getActivity()) {
+                    @Override
+                    public void onSuccess(RsultBean rsultBean, Call call, Response response) {
+                        decodeOnly(rsultBean);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        TUtils.showShort(getActivity(), "数据获取失败，请检查网络后重试");
+                    }
+                });
+    }
+
+    private void decodeOnly(RsultBean rsultBean) {
+        String err_code = rsultBean.getErr_code();
+        String err_msg = rsultBean.getErr_msg();
+        if (err_code.equals("100")){
+            Log.e("LOG","Mine-----------------");
+            showOnlyDialog();
+        }
+    }
+
+    private void showOnlyDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();//创建对象
+        View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_only_login_dialog,null);//自定义布局
+        TextView query_tv = (TextView) dialogView.findViewById(R.id.query_tv);
+        //把自定义的布局设置到dialog中，注意，布局设置一定要在show之前。从第二个参数分别填充内容与边框之间左、上、右、下、的像素
+        dialog.setView(dialogView,0,0,0,0);
+        //一定要先show出来再设置dialog的参数，不然就不会改变dialog的大小了
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        int width = getActivity().getWindowManager().getDefaultDisplay().getWidth();//得到当前显示设备的宽度，单位是像素
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();//得到这个dialog界面的参数对象
+//        params.width = width-(width/3);//设置dialog的界面宽度
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog的界面宽度
+        params.height =  ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog高度为包裹内容
+        params.gravity = Gravity.CENTER;//设置dialog的重心
+        dialog.getWindow().setAttributes(params);//最后把这个参数对象设置进去，即与dialog绑定
+        query_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mTabHost.setCurrentTab(0);
+                dialog.dismiss();
+                intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -444,29 +525,30 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //兑换专区
             case R.id.mine_duihuan:
-                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+//                TUtils.showShort(getActivity(), "即将开放，敬请期待");
 //                intent = new Intent(getActivity(), ExchangeZoneActivity.class);
-//                startActivity(intent);
+                intent = new Intent(getActivity(), NiceZoneActivity.class);
+                startActivity(intent);
                 break;
             //查看兑换明细
-            case R.id.mine_selectduihuan:
-                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+//            case R.id.mine_selectduihuan:
+////                TUtils.showShort(getActivity(), "即将开放，敬请期待");
 //                intent = new Intent(getActivity(), CheckForTheDetailActivity.class);
 //                startActivity(intent);
-                break;
+//                break;
             //待发货
-            case R.id.mine_waitcargo:
-                TUtils.showShort(getActivity(), "即将开放，敬请期待");
-//                intent = new Intent(getActivity(), TraceActivity.class);
+//            case R.id.mine_waitcargo:
+////                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+////                intent = new Intent(getActivity(), TraceActivity.class);
 //                intent = new Intent(getActivity(), DropShipingActivity.class);
 //                startActivity(intent);
-                break;
+//                break;
             //已发货
-            case R.id.mine_alredycargo:
-                TUtils.showShort(getActivity(), "即将开放，敬请期待");
+//            case R.id.mine_alredycargo:
+////                TUtils.showShort(getActivity(), "即将开放，敬请期待");
 //                intent = new Intent(getActivity(), ShippedActivity.class);
 //                startActivity(intent);
-                break;
+//                break;
             // 账户零钱
 //            case R.id.mine_my_count:
 //                String user_id2 = SPUtils.getInstance().getString("user_id", "");
@@ -517,6 +599,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 TUtils.showShort(getActivity(), "即将开放，敬请期待");
 //                startActivity(new Intent(getActivity(), JXInitActivity.class));
                 break;
+            //我的余额
             case R.id.my_walletbalance_rl:
                 String user_id7 = SPUtils.getInstance().getString("user_id", "");
 
@@ -527,6 +610,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     showDialog();
                 }
                 break;
+            //市场总收入
             case R.id.my_con_rl:
                 String user_id3 = SPUtils.getInstance().getString("user_id", "");
 
@@ -537,6 +621,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     showDialog();
                 }
                 break;
+            //累计奖励
             case R.id.con_my_con_goback_rl:
                 String user_id2 = SPUtils.getInstance().getString("user_id", "");
                 if (user_id2 != ""){
@@ -546,10 +631,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     showDialog();
                 }
                 break;
+            case R.id.help_center:
+                break;
+            case R.id.platform_announcement:
+                break;
         }
     }
 
-    private void requestData1() {
+    private void  requestData1() {
         Log.e("MineFragment", "--xxx1----requestInfo------>>>>>>>");
         try {
             String time = DateUtils.getLinuxTime();

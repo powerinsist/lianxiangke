@@ -298,9 +298,9 @@ public class SettingActivity extends BaseFragmentActivity implements View.OnClic
 
             //我的收货地址
             case R.id.myshop_adress_rl:
-                TUtils.showShort(SettingActivity.this,"暂未开放，敬请期待");
-                /*intent = new Intent(SettingActivity.this,MyShopAdressActivity.class);
-                startActivity(intent);*/
+//                TUtils.showShort(SettingActivity.this,"暂未开放，敬请期待");
+                intent = new Intent(SettingActivity.this,MyShopAdressActivity.class);
+                startActivity(intent);
                 break;
             case R.id.my_qrcode_rl:
                 intent = new Intent(SettingActivity.this,MyQrCodeActivity.class);

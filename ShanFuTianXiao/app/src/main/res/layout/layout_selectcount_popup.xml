@@ -89,11 +89,10 @@
                 android:textSize="18dp"
                 android:background="@mipmap/myticket_exchange_amount_btn"/>
         </LinearLayout>
-        <ImageView
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/shop_pic_iv"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@mipmap/pci_zone_shop"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

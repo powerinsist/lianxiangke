@@ -74,10 +74,6 @@ public class ZoneSelectDataAdapter extends RecyclerView.Adapter<ZoneSelectDataAd
         TextView zone_grid_lxp_tv;
         @Bind(R.id.zone_shop_price_tv)
         TextView zone_shop_price_tv;
-        @Bind(R.id.zone_lxp_first_iv)
-        ImageView zone_lxp_first_iv;
-        @Bind(R.id.zone_lxp_second_iv)
-        ImageView zone_lxp_second_iv;
         @Bind(R.id.item_home_gridlayout)
         LinearLayout item_home_gridlayout;
 

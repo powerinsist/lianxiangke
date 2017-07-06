@@ -16,8 +16,10 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.network.NetworkManager;
 import com.shanfu.tianxia.utils.PwdEditText;
 
 import butterknife.Bind;
@@ -36,7 +38,7 @@ public class ZoneFrimOrderActivity extends BaseFragmentActivity implements View.
     @Bind(R.id.shopaddress_tv)
     TextView shopaddress_tv;
     @Bind(R.id.shop_pic_im)
-    ImageView shop_pic_im;
+    NetworkImageView shop_pic_im;
     @Bind(R.id.shop_name_tv)
     TextView shop_name_tv;
     @Bind(R.id.lxp_tv)
@@ -54,12 +56,27 @@ public class ZoneFrimOrderActivity extends BaseFragmentActivity implements View.
     private ImageView change_pay_iv;
     private TextView chang_pay_tv;
     private Intent intent;
+    private String name;
+    private String red;
+    private String now_price;
+    private String shipping;
+    private String shipping_price;
+    private String count;
+    private String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zone_frim_order);
         ButterKnife.bind(this);
+
+        name = getIntent().getStringExtra("name");
+        red = getIntent().getStringExtra("red");
+        now_price = getIntent().getStringExtra("now_price");
+        shipping = getIntent().getStringExtra("shipping");
+        shipping_price = getIntent().getStringExtra("shipping_price");
+        count = getIntent().getStringExtra("count");
+        image = getIntent().getStringExtra("image");
         initView();
     }
 
@@ -68,8 +85,20 @@ public class ZoneFrimOrderActivity extends BaseFragmentActivity implements View.
         content_head_back = (RelativeLayout) setting_top.findViewById(R.id.content_head_back);
         content_head_title = (TextView) setting_top.findViewById(R.id.content_head_title);
         content_head_title.setText("确认订单");
-        content_head_back.setOnClickListener(this);
 
+        NetworkManager.getInstance().setImageUrl(shop_pic_im,image);
+        shop_name_tv.setText(name);
+        lxp_tv.setText(red+"张联享票+"+now_price+"元");
+        shop_count_tv.setText("X"+count);
+        if (shipping.equals("1")){
+            kuaidi_fangshi_tv.setText("快递：免费");
+        }else {
+            kuaidi_fangshi_tv.setText("运费："+shipping_price+"元");
+        }
+        gongji_count_tv.setText("共"+count+"件商品");
+        xufu_lxp_tv.setText(red+"张联享票+"+now_price+"元");
+
+        content_head_back.setOnClickListener(this);
         query_duihuan_tv.setOnClickListener(this);
     }
     @Override

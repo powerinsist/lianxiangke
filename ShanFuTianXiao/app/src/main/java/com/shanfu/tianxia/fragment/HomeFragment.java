@@ -1,6 +1,7 @@
 package com.shanfu.tianxia.fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,6 +36,7 @@ import com.shanfu.tianxia.bean.HotShopBean;
 import com.shanfu.tianxia.bean.LoginEvent;
 import com.shanfu.tianxia.bean.LogoutEvent;
 import com.shanfu.tianxia.bean.MiddleAdvertisementBean;
+import com.shanfu.tianxia.bean.RsultBean;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.model.HomeFloorData;
 import com.shanfu.tianxia.model.ProductData;
@@ -161,13 +165,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onLogoutEvent(LoginEvent event) {
+    public void onLogintEvent(LoginEvent event) {
 //        refreshData();
 //        lx = SPUtils.getInstance().getString("lx","0.0");
 //        ly = SPUtils.getInstance().getString("ly","0.0");
 //        requestDataBanner();
 //        requestDataMiddlead();
 //        requestHotShop(get_city,lx,ly);
+
     }
 
 
@@ -188,6 +193,73 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         super.onResume();
 //        refreshData();
         uid = SPUtils.getInstance().getString("uid", "");
+        requestOnly();
+    }
+
+
+    private void requestOnly() {
+        String time = DateUtils.getLinuxTime();
+        String token = MD5Utils.MD5(Constants.appKey + time);
+        String uid = SPUtils.getInstance().getString("uid", "");
+        String logintoken = SPUtils.getInstance().getString("logintoken", "");
+
+        HttpParams params = new HttpParams();
+        params.put("time", time);
+        params.put("token", token);
+        params.put("uid", uid);
+        params.put("logintoken",logintoken);
+
+        OkGo.post(Urls.loginverification)
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<RsultBean>(getActivity()) {
+                    @Override
+                    public void onSuccess(RsultBean rsultBean, Call call, Response response) {
+                        decodeOnly(rsultBean);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        TUtils.showShort(getActivity(), "数据获取失败，请检查网络后重试");
+                    }
+                });
+    }
+
+    private void decodeOnly(RsultBean rsultBean) {
+        String err_code = rsultBean.getErr_code();
+        String err_msg = rsultBean.getErr_msg();
+        if (err_code.equals("100")){
+            Log.e("LOG","------home--------------");
+            showOnlyDialog();
+        }
+    }
+
+    private void showOnlyDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();//创建对象
+        View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_only_login_dialog,null);//自定义布局
+        TextView query_tv = (TextView) dialogView.findViewById(R.id.query_tv);
+        //把自定义的布局设置到dialog中，注意，布局设置一定要在show之前。从第二个参数分别填充内容与边框之间左、上、右、下、的像素
+        dialog.setView(dialogView,0,0,0,0);
+        //一定要先show出来再设置dialog的参数，不然就不会改变dialog的大小了
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        int width = getActivity().getWindowManager().getDefaultDisplay().getWidth();//得到当前显示设备的宽度，单位是像素
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();//得到这个dialog界面的参数对象
+//        params.width = width-(width/3);//设置dialog的界面宽度
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog的界面宽度
+        params.height =  ViewGroup.LayoutParams.WRAP_CONTENT;//设置dialog高度为包裹内容
+        params.gravity = Gravity.CENTER;//设置dialog的重心
+        dialog.getWindow().setAttributes(params);//最后把这个参数对象设置进去，即与dialog绑定
+        query_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mTabHost.setCurrentTab(0);
+                dialog.dismiss();
+                intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**

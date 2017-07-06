@@ -45,7 +45,7 @@
             android:id="@+id/pay_money_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="88.00"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="30dp"
             android:gravity="center"

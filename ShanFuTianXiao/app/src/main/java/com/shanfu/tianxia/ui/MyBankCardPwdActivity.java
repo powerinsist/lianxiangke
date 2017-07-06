@@ -76,6 +76,8 @@ public class MyBankCardPwdActivity extends BaseFragmentActivity implements View.
                     params.put("user_id", user_id);
 
                     params.put("userpwd",pwd_put);
+                    Log.e("LOG",pwd_put);
+                    Log.e("LOG",user_id);
 
                     OkGo.post(Urls.verify_password)
                             .tag(this)

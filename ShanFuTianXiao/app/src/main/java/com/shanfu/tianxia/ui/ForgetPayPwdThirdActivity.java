@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -107,6 +108,7 @@ public class ForgetPayPwdThirdActivity extends BaseFragmentActivity implements V
 
             params.put("tokens",tokens);
             params.put("pwd_pay_new",new_pwd);
+            Log.e("LOG",new_pwd);
 
             OkGo.post(Urls.paypwdset)
                     .tag(this)
@@ -135,7 +137,7 @@ public class ForgetPayPwdThirdActivity extends BaseFragmentActivity implements V
         String ret_msg = payPwdSetBean.getData().getData().getRet_msg();
 
         if("200".equals(err_code)&&"0000".equals(ret_code)){
-            SPUtils.getInstance().putString("pwd_pay",new_pwd);
+//            SPUtils.getInstance().putString("pwd_pay",new_pwd);
             Intent intent = new Intent(ForgetPayPwdThirdActivity.this,MyWalletActivity.class);
             startActivity(intent);
         }else{

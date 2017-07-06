@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
+import com.shanfu.tianxia.MainActivity;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
@@ -230,8 +231,10 @@ public class SettingRealInfoActivity extends BaseFragmentActivity implements Vie
         String msg = getLLInfoBean.getErr_msg();
 
         if(!"200".equals(code)){
-            TUtils.showShort(this,msg);
-
+            TUtils.showShort(this,"您还没有实名认证！");
+            Intent intent = new Intent(SettingRealInfoActivity.this, MainActivity.class);
+            intent.putExtra("comefrom","mine");
+            startActivity(intent);
         }else {
             user_id = getLLInfoBean.getData().getData().getUser_id();
             String name_user = getLLInfoBean.getData().getData().getName_user();

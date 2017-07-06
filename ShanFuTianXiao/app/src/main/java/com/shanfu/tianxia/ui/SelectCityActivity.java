@@ -100,6 +100,7 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
         mRecyclerView = mList.getRecyclerView();
         //代码设置scrollbar无效？未解决！
         mRecyclerView.setVerticalScrollBarEnabled(true);
+
         //设置下拉刷新是否可见
         //mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置是否可以下拉刷新

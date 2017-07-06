@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -21,6 +22,8 @@ import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
 import com.shanfu.tianxia.bean.RsultBean;
+import com.shanfu.tianxia.city.CityPicker;
+import com.shanfu.tianxia.city.CitycodeUtil;
 import com.shanfu.tianxia.city.ScrollerNumberPicker;
 import com.shanfu.tianxia.listener.DialogCallback;
 import com.shanfu.tianxia.utils.DateUtils;
@@ -29,12 +32,15 @@ import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
 public class AddAdressActivity extends BaseFragmentActivity implements View.OnClickListener {
+    private static final String TAG = "LOG";
     @Bind(R.id.shouhuoren_ed)
     EditText shouhuoren_ed;
     @Bind(R.id.phone_ed)
@@ -134,6 +140,14 @@ public class AddAdressActivity extends BaseFragmentActivity implements View.OnCl
                 addressdialog_linearlayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        /*CitycodeUtil citycodeUtil = CitycodeUtil.getSingleton();
+                        CityPicker picker = new CityPicker(AddAdressActivity.this);
+                        ArrayList<String> city_list_code = citycodeUtil.getCity_list_code();
+                        Log.i(TAG, "onClick: "+city_list_code);
+                        ArrayList<String> province_list_code = citycodeUtil.getProvince_list_code();
+                        Log.i(TAG, "onClick: "+province_list_code);
+                        ArrayList<String> couny_list_code = citycodeUtil.getCouny_list_code();
+                        Log.i(TAG, "onClick: "+couny_list_code);*/
                         address_tv.setText(provincePicker.getSelectedText()+cityPicker.getSelectedText()+counyPicker.getSelectedText());
                         dialog.dismiss();
                     }

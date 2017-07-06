@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="联享客兑换专区"
+                android:text="联享客优品直购专区"
                 android:textSize="16dp"
                 android:textColor="@color/black"
                 android:paddingLeft="10dp"
@@ -101,22 +101,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/common_fenge">
-                <ImageView
+                <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/shop_pic_im"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@mipmap/pci_zone_shop"
                     android:padding="10dp"
                     android:layout_marginLeft="5dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/shop_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="OPPOA57 3GB+32GB内存版 玫瑰金 全网通 4G 双卡双待"
                         android:textColor="@color/black"
                         android:layout_marginRight="17dp"
                         android:layout_marginTop="15dp"/>
@@ -129,13 +129,11 @@
                             android:id="@+id/lxp_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2张红联想票+3张绿色联想票"
                             android:textColor="#FD5353"/>
                         <TextView
                             android:id="@+id/shop_count_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="x1"
                             android:layout_marginLeft="52dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -158,7 +156,6 @@
                     android:id="@+id/kuaidi_fangshi_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="快递免费"
                     android:textColor="@color/black"
                     android:layout_alignBaseline="@+id/textView4"
                     android:layout_alignBottom="@+id/textView4"
@@ -175,7 +172,6 @@
                 android:id="@+id/gongji_count_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="共1件商品"
                 android:textColor="@color/black"
                 android:gravity="right"
                 android:layout_marginRight="22dp"
@@ -208,7 +204,6 @@
                     android:id="@+id/xufu_lxp_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2张红联想票+3张绿联想票"
                     android:textSize="14dp"
                     android:textColor="@color/Gainsboro" />
             </LinearLayout>

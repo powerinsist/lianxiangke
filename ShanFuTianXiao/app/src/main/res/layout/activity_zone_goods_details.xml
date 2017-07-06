@@ -32,10 +32,11 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/content_head_title"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="数码手机"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="@color/white"
             android:layout_alignBaseline="@+id/content_head_right"
             android:layout_alignBottom="@+id/content_head_right"

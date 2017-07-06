@@ -89,12 +89,7 @@ public class ForgetPayPwdNextActivity extends BaseFragmentActivity implements Vi
                 break;
 
             case R.id.code_send:
-
-                TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,code_send_tv,code_send);
-                timeCountUtil.start();
-
                 requestData();
-
                 break;
 
             case R.id.froget_pay_pwd_complete:
@@ -188,6 +183,7 @@ public class ForgetPayPwdNextActivity extends BaseFragmentActivity implements Vi
                             decodeData(bankPayPwdSetBean);
                             OkGo.getInstance().debug("OkHttpUtils");
 
+
                         }
 
                         @Override
@@ -209,7 +205,8 @@ public class ForgetPayPwdNextActivity extends BaseFragmentActivity implements Vi
 
         if("200".equals(err_code)&&"0000".equals(ret_code)){
             tokens = bankPayPwdSetBean.getData().getData().getToken();
-
+            TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,code_send_tv,code_send);
+            timeCountUtil.start();
         }else{
             TUtils.showShort(ForgetPayPwdNextActivity.this,ret_msg);
         }
