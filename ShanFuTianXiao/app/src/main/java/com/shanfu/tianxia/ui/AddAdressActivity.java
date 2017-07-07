@@ -140,14 +140,7 @@ public class AddAdressActivity extends BaseFragmentActivity implements View.OnCl
                 addressdialog_linearlayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /*CitycodeUtil citycodeUtil = CitycodeUtil.getSingleton();
-                        CityPicker picker = new CityPicker(AddAdressActivity.this);
-                        ArrayList<String> city_list_code = citycodeUtil.getCity_list_code();
-                        Log.i(TAG, "onClick: "+city_list_code);
-                        ArrayList<String> province_list_code = citycodeUtil.getProvince_list_code();
-                        Log.i(TAG, "onClick: "+province_list_code);
-                        ArrayList<String> couny_list_code = citycodeUtil.getCouny_list_code();
-                        Log.i(TAG, "onClick: "+couny_list_code);*/
+
                         address_tv.setText(provincePicker.getSelectedText()+cityPicker.getSelectedText()+counyPicker.getSelectedText());
                         dialog.dismiss();
                     }

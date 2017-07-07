@@ -11,6 +11,10 @@ public class Urls {
     static final String shop_url = "https://api.lianxiangke.cn/Shop/";
 
 //    https://api.lianxiangke.cn/Shop/Shopclass/getexchangeimage
+    //帮助中心  https://api.lianxiangke.cn/Shop/Helps/helplist
+    public static final String helplist = shop_url+"Helps/helplist";
+    //平台公告  https://api.lianxiangke.cn/Shop/Helps/noticelist
+    public static final String noticelist = shop_url+"Helps/noticelist";
     /**
      * 兑换专区
      */

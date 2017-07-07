@@ -38,6 +38,7 @@ import okhttp3.Response;
 
 public class ShouZhiDetailActivity extends BaseFragmentActivity implements View.OnClickListener {
 
+    private static final String TAG = "LOG";
     private RelativeLayout setting_top;
     private RelativeLayout content_head_back;
     private TextView content_head_title;
@@ -64,14 +65,13 @@ public class ShouZhiDetailActivity extends BaseFragmentActivity implements View.
         ButterKnife.bind(this);
 
         initView();
+        requestData();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        requestData();
-
     }
 
 
@@ -114,7 +114,6 @@ public class ShouZhiDetailActivity extends BaseFragmentActivity implements View.
         String err_code = userPayMentBean.getErr_code();
         String err_msg = userPayMentBean.getErr_msg();
         if ("200".equals(err_code)){
-
             page = userPayMentBean.getData().getPage();
             Log.e("TAG","------------"+page);
 //            list = userPayMentBean.getData().getList();
@@ -186,14 +185,21 @@ public class ShouZhiDetailActivity extends BaseFragmentActivity implements View.
      * @param view
      */
     public void loadMore(View view) {
+        Log.i(TAG, "loadMore: ------11111------>");
         load_more_tv.setText("正在加载...");   //设置按钮文字loading
+        Log.i(TAG, "loadMore: -------2222------------->");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Log.i(TAG, "run: ----33333---------->");
                 ++a;
+                Log.i(TAG, "run: ----44444---------->");
                 if (a <= page){
+                    Log.i(TAG, "run: ----55555---------->");
                     requestData();
+                    Log.i(TAG, "run: ----66666---------->");
                     adapter.notifyDataSetChanged(); //数据集变化后,通知adapter
+                    Log.i(TAG, "run: ----77777---------->");
                 }else {
                     TUtils.showShort(ShouZhiDetailActivity.this,"没有更多数据了哦...");
                 }

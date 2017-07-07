@@ -34,6 +34,7 @@ import com.shanfu.tianxia.ui.CheckForTheDetailActivity;
 import com.shanfu.tianxia.ui.ConsumptionActivity;
 import com.shanfu.tianxia.ui.DropShipingActivity;
 import com.shanfu.tianxia.ui.ExchangeZoneActivity;
+import com.shanfu.tianxia.ui.HelpCenterActivity;
 import com.shanfu.tianxia.ui.KeFuJiaXinActivity;
 import com.shanfu.tianxia.ui.LoginActivity;
 import com.shanfu.tianxia.ui.MerchantsInActivity;
@@ -43,6 +44,7 @@ import com.shanfu.tianxia.ui.MyWalletActivity;
 import com.shanfu.tianxia.ui.MyWalletBalanceActivity;
 import com.shanfu.tianxia.ui.NiceZoneActivity;
 import com.shanfu.tianxia.ui.OnLineActivity;
+import com.shanfu.tianxia.ui.PlatformAnnouncementActivity;
 import com.shanfu.tianxia.ui.QueryIncomeActivity;
 import com.shanfu.tianxia.ui.RealNameFirstActivity;
 import com.shanfu.tianxia.ui.SecurityActivity;
@@ -631,9 +633,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     showDialog();
                 }
                 break;
+            //帮助中心
             case R.id.help_center:
+                intent = new Intent(getActivity(), HelpCenterActivity.class);
+                startActivity(intent);
                 break;
+            //平台公告
             case R.id.platform_announcement:
+                intent = new Intent(getActivity(),PlatformAnnouncementActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -243,7 +243,11 @@
         <activity android:name=".ui.KeFuJiaXinActivity" />
         <activity android:name=".ui.LxkDetailsActivity" />
         <activity android:name=".ui.LxkAllowActivity" />
-        <activity android:name=".ui.NiceZoneActivity"></activity>
+        <activity android:name=".ui.NiceZoneActivity" />
+        <activity android:name=".ui.HelpCenterActivity" />
+        <activity android:name=".ui.HelpCenterWebActivity" />
+        <activity android:name=".ui.PlatformAnnouncementActivity" />
+        <activity android:name=".ui.PlatformWebActivity"></activity>
     </application>
 
 </manifest>

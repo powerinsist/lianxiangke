@@ -38,7 +38,7 @@ public class ShouZhiDetailAdapter extends BaseAdapter{
     }
     @Override
     public int getCount() {
-        Log.e("LOG","1111"+list.size());
+
         return list.size();
     }
 

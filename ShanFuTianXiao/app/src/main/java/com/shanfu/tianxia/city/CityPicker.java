@@ -42,13 +42,19 @@ public class CityPicker extends LinearLayout {
 	private int temCityIndex = -1;
 	private int tempCounyIndex = -1;
 	private Context context;
+	/** area0 */
 	private List<Cityinfo> province_list = new ArrayList<Cityinfo>();
+	/** area1 */
 	private HashMap<String, List<Cityinfo>> city_map = new HashMap<String, List<Cityinfo>>();
+	/** area2 */
 	private HashMap<String, List<Cityinfo>> couny_map = new HashMap<String, List<Cityinfo>>();
 
 	private CitycodeUtil citycodeUtil;
 	private String city_code_string;
 	private String city_string;
+
+	private static final String TAG = "LOG";
+
 
 	public CityPicker(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -76,10 +82,12 @@ public class CityPicker extends LinearLayout {
 	}
 
 	public static class JSONParser {
+		/* area0的id值 */
 		public ArrayList<String> province_list_code = new ArrayList<String>();
 		public ArrayList<String> city_list_code = new ArrayList<String>();
 
 		public List<Cityinfo> getJSONParserResult(String JSONString, String key) {
+			/* area0的id和name */
 			List<Cityinfo> list = new ArrayList<Cityinfo>();
 			JsonObject result = new JsonParser().parse(JSONString)
 					.getAsJsonObject().getAsJsonObject(key);
@@ -96,7 +104,9 @@ public class CityPicker extends LinearLayout {
 				province_list_code.add(entry.getKey());
 
 				list.add(cityinfo);
+
 			}
+
 			System.out.println(province_list_code.size());
 			return list;
 		}
@@ -127,6 +137,8 @@ public class CityPicker extends LinearLayout {
 				}
 				hashMap.put(entry.getKey(), list);
 			}
+			String s = city_list_code.toString();
+			Log.i(TAG, "getJSONParserResult: "+s);
 			return hashMap;
 		}
 	}
@@ -138,21 +150,31 @@ public class CityPicker extends LinearLayout {
 		citycodeUtil = CitycodeUtil.getSingleton();
 		// 获取控件引用
 		provincePicker = (ScrollerNumberPicker) findViewById(R.id.province);
-
 		cityPicker = (ScrollerNumberPicker) findViewById(R.id.city);
 		counyPicker = (ScrollerNumberPicker) findViewById(R.id.couny);
-		provincePicker.setData(citycodeUtil.getProvince(province_list));
+
+		/*provincePicker.setData(citycodeUtil.getProvince(province_list));
+		provincePicker.setDefault(1);*/
+		/** area0的id值*/
+		provincePicker.setData(citycodeUtil.getProvinceId(province_list));
 		provincePicker.setDefault(1);
 
-//		provincePicker.setData(citycodeUtil.getProvinceId(province_list));
-//		provincePicker.setDefault(1);
-
-		cityPicker.setData(citycodeUtil.getCity(city_map, citycodeUtil
+		/*cityPicker.setData(citycodeUtil.getCity(city_map, citycodeUtil
+				.getProvince_list_code().get(1)));
+		cityPicker.setDefault(1);*/
+		/**area1的id值*/
+		cityPicker.setData(citycodeUtil.getCityId(city_map, citycodeUtil
 				.getProvince_list_code().get(1)));
 		cityPicker.setDefault(1);
-		counyPicker.setData(citycodeUtil.getCouny(couny_map, citycodeUtil
+
+		/*counyPicker.setData(citycodeUtil.getCouny(couny_map, citycodeUtil
+				.getCity_list_code().get(1)));
+		counyPicker.setDefault(1);*/
+		/**area2的id值*/
+		counyPicker.setData(citycodeUtil.getCounyId(couny_map, citycodeUtil
 				.getCity_list_code().get(1)));
 		counyPicker.setDefault(1);
+
 		provincePicker.setOnSelectListener(new ScrollerNumberPicker.OnSelectListener() {
 
 			@Override
@@ -170,10 +192,10 @@ public class CityPicker extends LinearLayout {
 					if (selectMonth == null || selectMonth.equals(""))
 						return;
 					// 城市数组
-					cityPicker.setData(citycodeUtil.getCity(city_map,
+					cityPicker.setData(citycodeUtil.getCityId(city_map,
 							citycodeUtil.getProvince_list_code().get(id)));
 					cityPicker.setDefault(1);
-					counyPicker.setData(citycodeUtil.getCouny(couny_map,
+					counyPicker.setData(citycodeUtil.getCounyId(couny_map,
 							citycodeUtil.getCity_list_code().get(1)));
 					counyPicker.setDefault(1);
 					int lastDay = Integer.valueOf(provincePicker.getListSize());
@@ -206,7 +228,7 @@ public class CityPicker extends LinearLayout {
 					String selectMonth = counyPicker.getSelectedText();
 					if (selectMonth == null || selectMonth.equals(""))
 						return;
-					counyPicker.setData(citycodeUtil.getCouny(couny_map,
+					counyPicker.setData(citycodeUtil.getCounyId(couny_map,
 							citycodeUtil.getCity_list_code().get(id)));
 					counyPicker.setDefault(1);
 					int lastDay = Integer.valueOf(cityPicker.getListSize());
