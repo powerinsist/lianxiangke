@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.shanfu.tianxia.R;
 import com.shanfu.tianxia.bean.ZoneProductBean;
+import com.shanfu.tianxia.bean.ZoneSelectBean;
 import com.shanfu.tianxia.network.NetworkManager;
+import com.shanfu.tianxia.ui.ZoneGoodsDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +32,13 @@ import butterknife.ButterKnife;
 
 public class ZoneSelectDataAdapter extends RecyclerView.Adapter<ZoneSelectDataAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
-    private Intent intent;
-    private String grade;
 
     private SelectCityDataAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    private List<ZoneProductBean> list;
+    private List<ZoneSelectBean.DataBean.ListBean> list;
+    public static int totalnumber;
 
-    public ZoneSelectDataAdapter(Context context,List<ZoneProductBean> list){
+    public ZoneSelectDataAdapter(Context context,List<ZoneSelectBean.DataBean.ListBean> list){
         this.context = context;
         this.list = list;
     }
@@ -56,8 +57,33 @@ public class ZoneSelectDataAdapter extends RecyclerView.Adapter<ZoneSelectDataAd
 //        holder.zone_grid_shop_tv.setText(list.get(position).getShopname());
 //        holder.zone_grid_lxp_tv.setText(list.get(position).getLxpchange());
 //        holder.zone_shop_price_tv.setText(list.get(position).getShopprice());
-        Log.i("LOG", "onBindViewHolder: + 1111 ");
+        NetworkManager.getInstance().setImageUrl(holder.zone_grid_shop_iv,list.get(position).getImage());
+        holder.zone_grid_shop_tv.setText(list.get(position).getName());
+        holder.zone_grid_lxp_tv.setText(list.get(position).getRed()+"张联享票");
+        holder.zone_shop_price_tv.setText(list.get(position).getNow_price());
+        holder.exchange_count_tv.setText(list.get(position).getSold());
+        String shipping = list.get(position).getShipping();
+        totalnumber = list.get(position).getTotalnumber();
+        final String goods_id = list.get(position).getGoods_id();
+        final String shop_name = list.get(position).getName();
+        final String shop_id = list.get(position).getShop_id();
+
+
+        holder.item_home_gridlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ZoneGoodsDetailsActivity.class);
+                intent.putExtra("goods_id",goods_id);
+                Log.e("LOG","---------->"+goods_id);
+                intent.putExtra("shop_id",shop_id);
+                Log.e("LOG","---------->"+shop_id);
+                intent.putExtra("shop_name",shop_name);
+                Log.e("LOG","---------->"+shop_name);
+                context.startActivity(intent);
+            }
+        });
         holder.itemView.setTag(position);
+
     }
 
     @Override
@@ -76,6 +102,8 @@ public class ZoneSelectDataAdapter extends RecyclerView.Adapter<ZoneSelectDataAd
         TextView zone_shop_price_tv;
         @Bind(R.id.item_home_gridlayout)
         LinearLayout item_home_gridlayout;
+        @Bind(R.id.exchange_count_tv)
+        TextView exchange_count_tv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,7 +111,7 @@ public class ZoneSelectDataAdapter extends RecyclerView.Adapter<ZoneSelectDataAd
         }
     }
 
-    public void addAllData(List<ZoneProductBean> list){
+    public void addAllData(List<ZoneSelectBean.DataBean.ListBean> list){
         this.list.addAll(list);
         notifyDataSetChanged();
     }

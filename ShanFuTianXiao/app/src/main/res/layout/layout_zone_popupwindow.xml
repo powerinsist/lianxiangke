@@ -27,21 +27,20 @@
                 android:text="选择支付方式"
                 android:textColor="@color/black"/>
         </RelativeLayout>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingRight="20dp">
                 <RelativeLayout
                     android:id="@+id/wallet_pay_rl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="18dp"
-                    android:paddingBottom="18dp"
-                    android:paddingRight="200dp">
+                    android:paddingBottom="18dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -49,6 +48,7 @@
                         android:paddingLeft="26dp"
                         android:id="@+id/imageView4" />
                     <TextView
+                        android:id="@+id/wallet_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="余额支付"
@@ -59,17 +59,13 @@
                         android:layout_marginLeft="11dp"
                         android:layout_marginStart="11dp" />
                 </RelativeLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/common_fenge"/>
+
                 <RelativeLayout
                     android:id="@+id/wechart_pay_rl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="18dp"
-                    android:paddingBottom="18dp"
-                    android:paddingRight="200dp">
+                    android:paddingBottom="18dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,20 +73,27 @@
                         android:paddingLeft="28dp"
                         android:id="@+id/imageView5" />
                     <TextView
+                        android:id="@+id/bank_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="微信支付"
+                        android:text="中国工商银行"
                         android:textColor="@color/black"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView5"
                         android:layout_toEndOf="@+id/imageView5"
                         android:layout_marginLeft="13dp"
                         android:layout_marginStart="13dp" />
-                    </RelativeLayout>
+                </RelativeLayout>
+
             </LinearLayout>
+
             <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp">
                 <RadioButton
                     android:id="@+id/rbt_wallet"
                     android:layout_width="25dp"
@@ -106,7 +109,7 @@
                     android:background="@color/common_fenge"
                     android:layout_marginTop="19dp"/>
                 <RadioButton
-                    android:id="@+id/rbt_wechart"
+                    android:id="@+id/rbt_bank"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginTop="15dp"
@@ -114,52 +117,12 @@
                     android:background="@drawable/query_dingdan_zone"
                     android:button="@null"
                     android:checked="false"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/common_fenge"/>
             </RadioGroup>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/common_fenge"/>
-        <RelativeLayout
-            android:id="@+id/select_bank_rl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="18dp"
-            android:paddingBottom="18dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingRight="110dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/myticket_exchange_payway_add"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="4dp"
-                    android:id="@+id/imageView6" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="添加银行卡付款"
-                    android:textColor="@color/Gainsboro"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imageView6"
-                    android:layout_toEndOf="@+id/imageView6"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/myticket_exchange_payway_next"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="45dp"
-                    android:layout_marginEnd="45dp" />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"

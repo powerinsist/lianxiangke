@@ -53,6 +53,8 @@ public class AddAdressActivity extends BaseFragmentActivity implements View.OnCl
     Switch moren_switch;
     @Bind(R.id.address_tv)
     TextView address_tv;
+    /*@Bind(R.id.id_text)
+    TextView id_text;*/
 
     private RelativeLayout setting_top;
     private RelativeLayout content_head_back;
@@ -136,12 +138,22 @@ public class AddAdressActivity extends BaseFragmentActivity implements View.OnCl
                 final ScrollerNumberPicker cityPicker = (ScrollerNumberPicker)view.findViewById(R.id.city);
                 final ScrollerNumberPicker counyPicker = (ScrollerNumberPicker)view.findViewById(R.id.couny);
                 final AlertDialog dialog = builder.show();
-
+                final ArrayList<String> province_list_code = CitycodeUtil.getSingleton().getProvince_list_code();
+                final ArrayList<String> city_list_code = CitycodeUtil.getSingleton().getCity_list_code();
+                final ArrayList<String> couny_list_code = CitycodeUtil.getSingleton().getCouny_list_code();
                 addressdialog_linearlayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         address_tv.setText(provincePicker.getSelectedText()+cityPicker.getSelectedText()+counyPicker.getSelectedText());
+                        String provinceId = province_list_code.get(provincePicker.getSelected());
+                        String city_Id = city_list_code.get(cityPicker.getSelected());
+                        String couny_Id = couny_list_code.get(counyPicker.getSelected());
+
+                        /*id_text.setText(
+                                        "省ID"+province_list_code.get(provincePicker.getSelected())+
+                                        "市ID"+city_list_code.get(cityPicker.getSelected())+
+                                        "县ID"+couny_list_code.get(counyPicker.getSelected())
+                        );*/
                         dialog.dismiss();
                     }
                 });

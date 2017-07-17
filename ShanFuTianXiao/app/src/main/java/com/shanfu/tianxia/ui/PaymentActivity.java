@@ -1633,7 +1633,6 @@ public class PaymentActivity extends BaseFragmentActivity implements View.OnClic
                 popupWindow.dismiss();
                 openPopup();
                 chang_pay_tv.setText("余额支付"+"("+balance+")");
-
             }
         });
         rbt_bank.setOnClickListener(new View.OnClickListener() {

@@ -28,6 +28,7 @@ import com.shanfu.tianxia.adapter.BasicViewHolder;
 import com.shanfu.tianxia.adapter.NiceZoneAdapter;
 import com.shanfu.tianxia.appconfig.Constants;
 import com.shanfu.tianxia.base.BaseFragmentActivity;
+import com.shanfu.tianxia.bean.NavListBean;
 import com.shanfu.tianxia.bean.ZoneImageUrlBean;
 import com.shanfu.tianxia.bean.ZoneProductBean;
 import com.shanfu.tianxia.listener.DialogCallback;
@@ -38,6 +39,7 @@ import com.shanfu.tianxia.recyclerviewholder.NavHolder;
 import com.shanfu.tianxia.testRecyclerView.PowerRecyclerView;
 import com.shanfu.tianxia.utils.DateUtils;
 import com.shanfu.tianxia.utils.MD5Utils;
+import com.shanfu.tianxia.utils.SPUtils;
 import com.shanfu.tianxia.utils.TUtils;
 import com.shanfu.tianxia.utils.Urls;
 import com.shanfu.tianxia.viewpagerindicator.CirclePageIndicator;
@@ -65,6 +67,9 @@ public class NiceZoneActivity extends BaseFragmentActivity implements View.OnCli
 
     private List<ZoneProductBean.DataBean.ListBean> listBeansAll = new ArrayList<>();
     private List<ZoneProductBean.DataBean.ListBean> listBeansMore = new ArrayList<>();
+
+    private List<NavListBean.DataBean.ListBean> list = new ArrayList<>();
+
     /**
      * 网络请求判断条件
      */
@@ -92,9 +97,12 @@ public class NiceZoneActivity extends BaseFragmentActivity implements View.OnCli
         setContentView(R.layout.activity_nice_zone);
         ButterKnife.bind(this);
         inflater = LayoutInflater.from(this);
+
         initView();
 //        requestDataBanner();
 //        requestHotShop();
+
+//        requestNav();
 
     }
 
@@ -133,7 +141,8 @@ public class NiceZoneActivity extends BaseFragmentActivity implements View.OnCli
         niceZoneAdapter.addHeadView(new BasicAdapter.HeadAndFoot() {
             @Override
             public BasicViewHolder createHolder(ViewGroup parent) {
-                return new NavHolder(inflater.inflate(R.layout.nice_zone_nav_view, parent, false));
+                return new NavHolder(inflater.inflate(R.layout.nice_zone_nav_view, parent, false),NiceZoneActivity.this
+                        ,NiceZoneActivity.this,list);
             }
         });
 
@@ -156,7 +165,6 @@ public class NiceZoneActivity extends BaseFragmentActivity implements View.OnCli
             }
         });
     }
-
 
     /**
      * 首页商品列表

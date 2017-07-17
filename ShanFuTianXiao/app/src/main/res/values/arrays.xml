@@ -2,21 +2,21 @@
 <resources>
     <string-array name="categray">
 
-        <item>数码手机</item>
+        <item>优品精选</item>
 
-        <item>珠宝艺术品 </item>
+        <item>数码手机</item>
 
         <item>家具厨具</item>
 
-        <item>家具家装</item>
+        <item>服装箱包</item>
 
-        <item>酒水饮料</item>
+        <item>食品保健</item>
 
-        <item>服装鞋包</item>
+        <item>运动玩具</item>
 
         <item>美妆个护</item>
 
-        <item>休闲零食</item>
+        <item>珠宝艺术品 </item>
 
     </string-array>
 </resources>

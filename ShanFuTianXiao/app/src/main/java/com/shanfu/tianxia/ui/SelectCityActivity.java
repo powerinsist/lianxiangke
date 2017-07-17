@@ -237,7 +237,7 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
         }
     }
 
-    private void requestListShops(String tid,String lx,String ly,String page){
+    /*private void requestListShops(String tid,String lx,String ly,String page){
 
         try {
             String time = DateUtils.getLinuxTime();
@@ -268,7 +268,7 @@ public class SelectCityActivity extends BaseFragmentActivity implements View.OnC
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     private SelectCityAdapter adapter;

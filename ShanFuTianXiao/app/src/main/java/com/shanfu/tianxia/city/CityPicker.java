@@ -79,6 +79,7 @@ public class CityPicker extends LinearLayout {
 		province_list = parser.getJSONParserResult(area_str, "area0");
 		city_map = parser.getJSONParserResultArray(area_str, "area1");
 		couny_map = parser.getJSONParserResultArray(area_str, "area2");
+		Log.i(TAG, "getaddressinfo: ------------------>");
 	}
 
 	public static class JSONParser {
@@ -153,27 +154,27 @@ public class CityPicker extends LinearLayout {
 		cityPicker = (ScrollerNumberPicker) findViewById(R.id.city);
 		counyPicker = (ScrollerNumberPicker) findViewById(R.id.couny);
 
-		/*provincePicker.setData(citycodeUtil.getProvince(province_list));
-		provincePicker.setDefault(1);*/
-		/** area0的id值*/
-		provincePicker.setData(citycodeUtil.getProvinceId(province_list));
+		provincePicker.setData(citycodeUtil.getProvince(province_list));
 		provincePicker.setDefault(1);
+		/** area0的id值*/
+		/*provincePicker.setData(citycodeUtil.getProvinceId(province_list));
+		provincePicker.setDefault(1);*/
 
-		/*cityPicker.setData(citycodeUtil.getCity(city_map, citycodeUtil
-				.getProvince_list_code().get(1)));
-		cityPicker.setDefault(1);*/
-		/**area1的id值*/
-		cityPicker.setData(citycodeUtil.getCityId(city_map, citycodeUtil
+		cityPicker.setData(citycodeUtil.getCity(city_map, citycodeUtil
 				.getProvince_list_code().get(1)));
 		cityPicker.setDefault(1);
+		/**area1的id值*/
+		/*cityPicker.setData(citycodeUtil.getCityId(city_map, citycodeUtil
+				.getProvince_list_code().get(1)));
+		cityPicker.setDefault(1);*/
 
-		/*counyPicker.setData(citycodeUtil.getCouny(couny_map, citycodeUtil
-				.getCity_list_code().get(1)));
-		counyPicker.setDefault(1);*/
-		/**area2的id值*/
-		counyPicker.setData(citycodeUtil.getCounyId(couny_map, citycodeUtil
+		counyPicker.setData(citycodeUtil.getCouny(couny_map, citycodeUtil
 				.getCity_list_code().get(1)));
 		counyPicker.setDefault(1);
+		/**area2的id值*/
+		/*counyPicker.setData(citycodeUtil.getCounyId(couny_map, citycodeUtil
+				.getCity_list_code().get(1)));
+		counyPicker.setDefault(1);*/
 
 		provincePicker.setOnSelectListener(new ScrollerNumberPicker.OnSelectListener() {
 
@@ -192,10 +193,10 @@ public class CityPicker extends LinearLayout {
 					if (selectMonth == null || selectMonth.equals(""))
 						return;
 					// 城市数组
-					cityPicker.setData(citycodeUtil.getCityId(city_map,
+					cityPicker.setData(citycodeUtil.getCity(city_map,
 							citycodeUtil.getProvince_list_code().get(id)));
 					cityPicker.setDefault(1);
-					counyPicker.setData(citycodeUtil.getCounyId(couny_map,
+					counyPicker.setData(citycodeUtil.getCouny(couny_map,
 							citycodeUtil.getCity_list_code().get(1)));
 					counyPicker.setDefault(1);
 					int lastDay = Integer.valueOf(provincePicker.getListSize());
@@ -228,7 +229,7 @@ public class CityPicker extends LinearLayout {
 					String selectMonth = counyPicker.getSelectedText();
 					if (selectMonth == null || selectMonth.equals(""))
 						return;
-					counyPicker.setData(citycodeUtil.getCounyId(couny_map,
+					counyPicker.setData(citycodeUtil.getCouny(couny_map,
 							citycodeUtil.getCity_list_code().get(id)));
 					counyPicker.setDefault(1);
 					int lastDay = Integer.valueOf(cityPicker.getListSize());

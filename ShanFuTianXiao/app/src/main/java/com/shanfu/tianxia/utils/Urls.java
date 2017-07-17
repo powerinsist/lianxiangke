@@ -24,6 +24,12 @@ public class Urls {
     public static final String address_list = shop_url+"Address/address_list";
     //商品详情  https://api.lianxiangke.cn/Shop/Shopclass/gooddetail
     public static final String gooddetail = shop_url+"Shopclass/gooddetail";
+    //商品类别  https://api.lianxiangke.cn/Shop/Shopclass/get_classlist
+    public static final String get_classlist = shop_url+"Shopclass/get_classlist";
+    //对应分类下商品展示 https://api.lianxiangke.cn/Shop/Shopclass/classified_list
+    public static final String classified_list = shop_url+"Shopclass/classified_list";
+    //获取用户可用联想票     https://api.lianxiangke.cn/Shop/Shopclass/ticketusers
+    public static final String ticketusers = shop_url+"Shopclass/ticketusers";
     //添加收货地址
     public static final String add_adress = shop_url+"Address/address_add";
     //删除收货地址    https://api.lianxiangke.cn/Shop/Address/address_delete
@@ -106,8 +112,8 @@ public class Urls {
     public static final String getbindbankuser = api_url+"Lianlian/getbindbankuser";
     //唯一登陆接口 https://api.lianxiangke.cn/Api/login/loginverification
     public static final String loginverification = api_url+"login/loginverification";
-
-
+    //购物车银行卡支付  https://api.lianxiangke.cn/Shop/Order/bankpayone
+    public static final String bankpayone = api_url+"Order/bankpayone";
 
 
 

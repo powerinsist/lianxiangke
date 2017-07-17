@@ -23,12 +23,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_phone_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_phone" />
 
             <TextView
+                android:id="@+id/zone_phone_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,12 +48,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_art_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_art" />
 
             <TextView
+                android:id="@+id/zone_art_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,12 +73,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_fitment_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_fitment" />
 
             <TextView
+                android:id="@+id/zone_fitment_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,12 +98,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_home_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_home" />
 
             <TextView
+                android:id="@+id/zone_home_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,12 +131,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_drink_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_drinks" />
 
             <TextView
+                android:id="@+id/zone_drink_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,12 +155,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_clothes_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_clothes" />
 
             <TextView
+                android:id="@+id/zone_clothes_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,12 +180,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_face_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_face" />
 
             <TextView
+                android:id="@+id/zone_face_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,12 +205,14 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/zone_rest_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:src="@mipmap/myticket_exchange_icon_rest" />
 
             <TextView
+                android:id="@+id/zone_rest_tv"
                 style="@style/Gainsboro_textview_sm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

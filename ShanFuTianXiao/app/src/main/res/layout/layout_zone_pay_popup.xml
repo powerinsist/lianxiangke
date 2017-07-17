@@ -74,14 +74,14 @@
                 android:id="@+id/change_pay_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/bank_new"
+                android:src="@mipmap/myticket_exchange_payway_moncon"
                 android:layout_toLeftOf="@+id/chang_pay_tv"
                 android:layout_toStartOf="@+id/chang_pay_tv"
                 android:layout_centerVertical="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="招商银行储蓄卡（3551）"
+                android:text="余额支付"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:layout_toLeftOf="@+id/imageView8"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/common_fenge"/>
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp">
             <TextView
@@ -128,7 +128,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="51dp"
                 android:layout_marginEnd="51dp" />
-        </RelativeLayout>
+        </RelativeLayout>-->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
