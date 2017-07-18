@@ -44,10 +44,10 @@
     <string name="input_phone_num">请输入11位手机号</string>
     <string name="yanzhengma">验证码</string>
     <string name="input_yanzhengma">请输入验证码</string>
-    <string name="login_pwd">登录密码</string>
+    <string name="login_pwd">设置登录密码</string>
     <string name="input_login_pwd">请输入8-20位密码</string>
-    <string name="queren_pwd">确认密码</string>
-    <string name="input_queren_pwd">请确认密码</string>
+    <string name="queren_pwd">设置支付密码</string>
+    <string name="input_queren_pwd">请输入支付密码</string>
     <string name="tui_jian_ren">推荐人</string>
     <string name="input_tui_jian_ren">请填写推荐人的ID(必填)</string>
     <string name="change_pwd_toast">为保障您的账户安全，请注意保密，登录密码与提现密码不能相同</string>

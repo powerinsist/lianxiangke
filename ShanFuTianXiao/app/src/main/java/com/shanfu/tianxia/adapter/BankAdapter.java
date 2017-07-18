@@ -39,10 +39,6 @@ public class BankAdapter extends BaseAdapter{
     private String card_no;
     private String card_type;
 
-
-
-
-
     public BankAdapter(Context context,List<UserBankCardBean.DataBeanX.DataBean.AgreementListBean> banks){
       this.banks = banks;
       inflater =  LayoutInflater.from(context);

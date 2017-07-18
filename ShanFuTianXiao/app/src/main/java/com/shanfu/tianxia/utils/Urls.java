@@ -9,7 +9,7 @@ public class Urls {
     //static final String api_url = "https://api.xiaokang100.com/Api/";
     static final String api_url = "https://api.lianxiangke.cn/Api/";
     static final String shop_url = "https://api.lianxiangke.cn/Shop/";
-
+    static final String rigit_url = "https://xcx.lianxiangke.cn/api/";
 //    https://api.lianxiangke.cn/Shop/Shopclass/getexchangeimage
     //帮助中心  https://api.lianxiangke.cn/Shop/Helps/helplist
     public static final String helplist = shop_url+"Helps/helplist";
@@ -127,6 +127,15 @@ public class Urls {
 
 
     //-----------------------------------------------------------------------------------------------------
+
+    //添加用户  https://xcx.lianxiangke.cn/api/user/adduserbk
+    public static final String adduserbk = rigit_url+"user/adduserbk";
+    //获取短信验证码   https://xcx.lianxiangke.cn/api/smssend
+    public static final String smssend_ll = rigit_url+"smssend";
+    //验证短信  https://xcx.lianxiangke.cn/api/smscheck
+    public static final String smscheck_ll = rigit_url+"smscheck";
+
+
 
     //忘记密码的phone值
     public  static final String forget_phone = api_url+"Login/Withdrawalsuidyu";

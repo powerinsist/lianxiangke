@@ -45,12 +45,19 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
     EditText input_phone_num;
     @Bind(R.id.input_yanzhengma)
     EditText input_yanzhengma;
+
+    @Bind(R.id.input_login_name)
+    EditText input_login_name;
+    @Bind(R.id.input_login_idcard)
+    EditText input_login_idcard;
+
+
     @Bind(R.id.re_send)
     TextView re_send;
     @Bind(R.id.input_login_pwd)
     EditText input_login_pwd;
-    @Bind(R.id.input_queren_pwd)
-    EditText input_queren_pwd;
+    @Bind(R.id.input_pay_pwd)
+    EditText input_pay_pwd;
     @Bind(R.id.input_tui_jian_ren)
     EditText input_tui_jian_ren;
     @Bind(R.id.regist_button)
@@ -62,11 +69,8 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
 
 
     private String phoneNum;
-
-
-
-
-
+    private String phone_num;
+    private String[] data_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +101,11 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                 finish();
                 break;
             case R.id.regist_button:
+
                 phoneNum = input_phone_num.getText().toString().trim();
                 String yanzhengma = input_yanzhengma.getText().toString().trim();
                 String login_pwd = input_login_pwd.getText().toString().trim();
-                String queren_login_pwd = input_queren_pwd.getText().toString().trim();
+                String pay_pwd = input_pay_pwd.getText().toString().trim();
                 String tui_jian_ren = input_tui_jian_ren.getText().toString().trim();
 
                 if(TextUtils.isEmpty(phoneNum)){
@@ -123,29 +128,19 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                     TUtils.showShort(RegeditActivity.this,"密码不能为空");
                     return;
                 }
-                if(TextUtils.isEmpty(queren_login_pwd)){
-                    TUtils.showShort(RegeditActivity.this,"确认密码不能为空");
+                if(TextUtils.isEmpty(pay_pwd)){
+                    TUtils.showShort(RegeditActivity.this,"支付密码不能为空");
                     return;
                 }
                 if(login_pwd.length()<8||login_pwd.length()>20){
                     TUtils.showShort(RegeditActivity.this,"密码的长度为8~20位,请重新输入");
                     return;
                 }
-                if(queren_login_pwd.length()<8||queren_login_pwd.length()>20){
+                if(pay_pwd.length() != 6){
                     TUtils.showShort(RegeditActivity.this,"密码的长度为8~20位,请重新输入");
                     return;
                 }
 
-                if(!login_pwd.equals(queren_login_pwd)){
-                    TUtils.showShort(RegeditActivity.this,"两次输入的密码不相同，请重新输入");
-                    return;
-                }
-                /*if(!TextUtils.isEmpty(tui_jian_ren)){
-                    if(tui_jian_ren.length()!=11){
-                        TUtils.showShort(RegeditActivity.this, "请输入正确的推荐人手机号码");
-                        return;
-                    }
-                }*/
                 if(TextUtils.isEmpty(tui_jian_ren)){
 
                         TUtils.showShort(RegeditActivity.this, "请填写推荐人的ID");
@@ -156,24 +151,68 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
                 break;
             //发送验证码
             case R.id.re_send:
-                String num = input_phone_num.getText().toString().trim();
-                if(TextUtils.isEmpty(num)){
+                phone_num = input_phone_num.getText().toString().trim();
+                data_phone = new String[]{phone_num};
+
+                if(TextUtils.isEmpty(phone_num)){
                     TUtils.showShort(RegeditActivity.this,"手机号码不能为空");
                     return;
                 }
-                else if(num.length()!=11){
+                else if(phone_num.length()!=11){
                     TUtils.showShort(RegeditActivity.this, "请输入正确的手机号码");
                     return;
                 }else {
-                    registerCode(num);
-                    TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,re_send,re_send_rl);
-                    timeCountUtil.start();
+                    requestSendCode();
+//                    registerCode(phone_num);
                 }
                 break;
             case R.id.lxk_xieyi_tv:
                 Intent intent = new Intent(RegeditActivity.this,LxkAllowActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+
+    private void requestSendCode() {
+        String time = DateUtils.getLinuxTime();
+        String token = MD5Utils.MD5(Constants.appKey + time);
+        String uid = SPUtils.getInstance().getString("uid", "");
+        String[] data_uid = {uid};
+        String[] data_flag = {"0"};
+
+        HttpParams params = new HttpParams();
+        params.put("time",time);
+        params.put("token",token);
+        params.put("data[phone]",data_phone[0]);
+        params.put("data[uid]",data_uid[0]);
+        params.put("data[flag_send]",data_flag[0]);
+
+        OkGo.post(Urls.smssend_ll)
+                .tag(this)
+                .params(params)
+                .execute(new DialogCallback<RsultBean>(this) {
+                    @Override
+                    public void onSuccess(RsultBean rsultBean, Call call, Response response) {
+                        decodeSendCode(rsultBean);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        TUtils.showShort(RegeditActivity.this,"网络数据获取失败，请稍后重试");
+                    }
+                });
+
+    }
+
+    private void decodeSendCode(RsultBean rsultBean) {
+        String err_code = rsultBean.getErr_code();
+        String err_msg = rsultBean.getErr_msg();
+        if (err_code.equals("200")){
+            TUtils.showShort(this,err_msg);
+            TimeCountUtil timeCountUtil = new TimeCountUtil(60000,1000,re_send,re_send_rl);
+            timeCountUtil.start();
+        }else {
+            TUtils.showShort(this,err_msg);
         }
     }
 
@@ -230,7 +269,7 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
 
     }
 
-    private void registerCode(String phone){
+    /*private void registerCode(String phone){
         try {
             String time = DateUtils.getLinuxTime();
             String token = MD5Utils.MD5(Constants.appKey + time);
@@ -261,5 +300,5 @@ public class RegeditActivity extends BaseFragmentActivity implements View.OnClic
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
