@@ -27,6 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by qing on 2017/3/16.
  * 银行卡列表
+ * test 成功否
  */
 public class BankAdapter extends BaseAdapter{
     private List<UserBankCardBean.DataBeanX.DataBean.AgreementListBean> banks;
@@ -37,6 +38,10 @@ public class BankAdapter extends BaseAdapter{
     private String bank_code;
     private String card_no;
     private String card_type;
+
+
+
+
 
     public BankAdapter(Context context,List<UserBankCardBean.DataBeanX.DataBean.AgreementListBean> banks){
       this.banks = banks;
